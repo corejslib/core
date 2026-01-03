@@ -14,9 +14,9 @@ jobs:
         MAXMIND_LICENSE_KEY: ${{ secrets.MAXMIND_LICENSE_KEY }}
         CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
     steps:
-      - uses: softvisio/actions/setup-npm@v1
+      - uses: softvisio/actions/setup-npm@latest
 
-      - uses: softvisio/actions/checkout@v1
+      - uses: softvisio/actions/checkout@latest
 
       - run: |
           npm install --ignore-scripts
