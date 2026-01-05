@@ -1,5 +1,29 @@
 # Changelog
 
+### v7.194.0 (2026-01-05)
+
+**New features:**
+
+- \[MINOR] feat: add api cli listen command (● [076185d](https://github.com/c0rejs/core/commit/076185d96); 👬 zdm)
+
+- \[MINOR] feat: add git releases .getReleaseTagsVersions() method (● [b1593c7](https://github.com/c0rejs/core/commit/b1593c7ab), [3a5b639](https://github.com/c0rejs/core/commit/3a5b639ea); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: add version to action spec (● [e1a158d](https://github.com/c0rejs/core/commit/e1a158d14); 👬 zdm)
+
+- \[PATCH] fix: update actions version (● [723108f](https://github.com/c0rejs/core/commit/723108f18); 👬 zdm)
+
+**Other changes:**
+
+- build: update workflow actions (● [aec769d](https://github.com/c0rejs/core/commit/aec769d87), [1895235](https://github.com/c0rejs/core/commit/1895235d1); 👬 zdm)
+
+- chore: remove npm @sencha:registry (● [0b9db4f](https://github.com/c0rejs/core/commit/0b9db4fe8); 👬 zdm)
+
+- chore: update softvisio/actions version (● [7ac9f59](https://github.com/c0rejs/core/commit/7ac9f59b7); 👬 zdm)
+
+Compare with the previous release: [v7.193.1](https://github.com/c0rejs/core/compare/v7.193.1...v7.194.0)
+
 ### v7.193.1 (2025-12-25)
 
 **Bug fixes:**
