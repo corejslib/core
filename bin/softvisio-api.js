@@ -88,6 +88,29 @@ const CLI = {
                 },
             },
         },
+
+        "listen": {
+            "title": "Listen API events",
+            "options": {
+                "listen-system-events": {
+                    "short": "s",
+                    "description": `Listen API system events, such as: "connect", "disconnect", "sessionDisable", "sessionDelete", "sessionReload", "accessDenied".`,
+                    "default": false,
+                    "schema": { "type": "boolean" },
+                },
+            },
+            "arguments": {
+                "event": {
+                    "description": "API event name",
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                        },
+                    },
+                },
+            },
+        },
     },
 };
 
@@ -161,9 +184,46 @@ class ApiCli {
         return res;
     }
 
+    async listen ( events, { listenSystemEvents } = {} ) {
+        if ( !Array.isArray( events ) ) events = [ events ];
+
+        events = new Set( events );
+
+        // add system events
+        if ( listenSystemEvents ) {
+            for ( const event of [ "connect", "disconnect", "sessionDisable", "sessionDelete", "sessionReload", "accessDenied" ] ) {
+                events.add( event );
+            }
+        }
+
+        const api = this.#getApi( {
+            "persistent": true,
+        } );
+
+        for ( const event of events ) {
+            if ( !event ) continue;
+
+            api.on( event, ( ...args ) => {
+                console.log( JSON.stringify(
+                    {
+                        event,
+                        "arguments": args,
+                    },
+                    null,
+                    4
+                ) );
+            } );
+        }
+
+        await new Promise( () => {} );
+
+        return result( 200 );
+    }
+
     // private
-    #getApi () {
+    #getApi ( { persistent } = {} ) {
         this.#api ??= new Api( this.#url, {
+            persistent,
             "version": this.#version,
             "token": this.#token,
             "locale": this.#locale,
@@ -247,6 +307,11 @@ if ( process.cli.command === "schema" ) {
 }
 else if ( process.cli.command === "call" ) {
     res = await apiCli.call( process.cli.arguments.method, ...( process.cli.arguments.argument || [] ) );
+}
+else if ( process.cli.command === "listen" ) {
+    res = await apiCli.listen( process.cli.arguments.event, {
+        "listenSystemEvents": process.cli.options[ "listen-system-events" ],
+    } );
 }
 
 if ( res.ok ) {
