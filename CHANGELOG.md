@@ -1,5 +1,31 @@
 # Changelog
 
+### v7.196.0 (2026-01-18)
+
+**New features:**
+
+- \[MINOR] feat: add ranges (● [4b8271b](https://github.com/c0rejs/core/commit/4b8271bb9); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix ejs import (● [3254320](https://github.com/c0rejs/core/commit/3254320cd); 👬 zdm)
+
+- \[PATCH] fix: fix ip range compare methods (● [aea8a75](https://github.com/c0rejs/core/commit/aea8a7585), [f36575a](https://github.com/c0rejs/core/commit/f36575a17), [a2ac197](https://github.com/c0rejs/core/commit/a2ac19757); 👬 zdm)
+
+- \[PATCH] fix: use Buffer.isBuffer() (● [f88e5f1](https://github.com/c0rejs/core/commit/f88e5f140); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: refactor ip range (● [1244802](https://github.com/c0rejs/core/commit/124480249); 👬 zdm)
+
+- \[PATCH] refactor: rename ip range .combine() to .concat() (● [e56aa91](https://github.com/c0rejs/core/commit/e56aa9129); 👬 zdm)
+
+**Other changes:**
+
+- build(deps): bump ejs@^4.0.0 (● [065ea02](https://github.com/c0rejs/core/commit/065ea02d0); 👬 zdm)
+
+Compare with the previous release: [v7.195.1](https://github.com/c0rejs/core/compare/v7.195.1...v7.196.0)
+
 ### v7.195.1 (2026-01-07)
 
 No changes since the previous release.
