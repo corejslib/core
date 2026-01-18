@@ -1,5 +1,13 @@
 # Changelog
 
+### v7.197.5 (2026-01-18)
+
+**Bug fixes:**
+
+- \[PATCH] fix: increase types_hash_bucket_size (● [0ead58d](https://github.com/c0rejs/core/commit/0ead58d37); 👬 zdm)
+
+Compare with the previous release: [v7.197.4](https://github.com/c0rejs/core/compare/v7.197.4...v7.197.5)
+
 ### v7.197.4 (2026-01-18)
 
 **Bug fixes:**
