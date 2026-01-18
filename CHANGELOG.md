@@ -1,5 +1,13 @@
 # Changelog
 
+### v7.197.9 (2026-01-18)
+
+**Bug fixes:**
+
+- \[PATCH] fix: disable nginx slice (● [df89df0](https://github.com/c0rejs/core/commit/df89df05b); 👬 zdm)
+
+Compare with the previous release: [v7.197.8](https://github.com/c0rejs/core/compare/v7.197.8...v7.197.9)
+
 ### v7.197.8 (2026-01-18)
 
 **Bug fixes:**
