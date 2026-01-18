@@ -31,8 +31,10 @@ suite( "file", () => {
         for ( let n = 0; n < TESTS.length; n++ ) {
             test( n + "", async () => {
                 const stream = file.stream( {
-                        "start": TESTS[ n ].start,
-                        "end": TESTS[ n ].end,
+                        "range": {
+                            "start": TESTS[ n ].start,
+                            "end": TESTS[ n ].end,
+                        },
                     } ),
                     text = await stream.text(),
                     slice = content.slice( TESTS[ n ].start ?? undefined, TESTS[ n ].end ?? undefined );
