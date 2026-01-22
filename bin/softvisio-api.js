@@ -274,7 +274,7 @@ class ApiCli {
         } ).pipe( process.stdout );
 
         for ( const method of methods ) {
-            table.add( method );
+            table.write( method );
         }
 
         table.end();
