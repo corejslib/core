@@ -1,5 +1,25 @@
 # Changelog
 
+### v7.198.0 (2026-01-24)
+
+**New features:**
+
+- \[MINOR] feat: add dates module (● [b6ec49f](https://github.com/c0rejs/core/commit/b6ec49ffb); 👬 zdm)
+
+- \[MINOR] feat: add digital-size kibi properties (● [c572a65](https://github.com/c0rejs/core/commit/c572a652e); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: convert websocket data to buffer before send (● [e164f77](https://github.com/c0rejs/core/commit/e164f7751); 👬 zdm)
+
+- \[PATCH] fix: fix http compress (● [b0a71cf](https://github.com/c0rejs/core/commit/b0a71cf55); 👬 zdm)
+
+**Other changes:**
+
+- chore: fix typo (● [ba29599](https://github.com/c0rejs/core/commit/ba29599a6); 👬 zdm)
+
+Compare with the previous release: [v7.197.10](https://github.com/c0rejs/core/compare/v7.197.10...v7.198.0)
+
 ### v7.197.10 (2026-01-23)
 
 **Bug fixes:**
