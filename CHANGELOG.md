@@ -1,5 +1,13 @@
 # Changelog
 
+### v7.198.1 (2026-01-24)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix app api compress (● [30da8b6](https://github.com/c0rejs/core/commit/30da8b6ce); 👬 zdm)
+
+Compare with the previous release: [v7.198.0](https://github.com/c0rejs/core/compare/v7.198.0...v7.198.1)
+
 ### v7.198.0 (2026-01-24)
 
 **New features:**
