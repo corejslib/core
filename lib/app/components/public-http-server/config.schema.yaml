@@ -18,8 +18,6 @@
         - type: "null"
         - enum: [x-real-ip, x-forwarded-for]
 
-    rangesEnabled: { type: boolean }
-
     httpCompress:
       anyOf:
         - type: boolean
@@ -65,4 +63,4 @@
       required: [enabled, port, serverNames, server]
 
   additionalProperties: false
-  required: [address, port, exclusive, setRealIpFrom, realIpHeader, rangesEnabled, httpCompress, webSocketCompress, nginx]
+  required: [address, port, exclusive, setRealIpFrom, realIpHeader, httpCompress, webSocketCompress, nginx]
