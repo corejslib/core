@@ -11,6 +11,9 @@ methods:
             - { type: string, format: nginx-server-name }
             - { type: array, items: { type: string, format: nginx-server-name }, minItems: 1, uniqueItems: true }
 
+  clear-cache:
+    title: Clear nginx cache
+
   update-proxies:
     title: Update nginx proxies
     requirePersistentConnection: true
