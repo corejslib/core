@@ -1,5 +1,15 @@
 # Changelog
 
+### v7.199.1 (2026-01-27)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix dependabot config (● [5455f8f](https://github.com/c0rejs/core/commit/5455f8f7c); 👬 zdm)
+
+- \[PATCH] fix: remove getReleaseTags() (● [9e560ec](https://github.com/c0rejs/core/commit/9e560ec18); 👬 zdm)
+
+Compare with the previous release: [v7.199.0](https://github.com/c0rejs/core/compare/v7.199.0...v7.199.1)
+
 ### v7.199.0 (2026-01-26)
 
 **New features:**
