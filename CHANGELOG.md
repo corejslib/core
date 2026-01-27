@@ -1,5 +1,11 @@
 # Changelog
 
+### v7.199.2 (2026-01-27)
+
+No changes since the previous release.
+
+Compare with the previous release: [v7.199.1](https://github.com/c0rejs/core/compare/v7.199.1...v7.199.2)
+
 ### v7.199.1 (2026-01-27)
 
 **Bug fixes:**
