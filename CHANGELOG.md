@@ -1,5 +1,13 @@
 # Changelog
 
+### v7.200.3 (2026-02-01)
+
+**Bug fixes:**
+
+- \[PATCH] fix: convert http method name to upper case (● [2034ecf](https://github.com/corejslib/core/commit/2034ecfed); 👬 zdm)
+
+Compare with the previous release: [v7.200.2](https://github.com/corejslib/core/compare/v7.200.2...v7.200.3)
+
 ### v7.200.2 (2026-01-31)
 
 **Other changes:**
