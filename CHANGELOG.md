@@ -1,5 +1,13 @@
 # Changelog
 
+### v7.201.1 (2026-02-03)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix blob stream (● [4764ffb](https://github.com/corejslib/core/commit/4764ffbb5); 👬 zdm)
+
+Compare with the previous release: [v7.201.0](https://github.com/corejslib/core/compare/v7.201.0...v7.201.1)
+
 ### v7.201.0 (2026-02-03)
 
 **New features:**
