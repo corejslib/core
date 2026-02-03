@@ -13,7 +13,7 @@ const TESTS = [
             "accept-encoding": "br;q=0.1, deflate, gzip;q=1.0, *;q=0.5    ",
         },
         "method": "acceptEncoding",
-        "result": [ "deflate", "gzip", "*", "br" ],
+        "result": new Set( [ "deflate", "gzip", "*", "br" ] ),
     },
 
     // cookie
@@ -39,7 +39,7 @@ const TESTS = [
     // set-cookie
     {
         "headers": {
-            "set-cookie": "name=value; expires=Tue, 19-Jul-2022 12:53:28 GMT; path=/  ; domain = .мама.google.com  ;Secure; HttpOnly; SameSite=none",
+            "set-cookie": `name=value; expires=${ new Date( 1000 ).toUTCString() }; path=/  ; domain = .мама.google.com  ;Secure; HttpOnly; SameSite=none`,
         },
         "method": "setCookie",
         result ( res ) {
@@ -51,7 +51,7 @@ const TESTS = [
                         "name": "name",
                         "value": "value",
                         "maxAge": undefined,
-                        "expires": new Date( "Tue, 19-Jul-2022 12:53:28 GMT" ),
+                        "expires": new Date( 1000 ),
                         "path": "/",
                         "domain": "xn--80aa8ab.google.com",
                         "secure": true,
