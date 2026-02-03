@@ -1,5 +1,25 @@
 # Changelog
 
+### v7.201.0 (2026-02-03)
+
+**New features:**
+
+- \[MINOR] feat: add disposable events emitter (● [6739296](https://github.com/corejslib/core/commit/673929620), [d42bd89](https://github.com/corejslib/core/commit/d42bd8981); 👬 zdm)
+
+- \[MINOR] feat: add fs .rmDirEntries(), .rmEmptyDir() (● [e6c2be0](https://github.com/corejslib/core/commit/e6c2be01e); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: add logger async dispose (● [c4b5296](https://github.com/corejslib/core/commit/c4b52965c); 👬 zdm)
+
+- \[PATCH] fix: fix blob slice (● [6af82d6](https://github.com/corejslib/core/commit/6af82d651), [b900e4c](https://github.com/corejslib/core/commit/b900e4ca1); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: refactor File api (● [e38ee35](https://github.com/corejslib/core/commit/e38ee3507); 👬 zdm)
+
+Compare with the previous release: [v7.200.3](https://github.com/corejslib/core/compare/v7.200.3...v7.201.0)
+
 ### v7.200.3 (2026-02-01)
 
 **Bug fixes:**
