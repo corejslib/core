@@ -1,5 +1,13 @@
 # Changelog
 
+### v7.202.0 (2026-02-05)
+
+**New features:**
+
+- \[MINOR] feat: add shareTmpDir option (● [a1649af](https://github.com/corejslib/core/commit/a1649af2b); 👬 zdm)
+
+Compare with the previous release: [v7.201.2](https://github.com/corejslib/core/compare/v7.201.2...v7.202.0)
+
 ### v7.201.2 (2026-02-05)
 
 **Bug fixes:**
