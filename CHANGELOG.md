@@ -1,5 +1,17 @@
 # Changelog
 
+### v7.201.2 (2026-02-05)
+
+**Bug fixes:**
+
+- \[PATCH] fix: blob slice (● [9e497f2](https://github.com/corejslib/core/commit/9e497f22e); 👬 zdm)
+
+**Other changes:**
+
+- chore: remove @zdm npm registry (● [4d5cc3e](https://github.com/corejslib/core/commit/4d5cc3e9a); 👬 zdm)
+
+Compare with the previous release: [v7.201.1](https://github.com/corejslib/core/compare/v7.201.1...v7.201.2)
+
 ### v7.201.1 (2026-02-03)
 
 **Bug fixes:**
