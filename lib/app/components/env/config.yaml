@@ -6,3 +6,4 @@ optionalDependencies: ~
 
 config:
   name: ~
+  shareTmpDir: true

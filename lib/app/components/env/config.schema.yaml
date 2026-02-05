@@ -2,6 +2,7 @@
   type: object
   properties:
     name: { type: string, format: kebab-case }
+    shareTmpDir: { type: boolean }
 
   additionalProperties: false
-  required: [name]
+  required: [name, shareTmpDir]
