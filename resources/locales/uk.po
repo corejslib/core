@@ -11,7 +11,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Search-Path: /lib/**\n"
-"X-Generator: Poedit 3.4.4\n"
 
 #: ../../lib/app/components/telegram-bot-forum-chat/bot/commands/forum-chat.js:62:44
 msgid "/start - Exit from the chat"
