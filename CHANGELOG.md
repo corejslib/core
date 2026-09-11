@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.13.7 (2026-09-11)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix typo (● [aa87b66](https://github.com/corejslib/core/commit/aa87b66cd); 👬 zdm)
+
+Compare with the previous release: [v8.13.6...v8.13.7](https://github.com/corejslib/core/compare/v8.13.6...v8.13.7)
+
 ### v8.13.6 (2026-09-11)
 
 **Bug fixes:**
