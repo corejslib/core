@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.13.6 (2026-09-11)
+
+**Bug fixes:**
+
+- \[PATCH] fix: update locales po (● [daa5d2e](https://github.com/corejslib/core/commit/daa5d2e41); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: refactor glob patterns (● [a3e2d1f](https://github.com/corejslib/core/commit/a3e2d1f56); 👬 zdm)
+
+Compare with the previous release: [v8.13.5...v8.13.6](https://github.com/corejslib/core/compare/v8.13.5...v8.13.6)
+
 ### v8.13.5 (2026-09-07)
 
 **Bug fixes:**
