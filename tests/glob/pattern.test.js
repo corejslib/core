@@ -52,48 +52,29 @@ suite( "glob-pattern", () => {
     suite( "static", () => {
         const tests = [
             {
-                "pattern": [
-                    "path",
-                    {
-                        "caseSensitive": false,
-                    },
-                ],
-                "test": pattern => pattern.test( "PATH" ),
+                "pattern": [ "path" ],
+                "test": pattern => pattern.test( "PATH", { "caseSensitive": false } ),
                 "result": true,
             },
             {
-                "pattern": [
-                    "path",
-                    {
-                        "caseSensitive": true,
-                    },
-                ],
-                "test": pattern => pattern.test( "PATH" ),
+                "pattern": [ "path" ],
+                "test": pattern => pattern.test( "PATH", { "caseSensitive": true } ),
                 "result": false,
             },
             {
-                "pattern": [
-                    "aaa/bbb",
-                    {
-                        "caseSensitive": true,
-                    },
-                ],
-                "test": pattern => pattern.test( "aaa/bbb" ),
+                "pattern": [ "aaa/bbb" ],
+                "test": pattern => pattern.test( "aaa/bbb", { "caseSensitive": true } ),
                 "result": true,
             },
 
             // prefix, normalize
             {
-                "pattern": [
-                    "aaa/ccc///aaa/bbb",
-                    {
-                        "caseSensitive": true,
-                    },
-                ],
+                "pattern": [ "aaa/ccc///aaa/bbb" ],
                 "test": pattern => {
                     return pattern.test( "aaa/bbb", {
                         "prefix": "aaa/bbb/../ccc//",
                         "normalize": true,
+                        "caseSensitive": true,
                     } );
                 },
                 "result": true,
