@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.14.0 (2026-09-12)
+
+**New features:**
+
+- \[MINOR] feat: add fs .checkFsCaseSensitiveSync() (● [74e83b4](https://github.com/corejslib/core/commit/74e83b422); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: replace patterns caseSensitive with ignoreCase property (● [1691522](https://github.com/corejslib/core/commit/169152254); 👬 zdm)
+
+Compare with the previous release: [v8.13.7...v8.14.0](https://github.com/corejslib/core/compare/v8.13.7...v8.14.0)
+
 ### v8.13.7 (2026-09-11)
 
 **Bug fixes:**
