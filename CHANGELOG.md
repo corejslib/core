@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.15.0 (2026-09-12)
+
+**New features:**
+
+- \[MINOR] feat: add fs .checkFsCaseSensitive() (● [d0fc269](https://github.com/corejslib/core/commit/d0fc26931); 👬 zdm)
+
+Compare with the previous release: [v8.14.0...v8.15.0](https://github.com/corejslib/core/compare/v8.14.0...v8.15.0)
+
 ### v8.14.0 (2026-09-12)
 
 **New features:**
