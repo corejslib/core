@@ -1,5 +1,15 @@
 # Changelog
 
+### v8.15.1 (2026-09-13)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix patterns depth (● [f627a6c](https://github.com/corejslib/core/commit/f627a6cbc), [03d3c9e](https://github.com/corejslib/core/commit/03d3c9eab); 👬 zdm)
+
+- \[PATCH] fix: rename pattern maxDepth to depth (● [8dec49b](https://github.com/corejslib/core/commit/8dec49b15); 👬 zdm)
+
+Compare with the previous release: [v8.15.0...v8.15.1](https://github.com/corejslib/core/compare/v8.15.0...v8.15.1)
+
 ### v8.15.0 (2026-09-12)
 
 **New features:**
