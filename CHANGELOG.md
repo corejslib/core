@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.15.2 (2026-09-14)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix sql (● [c8b4d48](https://github.com/corejslib/core/commit/c8b4d487e); 👬 zdm)
+
+Compare with the previous release: [v8.15.1...v8.15.2](https://github.com/corejslib/core/compare/v8.15.1...v8.15.2)
+
 ### v8.15.1 (2026-09-13)
 
 **Bug fixes:**
