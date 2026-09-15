@@ -1,8 +1,0 @@
-- $id: config
-  type: object
-  properties:
-    name: { type: string, format: kebab-case }
-    shareTmpDir: { type: boolean }
-
-  additionalProperties: false
-  required: [name, shareTmpDir]

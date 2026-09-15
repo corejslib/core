@@ -1,9 +1,0 @@
-module: notifications
-type: postgresql
-patch: ~
-
-emits: ~
-
-locks: ~
-
-cron: ~

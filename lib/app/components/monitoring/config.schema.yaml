@@ -1,7 +1,0 @@
-- $id: config
-  type: object
-  properties:
-    enabled: { type: boolean }
-
-  additionalProperties: false
-  required: [enabled]

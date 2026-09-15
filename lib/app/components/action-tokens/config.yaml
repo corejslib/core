@@ -1,7 +1,0 @@
-dependencies:
-  - dbh
-  - users
-
-optionalDependencies: ~
-
-config: ~

@@ -1,7 +1,0 @@
-dependencies: ~
-
-optionalDependencies: ~
-
-config:
-  enabled: false
-  url: ws://nginx:81/api

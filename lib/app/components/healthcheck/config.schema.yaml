@@ -1,9 +1,0 @@
-- $id: config
-  type: object
-  properties:
-    enabled: { type: boolean }
-    port: { type: integer, format: ip-port }
-    interval: { type: string, format: interval }
-
-  additionalProperties: false
-  required: [enabled, port, interval]

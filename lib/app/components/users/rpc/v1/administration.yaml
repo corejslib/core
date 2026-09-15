@@ -1,8 +1,0 @@
-title: Administration
-
-methods:
-  reset-root-password:
-    title: Reset root user password
-    params:
-      - name: password
-        schema: { type: string }

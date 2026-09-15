@@ -24,19 +24,10 @@
     },
     "exports": {
         "./*": "./lib/*.js",
-        "./app.yaml": "./lib/app/app.yaml",
         "./resources/*": "./resources/*",
         "./api": {
             "browser": "./lib/_browser/api.js",
             "node": "./lib/api.js"
-        },
-        "./app/constants": {
-            "browser": "./lib/_browser/app/constants.js",
-            "node": "./lib/app/constants.js"
-        },
-        "./app/user/permissions": {
-            "browser": "./lib/_browser/app/user/permissions.js",
-            "node": "./lib/app/user/permissions.js"
         },
         "./blob": {
             "browser": "./lib/_browser/blob.js",

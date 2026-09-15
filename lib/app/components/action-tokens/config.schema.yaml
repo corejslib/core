@@ -1,5 +1,0 @@
-- $id: config
-  type: object
-  properties: {}
-  additionalProperties: false
-  required: []

@@ -1,8 +1,0 @@
-module: crypto
-type: postgresql
-patch: ~
-
-emits:
-  - crypto/key/revoked/update
-
-locks: ~
