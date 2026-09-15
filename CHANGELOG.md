@@ -1,5 +1,24 @@
 # Changelog
 
+### v8.16.1 (2026-09-15)
+
+**Bug fixes:**
+
+- \[PATCH] fix: guard telegram bot availability (● [bb21683](https://github.com/corejslib/core/commit/bb21683bc); 👬 zdm)
+
+    - check the configured Telegram bot component before enabling notifications
+    - avoid dereferencing a missing telegram bot instance
+
+**Code refactoring:**
+
+- \[PATCH] refactor: rename AJV base class import (● [1402d40](https://github.com/corejslib/core/commit/1402d40cd); 👬 zdm)
+
+**Other changes:**
+
+- chore: remove stale Russian locale entries (● [26bacf0](https://github.com/corejslib/core/commit/26bacf004); 👬 zdm)
+
+Compare with the previous release: [v8.16.0...v8.16.1](https://github.com/corejslib/core/compare/v8.16.0...v8.16.1)
+
 ### v8.16.0 (2026-09-15)
 
 **New features:**
