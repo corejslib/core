@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.16.0 (2026-09-15)
+
+**New features:**
+
+- \[MINOR] feat: move telegram to separate package (● [d3c40ee](https://github.com/corejslib/core/commit/d3c40eec5); 👬 zdm)
+
+Compare with the previous release: [v8.15.2...v8.16.0](https://github.com/corejslib/core/compare/v8.15.2...v8.16.0)
+
 ### v8.15.2 (2026-09-14)
 
 **Bug fixes:**
