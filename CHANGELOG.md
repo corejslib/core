@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.17.0 (2026-09-15)
+
+**New features:**
+
+- \[MINOR] feat: add bundled utility implementations for ANSI and external resources (● [a2d6b0c](https://github.com/corejslib/core/commit/a2d6b0c0a); 👬 zdm)
+
+Compare with the previous release: [v8.16.2...v8.17.0](https://github.com/corejslib/core/compare/v8.16.2...v8.17.0)
+
 ### v8.16.2 (2026-09-15)
 
 **Other changes:**
