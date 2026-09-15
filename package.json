@@ -84,7 +84,7 @@
     },
     "dependencies": {
         "@corejslib/msgpack": "^3.0.0",
-        "@corejslib/utils": "^2.0.0",
+        "@corejslib/utils": "^1.0.0",
         "@corejslib/uws": "^2.0.0",
         "@nodable/flexible-xml-parser": "^1.11.3",
         "adm-zip": "^0.6.0",
