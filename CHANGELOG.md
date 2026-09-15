@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.16.2 (2026-09-15)
+
+**Other changes:**
+
+- chore: move app modules to app package (● [14718b7](https://github.com/corejslib/core/commit/14718b759), [8e79859](https://github.com/corejslib/core/commit/8e7985935); 👬 zdm)
+
+Compare with the previous release: [v8.16.1...v8.16.2](https://github.com/corejslib/core/compare/v8.16.1...v8.16.2)
+
 ### v8.16.1 (2026-09-15)
 
 **Bug fixes:**
