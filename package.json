@@ -84,7 +84,7 @@
     },
     "dependencies": {
         "@corejslib/msgpack": "^3.0.0",
-        "@corejslib/utils": "^2.0.0",
+        "@corejslib/result": "^6.6.3",
         "@corejslib/uws": "^2.0.0",
         "@nodable/flexible-xml-parser": "^1.11.3",
         "adm-zip": "^0.6.0",
@@ -106,6 +106,7 @@
         "mmdb-lib": "^3.0.0",
         "pkijs": "^3.2.4",
         "semver": "^7.7.2",
+        "tar": "^7.5.22",
         "temporal-polyfill": "^1.0.0",
         "undici": "^8.0.0",
         "xz-decompress": "^0.2.3"
