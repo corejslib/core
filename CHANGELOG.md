@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.17.1 (2026-09-15)
+
+**Other changes:**
+
+- build(deps): downgrade @corejslib/utils to ^1.0.0 (● [a654bdd](https://github.com/corejslib/core/commit/a654bddaa); 👬 zdm)
+
+- Revert "feat: add bundled utility implementations for ANSI and external resources" (● [21ec1b4](https://github.com/corejslib/core/commit/21ec1b4fc); 👬 zdm)
+
+    This reverts commit [a2d6b0c](https://github.com/corejslib/core/commit/a2d6b0c0afb8659b28a0b79bc88317f23de2d10f).
+
+Compare with the previous release: [v8.17.0...v8.17.1](https://github.com/corejslib/core/compare/v8.17.0...v8.17.1)
+
 ### v8.17.0 (2026-09-15)
 
 **New features:**
