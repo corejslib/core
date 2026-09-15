@@ -1,9 +1,0 @@
-module: telegram-bot-forum-chat
-type: postgresql
-patch: ~
-
-emits: ~
-
-locks: ~
-
-cron: ~

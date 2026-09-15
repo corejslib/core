@@ -1,9 +1,0 @@
-module: telegram-bot-contacts
-type: postgresql
-patch: ~
-
-emits: ~
-
-locks: ~
-
-cron: ~

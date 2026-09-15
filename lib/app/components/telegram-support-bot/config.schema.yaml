@@ -1,9 +1,0 @@
-- $id: public-config
-  type: object
-  properties: {}
-
-- $id: config
-  type: object
-  properties: {}
-  additionalProperties: false
-  required: []

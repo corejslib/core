@@ -115,7 +115,6 @@
         "mmdb-lib": "^3.0.0",
         "pkijs": "^3.2.4",
         "semver": "^7.7.2",
-        "teleproto": "^1.228.4",
         "temporal-polyfill": "^1.0.0",
         "undici": "^8.0.0",
         "xz-decompress": "^0.2.3"

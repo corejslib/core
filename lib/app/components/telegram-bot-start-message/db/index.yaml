@@ -1,9 +1,0 @@
-module: telegram-bot-start-message
-type: postgresql
-patch: ~
-
-emits: ~
-
-locks: ~
-
-cron: ~
