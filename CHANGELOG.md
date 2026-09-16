@@ -1,5 +1,30 @@
 # Changelog
 
+### v8.18.0 (2026-09-16)
+
+**New features:**
+
+- \[MINOR] feat: add custom inspect support for Locale (● [06c9a65](https://github.com/corejslib/core/commit/06c9a651d); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: ensure JsonContainer serializes nested values safely (● [bbc0ffa](https://github.com/corejslib/core/commit/bbc0ffa25); 👬 zdm)
+
+    Restore option state after serialization, add recursive conversion for
+    nested toJSON values, and remove the custom JSON.stringify override.
+
+- \[PATCH] fix: handle null and null-prototype objects in plain object check (● [cdecc3d](https://github.com/corejslib/core/commit/cdecc3d14); 👬 zdm)
+
+- \[PATCH] fix: handle plain objects in JSON conversion (● [3abf0f7](https://github.com/corejslib/core/commit/3abf0f748); 👬 zdm)
+
+- \[PATCH] fix: preserve translation fallback in L10nt#toJSON (● [a2f6e8e](https://github.com/corejslib/core/commit/a2f6e8eca); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: use shared plain-object detection in JSON container (● [3436cfc](https://github.com/corejslib/core/commit/3436cfcd6); 👬 zdm)
+
+Compare with the previous release: [v8.17.1...v8.18.0](https://github.com/corejslib/core/compare/v8.17.1...v8.18.0)
+
 ### v8.17.1 (2026-09-15)
 
 **Other changes:**
