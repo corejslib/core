@@ -1,5 +1,15 @@
 # Changelog
 
+### v8.20.0 (2026-09-19)
+
+**New features:**
+
+- \[MINOR] feat: add cli commands aliases (● [f23e659](https://github.com/corejslib/core/commit/f23e659d8), [26fc742](https://github.com/corejslib/core/commit/26fc742d2); 👬 zdm)
+
+- \[MINOR] feat: add cli optionsAutoShorts option (● [7b5046c](https://github.com/corejslib/core/commit/7b5046c47); 👬 zdm)
+
+Compare with the previous release: [v8.19.0...v8.20.0](https://github.com/corejslib/core/compare/v8.19.0...v8.20.0)
+
 ### v8.19.0 (2026-09-19)
 
 **New features:**
