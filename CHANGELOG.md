@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.19.0 (2026-09-19)
+
+**New features:**
+
+- \[MINOR] feat: add JSON replacer support to JsonContainer (● [f636ca1](https://github.com/corejslib/core/commit/f636ca15d); 👬 zdm)
+
+**Other changes:**
+
+- docs: add node 26 removal note (● [c3c9acf](https://github.com/corejslib/core/commit/c3c9acfc5); 👬 zdm)
+
+Compare with the previous release: [v8.18.0...v8.19.0](https://github.com/corejslib/core/compare/v8.18.0...v8.19.0)
+
 ### v8.18.0 (2026-09-16)
 
 **New features:**
