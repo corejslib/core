@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.21.1 (2026-09-20)
+
+**Other changes:**
+
+- style: simplify undefined checks (● [85cd7e6](https://github.com/corejslib/core/commit/85cd7e673); 👬 zdm)
+
+Compare with the previous release: [v8.21.0...v8.21.1](https://github.com/corejslib/core/compare/v8.21.0...v8.21.1)
+
 ### v8.21.0 (2026-09-20)
 
 **New features:**
