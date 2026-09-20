@@ -1,5 +1,59 @@
 # Changelog
 
+### v8.21.0 (2026-09-20)
+
+**New features:**
+
+- \[MINOR] feat: add allowPartialCommands option (● [1807aaf](https://github.com/corejslib/core/commit/1807aaf32); 👬 zdm)
+
+    Simplify partial command matching behind a single option and return the matched command name correctly.
+
+**Bug fixes:**
+
+- \[PATCH] fix: ensure auto-short assignment only when enabled (● [369de9e](https://github.com/corejslib/core/commit/369de9e54); 👬 zdm)
+
+    Avoid overwriting explicit short option values by only assigning a default
+    short name when auto-short generation is enabled and no short alias is set.
+
+- \[PATCH] fix: include short command names in alias output (● [2e010ad](https://github.com/corejslib/core/commit/2e010adb5); 👬 zdm)
+
+- \[PATCH] fix: propagate CLI instance through option parsing (● [9d9e3d7](https://github.com/corejslib/core/commit/9d9e3d785); 👬 zdm)
+
+- \[PATCH] fix: remove false short option from CLI schema (● [b7d13c1](https://github.com/corejslib/core/commit/b7d13c1ba); 👬 zdm)
+
+- \[PATCH] fix: rename auto-short option flag (● [6e9b2e3](https://github.com/corejslib/core/commit/6e9b2e39d); 👬 zdm)
+
+    - rename the CLI config/property from `optionsAutoShorts` to `allowOptionsAutoShort`
+    - update option short-generation checks to reference the renamed getter consistently
+
+- \[PATCH] fix: separate command name tracking from lookup map (● [976ea14](https://github.com/corejslib/core/commit/976ea146d); 👬 zdm)
+
+    This change keeps command names, short names, and aliases in a dedicated map so uniqueness checks and command resolution no longer rely on the same object used for direct command lookup.
+
+- \[PATCH] fix: separate option name and short alias tracking (● [5f9b35f](https://github.com/corejslib/core/commit/5f9b35f47); 👬 zdm)
+
+    Store option instances by long-name and short-name separately so lookups do not collide with short aliases. This preserves unique short-option validation and correct resolution of named options.
+
+**Code refactoring:**
+
+- \[PATCH] refactor: remove auto-short option handling and normalize option checks (● [d3aba84](https://github.com/corejslib/core/commit/d3aba845a); 👬 zdm)
+
+    - remove the legacy `allowOptionsAutoShort` CLI option and its getter
+    - replace null-based uniqueness checks with explicit boolean handling
+    - centralize negatable state tracking for boolean options and remove the auto-short assignment logic
+
+- \[PATCH] refactor: rename internal CLI spec state to config (● [bb5cf92](https://github.com/corejslib/core/commit/bb5cf9223); 👬 zdm)
+
+- \[PATCH] refactor: simplify cli name lookup storage (● [efb748b](https://github.com/corejslib/core/commit/efb748b7c); 👬 zdm)
+
+    - consolidate short-name and alias registration into shared item maps
+    - remove redundant lookup tables in command and option classes
+    - format argument end-position guard blocks for readability
+
+- \[PATCH] refactor: use cli instance in command resolution (● [bd0057d](https://github.com/corejslib/core/commit/bd0057de8); 👬 zdm)
+
+Compare with the previous release: [v8.20.0...v8.21.0](https://github.com/corejslib/core/compare/v8.20.0...v8.21.0)
+
 ### v8.20.0 (2026-09-19)
 
 **New features:**
