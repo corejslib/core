@@ -1,5 +1,19 @@
 # Changelog
 
+### v8.21.2 (2026-09-21)
+
+**Bug fixes:**
+
+- \[PATCH] fix: align browser import aliases (● [9ab51b3](https://github.com/corejslib/core/commit/9ab51b334); 👬 zdm)
+
+- \[PATCH] fix: use namespace imports for ASN.1 and PKI modules (● [17c21d8](https://github.com/corejslib/core/commit/17c21d89f); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: switch msgpack imports to named exports (● [255c76b](https://github.com/corejslib/core/commit/255c76b36); 👬 zdm)
+
+Compare with the previous release: [v8.21.1...v8.21.2](https://github.com/corejslib/core/compare/v8.21.1...v8.21.2)
+
 ### v8.21.1 (2026-09-20)
 
 **Other changes:**
