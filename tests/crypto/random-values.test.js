@@ -30,7 +30,7 @@ const TESTS = [
 ];
 
 const iterations = 1_000_000,
-    alpha = 0.01, // a-level, probability of error
+    alpha = 0.001, // a-level, probability of error
     randomValues = new RandomValues( 0xFFFF );
 
 function getChi2Crit ( alpha, df ) {
