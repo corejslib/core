@@ -30,7 +30,15 @@ const TESTS = [
 ];
 
 const iterations = 1_000_000,
-    alpha = 0.001, // a-level, probability of error
+
+    // family-wise a-level, probability of at least one false failure across the whole suite
+    familyAlpha = 0.001,
+
+    // Bonferroni correction: every test in TESTS is an independent chance to fail,
+    // so the per-test a-level is divided by the number of tests to keep the
+    // family-wise error rate at familyAlpha.
+    alpha = familyAlpha / TESTS.length,
+
     randomValues = new RandomValues( 0xFFFF );
 
 function getChi2Crit ( alpha, df ) {
@@ -83,6 +91,8 @@ function calculateChi2 ( { iterations, min = 0, max = 0, generate } ) {
         "min": Number( min ),
         "max": Number( max ),
         iterations,
+        familyAlpha,
+        "tests": TESTS.length,
         alpha,
         df,
         chi2,
