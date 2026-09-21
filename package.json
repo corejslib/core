@@ -18,9 +18,49 @@
     "author": "root <root@softvisio.net>",
     "type": "module",
     "imports": {
+        "#lib/*": "./lib/*.js",
         "#browser/*": "./lib/_browser/*.js",
-        "#lib/*": "@corejslib/core/*",
-        "#resources/*": "./resources/*"
+        "#resources/*": "./resources/*",
+        "#lib/api": {
+            "browser": "./lib/_browser/api.js",
+            "node": "./lib/api.js"
+        },
+        "#lib/blob": {
+            "browser": "./lib/_browser/blob.js",
+            "node": "./lib/blob.js"
+        },
+        "#lib/ejs": {
+            "browser": "./lib/_browser/ejs.js",
+            "node": "./lib/ejs.js"
+        },
+        "#lib/env": {
+            "browser": "./lib/_browser/env.js",
+            "node": "./lib/env.js"
+        },
+        "#lib/fetch": {
+            "browser": "./lib/_browser/fetch.js",
+            "node": "./lib/fetch.js"
+        },
+        "#lib/file": {
+            "browser": "./lib/_browser/file.js",
+            "node": "./lib/file.js"
+        },
+        "#lib/form-data": {
+            "browser": "./lib/_browser/form-data.js",
+            "node": "./lib/form-data.js"
+        },
+        "#lib/is-browser": {
+            "browser": "./lib/_browser/is-browser.js",
+            "node": "./lib/is-browser.js"
+        },
+        "#lib/utils": {
+            "browser": "./lib/_browser/utils.js",
+            "node": "./lib/utils.js"
+        },
+        "#lib/uuid": {
+            "browser": "./lib/_browser/uuid.js",
+            "node": "./lib/uuid.js"
+        }
     },
     "exports": {
         "./*": "./lib/*.js",
