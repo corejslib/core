@@ -147,7 +147,7 @@
         "pkijs": "^3.2.4",
         "semver": "^7.7.2",
         "temporal-polyfill": "^1.0.0",
-        "undici": "^8.0.0",
+        "undici": "8.10.2",
         "xz-decompress": "^0.2.3"
     },
     "engines": {
