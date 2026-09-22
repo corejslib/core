@@ -1,5 +1,19 @@
 # Changelog
 
+### v8.21.3 (2026-09-22)
+
+**Bug fixes:**
+
+- \[PATCH] fix: control family-wise error rate in random value tests (● [52b6493](https://github.com/corejslib/core/commit/52b6493e3); 👬 zdm)
+
+**Other changes:**
+
+- build(deps): pin undici to 8.10.2 (● [28f688d](https://github.com/corejslib/core/commit/28f688d43); 👬 zdm)
+
+- chore: tighten random values statistical test threshold (● [17a0ee4](https://github.com/corejslib/core/commit/17a0ee48b); 👬 zdm)
+
+Compare with the previous release: [v8.21.2...v8.21.3](https://github.com/corejslib/core/compare/v8.21.2...v8.21.3)
+
 ### v8.21.2 (2026-09-21)
 
 **Bug fixes:**
