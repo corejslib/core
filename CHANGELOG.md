@@ -1,5 +1,19 @@
 # Changelog
 
+### v8.21.4 (2026-09-24)
+
+**Bug fixes:**
+
+- \[PATCH] fix: remove npm JSON workaround (● [3af6b24](https://github.com/corejslib/core/commit/3af6b2448); 👬 zdm)
+
+**Other changes:**
+
+- build(deps): bump Node and npm engine requirements (● [26bd5d8](https://github.com/corejslib/core/commit/26bd5d8f2); 👬 zdm)
+
+- build(deps): bump undici from 8.10.2 to ^8.11.2 (● [cd2e094](https://github.com/corejslib/core/commit/cd2e094b7); 👬 zdm)
+
+Compare with the previous release: [v8.21.3...v8.21.4](https://github.com/corejslib/core/compare/v8.21.3...v8.21.4)
+
 ### v8.21.3 (2026-09-22)
 
 **Bug fixes:**
