@@ -38,7 +38,6 @@ const iterations = 1_000_000,
     // so the per-test a-level is divided by the number of tests to keep the
     // family-wise error rate at familyAlpha.
     alpha = familyAlpha / TESTS.length,
-
     randomValues = new RandomValues( 0xFFFF );
 
 function getChi2Crit ( alpha, df ) {
