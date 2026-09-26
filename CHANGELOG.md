@@ -1,5 +1,19 @@
 # Changelog
 
+### v8.24.0 (2026-09-26)
+
+**New features:**
+
+- \[MINOR] feat: support per-render EJS options (● [1f51511](https://github.com/corejslib/core/commit/1f515118b); 👬 zdm)
+
+- \[MINOR] feat: support synchronous rendering alongside async templates (● [bde36c1](https://github.com/corejslib/core/commit/bde36c195); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: render EJS translations synchronously (● [e44e72b](https://github.com/corejslib/core/commit/e44e72b93); 👬 zdm)
+
+Compare with the previous release: [v8.23.0...v8.24.0](https://github.com/corejslib/core/compare/v8.23.0...v8.24.0)
+
 ### v8.23.0 (2026-09-26)
 
 **New features:**
