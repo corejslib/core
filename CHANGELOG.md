@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.22.0 (2026-09-26)
+
+**New features:**
+
+- \[MINOR] feat: add strict reference and global handling to EJS (● [f2c8bc7](https://github.com/corejslib/core/commit/f2c8bc776); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: refactor ejs context (● [10b5282](https://github.com/corejslib/core/commit/10b528278), [66a09d0](https://github.com/corejslib/core/commit/66a09d0f2), [bdb1546](https://github.com/corejslib/core/commit/bdb154694); 👬 zdm)
+
+Compare with the previous release: [v8.21.5...v8.22.0](https://github.com/corejslib/core/compare/v8.21.5...v8.22.0)
+
 ### v8.21.5 (2026-09-26)
 
 **Bug fixes:**
