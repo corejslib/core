@@ -1,5 +1,15 @@
 # Changelog
 
+### v8.22.1 (2026-09-26)
+
+**Bug fixes:**
+
+- \[PATCH] fix: bind proxied target methods (● [9936609](https://github.com/corejslib/core/commit/993660924); 👬 zdm)
+
+    Preserve the target as `this` when accessing functions through `GlobalProxy`.
+
+Compare with the previous release: [v8.22.0...v8.22.1](https://github.com/corejslib/core/compare/v8.22.0...v8.22.1)
+
 ### v8.22.0 (2026-09-26)
 
 **New features:**
