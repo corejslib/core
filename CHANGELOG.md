@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.24.1 (2026-09-26)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: use synchronous renderer when available (● [2c2ae81](https://github.com/corejslib/core/commit/2c2ae8165); 👬 zdm)
+
+Compare with the previous release: [v8.24.0...v8.24.1](https://github.com/corejslib/core/compare/v8.24.0...v8.24.1)
+
 ### v8.24.0 (2026-09-26)
 
 **New features:**
