@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.23.0 (2026-09-26)
+
+**New features:**
+
+- \[MINOR] feat: add Japanese plural expression rules (● [68317a0](https://github.com/corejslib/core/commit/68317a07d); 👬 zdm)
+
+Compare with the previous release: [v8.22.1...v8.23.0](https://github.com/corejslib/core/compare/v8.22.1...v8.23.0)
+
 ### v8.22.1 (2026-09-26)
 
 **Bug fixes:**
