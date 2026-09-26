@@ -1,5 +1,29 @@
 # Changelog
 
+### v8.21.5 (2026-09-26)
+
+**Bug fixes:**
+
+- \[PATCH] fix: avoid throwing for undefined browser globals (● [3b11532](https://github.com/corejslib/core/commit/3b11532c5); 👬 zdm)
+
+- \[PATCH] fix: fix user-agent properties (● [b376be8](https://github.com/corejslib/core/commit/b376be8c9); 👬 zdm)
+
+- \[PATCH] fix: isolate globals in ejs templates (● [972ed74](https://github.com/corejslib/core/commit/972ed749a); 👬 zdm)
+
+- \[PATCH] fix: preserve safe globals in template evaluation (● [534ef3c](https://github.com/corejslib/core/commit/534ef3c20); 👬 zdm)
+
+    Expose standard globals while raising ReferenceError for undefined template variables.
+
+**Code refactoring:**
+
+- \[PATCH] refactor: simplify safe global lookup (● [b0e38e8](https://github.com/corejslib/core/commit/b0e38e856); 👬 zdm)
+
+**Other changes:**
+
+- style: lint (● [2ab98a0](https://github.com/corejslib/core/commit/2ab98a03b); 👬 zdm)
+
+Compare with the previous release: [v8.21.4...v8.21.5](https://github.com/corejslib/core/compare/v8.21.4...v8.21.5)
+
 ### v8.21.4 (2026-09-24)
 
 **Bug fixes:**
