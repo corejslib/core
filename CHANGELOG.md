@@ -1,5 +1,39 @@
 # Changelog
 
+### v8.25.0 (2026-09-27)
+
+**New features:**
+
+- \[MINOR] feat: add plural rules for more locales (● [5d6c3d7](https://github.com/corejslib/core/commit/5d6c3d797); 👬 zdm)
+
+    Store locale plural metadata separately and use its test functions in locale and PO-file handling.
+
+**Bug fixes:**
+
+- \[PATCH] fix: correct Ejs sync state getter (● [68172e7](https://github.com/corejslib/core/commit/68172e704); 👬 zdm)
+
+- \[PATCH] fix: correct PO message parsing and extraction handling (● [1411650](https://github.com/corejslib/core/commit/14116501d); 👬 zdm)
+
+    Rename the extraction method, preserve disabled message state, validate numeric indexes with `Number.isNaN`, and safely skip empty headers.
+
+- \[PATCH] fix: infer plural forms for known locales (● [d1cb067](https://github.com/corejslib/core/commit/d1cb067c7); 👬 zdm)
+
+- \[PATCH] fix: load locale constants and PO files correctly (● [1c97da1](https://github.com/corejslib/core/commit/1c97da1de); 👬 zdm)
+
+- \[PATCH] fix: load locale domains asynchronously (● [479ac62](https://github.com/corejslib/core/commit/479ac62d8); 👬 zdm)
+
+    Use async filesystem checks and file loading when populating locale domains so .po files are read with the non-blocking path helpers.
+
+- \[PATCH] fix: normalize plural form metadata generation (● [9197ead](https://github.com/corejslib/core/commit/9197eadcf); 👬 zdm)
+
+- \[PATCH] fix: preserve disabled state on PO messages (● [ed4ac37](https://github.com/corejslib/core/commit/ed4ac372d); 👬 zdm)
+
+    The PO message constructor was no longer initializing the disabled flag as a class field and instead assigned it to a public property, which breaks the internal disabled-state behavior. Restore the original field semantics and keep the disabled flag consistent.
+
+- \[PATCH] fix: use nplurals for locale plural counts (● [485adcf](https://github.com/corejslib/core/commit/485adcfdc); 👬 zdm)
+
+Compare with the previous release: [v8.24.1...v8.25.0](https://github.com/corejslib/core/compare/v8.24.1...v8.25.0)
+
 ### v8.24.1 (2026-09-26)
 
 **Code refactoring:**
