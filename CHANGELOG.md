@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.25.1 (2026-09-27)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: replace direct disabled and fuzzy state setters with explicit methods (● [c1f7a1f](https://github.com/corejslib/core/commit/c1f7a1f9d); 👬 zdm)
+
+Compare with the previous release: [v8.25.0...v8.25.1](https://github.com/corejslib/core/compare/v8.25.0...v8.25.1)
+
 ### v8.25.0 (2026-09-27)
 
 **New features:**
