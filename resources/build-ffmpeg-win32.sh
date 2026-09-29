@@ -113,17 +113,20 @@ run_optional() {
         return 0
     fi
 
+    mkdir -p "$FFMPEG_BUILD_DIR/logs"
+    local lib_log="$FFMPEG_BUILD_DIR/logs/$name.log"
+
     (
         set -e
         "$fn"
-    ) &
-    wait $! || status=$?
+    ) 2>&1 | tee "$lib_log" || status=${PIPESTATUS[0]}
 
     if [ "$status" -eq 0 ]; then
         OPTIONAL_FLAGS+=("$@")
     else
         FAILED_LIBS+=("$name")
-        printf '\n!!! %s не собралась — продолжаю без неё\n' "$name"
+        printf '\n!!! %s не собралась — продолжаю без неё. Последние строки (полный лог: %s):\n' "$name" "$lib_log"
+        tail -n 30 "$lib_log" || true
     fi
 }
 
@@ -684,13 +687,20 @@ build_rav1e() {
 
     export PATH="$HOME/.cargo/bin:$PATH"
     rustup target add x86_64-pc-windows-gnu
-    cargo cinstall --help > /dev/null 2>&1 || cargo install cargo-c --locked
+
+    # cargo-c ставим готовым бинарником: сборка из исходников ломается из-за
+    # CC=mingw-gcc и PKG_CONFIG_LIBDIR (openssl-sys не находит хостовый openssl)
+    if ! cargo cinstall --help > /dev/null 2>&1; then
+        mkdir -p "$HOME/.cargo/bin"
+        curl -fsSL https://github.com/lu-zero/cargo-c/releases/latest/download/cargo-c-x86_64-unknown-linux-musl.tar.gz \
+            | tar xz -C "$HOME/.cargo/bin"
+    fi
 
     cd "$SOURCES_DIR"
     git_fetch https://github.com/xiph/rav1e.git rav1e v0.7.1
     cd rav1e
     # Сбрасываем CC/CXX хоста, чтобы build-скрипты Rust собирались обычным gcc
-    env -u CC -u CXX -u AR -u RANLIB -u STRIP -u WINDRES \
+    env -u CC -u CXX -u AR -u RANLIB -u STRIP -u WINDRES -u PKG_CONFIG_LIBDIR \
         CC_x86_64_pc_windows_gnu="$CC" \
         CXX_x86_64_pc_windows_gnu="$CXX" \
         AR_x86_64_pc_windows_gnu="$AR" \
@@ -737,14 +747,19 @@ build_xvid() {
     log "libxvid"
     fetch_tarball https://downloads.xvid.com/downloads/xvidcore-1.3.7.tar.gz xvidcore/build/generic
     ./configure --host="$HOST" --prefix="$BUILD_DIR"
-    make -j"$JOBS"
-    make install
-    # На mingw xvid ставит DLL и библиотеку без префикса lib — оставляем только статику
-    rm -f "$BUILD_DIR/lib/xvidcore.dll.a" "$BUILD_DIR/bin/xvidcore.dll"
 
-    if [ -f "$BUILD_DIR/lib/xvidcore.a" ]; then
-        mv -f "$BUILD_DIR/lib/xvidcore.a" "$BUILD_DIR/lib/libxvidcore.a"
-    fi
+    # Современный gcc/mingw не знает флаг -mno-cygwin, который configure пишет в platform.inc
+    sed -i 's/-mno-cygwin//g' platform.inc
+
+    make -j1
+
+    # Ставим вручную только статику и заголовок (make install на mingw тащит DLL)
+    local static_lib
+    static_lib="$(find . -name xvidcore.a -print -quit)"
+    [ -n "$static_lib" ]
+    mkdir -p "$BUILD_DIR/lib" "$BUILD_DIR/include"
+    cp "$static_lib" "$BUILD_DIR/lib/libxvidcore.a"
+    cp ../../src/xvid.h "$BUILD_DIR/include/xvid.h"
 }
 
 build_kvazaar() {
@@ -951,7 +966,7 @@ make install
 
 # ----------------------------------------------------------------- done
 log "Готово!"
-ls -lh "$BIN_DIR"/*.exe
+
 if [ "${#FAILED_LIBS[@]}" -gt 0 ]; then
     echo "Не подключены (не собрались/не нашлись): ${FAILED_LIBS[*]}"
 fi
