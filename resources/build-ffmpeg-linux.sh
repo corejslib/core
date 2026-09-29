@@ -265,9 +265,24 @@ build_jitterentropy() {
     rm -rf .objs
     mkdir .objs
 
-    local src
-    for src in src/*.c; do
-        gcc -O0 -fwrapv -fPIC -Wall -I. -Isrc -c "$src" -o ".objs/$(basename "$src" .c).o"
+    # Ядро лежит в src/, а платформенный слой (jent_zalloc, jent_zfree,
+    # jent_memset_secure, jent_os_random_bytes...) — в arch/ либо в корне.
+    # Тесты (tests/) и прочее не берём.
+    local src objname
+    local -a srcs=()
+
+    while IFS= read -r src; do
+        srcs+=("$src")
+    done < <(
+        find . -maxdepth 1 -name '*.c' -print
+        find src arch -maxdepth 1 -name '*.c' -print 2> /dev/null
+    )
+
+    echo "jitterentropy: компилирую ${srcs[*]}"
+
+    for src in "${srcs[@]}"; do
+        objname="$(echo "${src#./}" | tr '/' '_')"
+        gcc -O0 -fwrapv -fPIC -Wall -I. -Isrc -Iarch -c "$src" -o ".objs/${objname%.c}.o"
     done
 
     mkdir -p "$BUILD_DIR/lib" "$BUILD_DIR/include"
@@ -317,8 +332,7 @@ for stub in dl pthread rt util; do
 done
 
 if pkg-config --static --libs openssl | grep -q jitterentropy \
-    && [ "$(gcc -print-file-name=libjitterentropy.a)" = "libjitterentropy.a" ] \
-    && [ ! -f "$BUILD_DIR/lib/libjitterentropy.a" ]; then
+    && [ "$(gcc -print-file-name=libjitterentropy.a)" = "libjitterentropy.a" ]; then
     build_jitterentropy
 fi
 
