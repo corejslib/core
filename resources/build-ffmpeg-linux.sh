@@ -141,6 +141,13 @@ configure_ffmpeg() {
 
         if [ "$found" -eq 0 ]; then
             echo "configure упал не из-за необязательной библиотеки — см. ffbuild/config.log" >&2
+
+            if [ -f ffbuild/config.log ]; then
+                echo "----- ffbuild/config.log (последние 80 строк) -----" >&2
+                tail -n 80 ffbuild/config.log >&2
+                echo "----- конец config.log -----" >&2
+            fi
+
             return 1
         fi
 
@@ -205,6 +212,22 @@ if ! pkg-config --static --print-errors "libass >= 0.11.0"; then
     echo "Установите недостающие -dev пакеты и запустите скрипт снова." >&2
     exit 1
 fi
+
+# Именно так configure проверяет libass: собирает и линкует тестовую программу
+# статически. Если здесь ошибка линковки — она же будет и у configure.
+LIBASS_TEST_DIR="$(mktemp -d)"
+printf '#include <ass/ass.h>\nint main(void) { ass_library_init(); return 0; }\n' \
+    > "$LIBASS_TEST_DIR/t.c"
+
+if ! gcc "$LIBASS_TEST_DIR/t.c" -static \
+    $(pkg-config --static --cflags --libs libass) \
+    -o "$LIBASS_TEST_DIR/t" -lpthread -lm; then
+    echo "Статическая линковка libass не удалась (ошибки линкера выше)." >&2
+    rm -rf "$LIBASS_TEST_DIR"
+    exit 1
+fi
+
+rm -rf "$LIBASS_TEST_DIR"
 
 # ------------------------------------------- дополнительные библиотеки (apt)
 # Формат: "имя|пакеты apt|флаги configure".
