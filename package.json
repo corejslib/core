@@ -119,6 +119,7 @@
     ],
     "scripts": {
         "build": "node bin/build.js",
+        "build-ffmpeg": "node bin/build-ffmpeg.js",
         "install": "node bin/install.js",
         "test": "node --test \"tests/**/*.test.js\""
     },
