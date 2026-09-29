@@ -1,4 +1,4 @@
-name: build-ffmpeg
+name: build-ffmpeg-linux
 
 on:
   workflow_dispatch:
