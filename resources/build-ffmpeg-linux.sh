@@ -689,11 +689,15 @@ log "Готово!"
 for bin in ffmpeg ffprobe; do
     [ -x "$BIN_DIR/$bin" ] || continue
 
-    if ldd "$BIN_DIR/$bin" 2>&1 | grep -q "not a dynamic executable"; then
+    # ldd для статического файла завершается с кодом 1, а с pipefail это ломало
+    # проверку в pipe (и set -e) — поэтому сначала забираем вывод целиком
+    ldd_out="$(LC_ALL=C ldd "$BIN_DIR/$bin" 2>&1 || true)"
+
+    if grep -qE "not a dynamic executable|statically linked" <<< "$ldd_out"; then
         echo "$bin: статический бинарник, внешние .so не нужны"
     else
         echo "ВНИМАНИЕ: $bin всё ещё динамический, зависимости:"
-        ldd "$BIN_DIR/$bin" | awk '{ print "  " $0 }'
+        awk '{ print "  " $0 }' <<< "$ldd_out"
     fi
 done
 
