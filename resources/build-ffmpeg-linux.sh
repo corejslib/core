@@ -170,7 +170,14 @@ sudo apt-get -y install \
     cmake \
     git-core \
     libass-dev \
+    libbrotli-dev \
+    libbz2-dev \
+    libexpat1-dev \
+    libfontconfig-dev \
     libfreetype6-dev \
+    libfribidi-dev \
+    libharfbuzz-dev \
+    libpng-dev \
     libssl-dev \
     libnuma-dev \
     libtool \
@@ -186,6 +193,18 @@ sudo apt-get -y install \
     wget \
     yasm \
     zlib1g-dev
+
+# libunibreak нужен новым версиям libass (Requires.private); в старых релизах
+# Ubuntu пакета нет — это не ошибка, поэтому ставим отдельно.
+sudo apt-get -y install libunibreak-dev || true
+
+# libass обязателен (--enable-libass). При статической сборке pkg-config
+# проверяет всю цепочку Requires.private, поэтому падаем заранее и понятно.
+if ! pkg-config --static --print-errors "libass >= 0.11.0"; then
+    echo "libass не проходит проверку pkg-config --static (см. вывод выше)." >&2
+    echo "Установите недостающие -dev пакеты и запустите скрипт снова." >&2
+    exit 1
+fi
 
 # ------------------------------------------- дополнительные библиотеки (apt)
 # Формат: "имя|пакеты apt|флаги configure".
