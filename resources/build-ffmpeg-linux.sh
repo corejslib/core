@@ -6,9 +6,13 @@ trap 'echo "⚠  Error ($0:$LINENO, exit code: $?): $BASH_COMMAND" >&2' ERR
 # Полная сборка FFmpeg из исходников на Ubuntu
 # По мотивам: https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu
 #
-# Собирается статический ffmpeg/ffprobe/ffplay с кодеками:
+# Собирается ffmpeg/ffprobe (без ffplay) с кодеками:
 #   x264, x265, libvpx (VP8/VP9), fdk-aac, mp3lame, opus,
 #   libaom (AV1), SVT-AV1, dav1d, libvorbis, libass, freetype, gnutls
+#
+# Бинарники линкуются полностью статически (-static): ldd покажет
+# "not a dynamic executable", никаких .so на целевой машине не нужно.
+# Из-за этого отключены VAAPI/VDPAU (им нужны драйверы через dlopen).
 #
 # ВНИМАНИЕ: из-за --enable-nonfree (fdk-aac) итоговый бинарник
 # нельзя распространять — только для личного использования.
@@ -169,10 +173,7 @@ sudo apt-get -y install \
     libfreetype6-dev \
     libgnutls28-dev \
     libnuma-dev \
-    libsdl2-dev \
     libtool \
-    libva-dev \
-    libvdpau-dev \
     libvorbis-dev \
     libunistring-dev \
     libxcb1-dev \
@@ -471,7 +472,7 @@ FFMPEG_FLAGS=(
     --prefix="$BUILD_DIR"
     --pkg-config-flags="--static"
     --extra-cflags="-I$BUILD_DIR/include"
-    --extra-ldflags="-L$BUILD_DIR/lib"
+    --extra-ldflags="-L$BUILD_DIR/lib -static"
     --extra-libs="-lpthread -lm"
     --ld="g++"
     --bindir="$BIN_DIR"
@@ -491,8 +492,13 @@ FFMPEG_FLAGS=(
     --enable-libx264
     --enable-libx265
     --enable-nonfree
-    # sndio подтягивается через libsdl2-dev и автоопределяется, но на целевой
-    # машине его обычно нет (libsndio.so.7: cannot open shared object file)
+    --disable-ffplay
+    # VAAPI/VDPAU грузят драйверы через dlopen — в статическом бинарнике не работают
+    --disable-vaapi
+    --disable-vdpau
+    # На случай, если SDL2/sndio остались в системе от прошлых сборок:
+    # автоопределение подцепило бы их как динамические зависимости
+    --disable-sdl2
     --disable-sndio
 )
 
@@ -507,13 +513,18 @@ hash -r
 # ----------------------------------------------------------------- done
 log "Готово!"
 
-# Проверка: бинарники не должны требовать нестандартных .so
-for bin in ffmpeg ffprobe ffplay; do
-    if [ -x "$BIN_DIR/$bin" ] && ldd "$BIN_DIR/$bin" | grep -q "not found"; then
-        echo "ВНИМАНИЕ: $bin ссылается на отсутствующие библиотеки:"
-        ldd "$BIN_DIR/$bin" | grep "not found"
+# Проверка, что бинарники действительно статические
+for bin in ffmpeg ffprobe; do
+    [ -x "$BIN_DIR/$bin" ] || continue
+
+    if ldd "$BIN_DIR/$bin" 2>&1 | grep -q "not a dynamic executable"; then
+        echo "$bin: статический бинарник, внешние .so не нужны"
+    else
+        echo "ВНИМАНИЕ: $bin всё ещё динамический, зависимости:"
+        ldd "$BIN_DIR/$bin" | awk '{ print "  " $0 }'
     fi
 done
+
 "$BIN_DIR/ffmpeg" -version | head -n 1
 if [ "${#FAILED_LIBS[@]}" -gt 0 ]; then
     echo "Не подключены (не собрались/не нашлись): ${FAILED_LIBS[*]}"
