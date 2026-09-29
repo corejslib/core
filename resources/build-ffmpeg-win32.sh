@@ -845,7 +845,15 @@ build_srt() {
 build_bluray() {
     log "libbluray"
     fetch_tarball https://download.videolan.org/pub/videolan/libbluray/1.3.4/libbluray-1.3.4.tar.bz2 libbluray-1.3.4
+
+    # В libbluray глобальный символ dec_init совпадает с dec_init из
+    # fftools/ffmpeg_dec.c -> "multiple definition" при статической линковке.
+    # Переименовываем его при сборке libbluray (distclean — чтобы пересобрать
+    # объектные файлы, если каталог остался от прошлого запуска).
+    make distclean > /dev/null 2>&1 || true
+
     cross_autotools \
+        CPPFLAGS="-Ddec_init=bd_dec_init" \
         --disable-examples \
         --disable-bdjava-jar \
         --disable-doxygen-doc \
