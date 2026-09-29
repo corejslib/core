@@ -129,12 +129,12 @@ run_optional() {
 
 configure_ffmpeg() {
     local -a optional=("$@")
-    local cfg_log="$PWD/configure-attempt.log" status name flag f found
+    local cfg_log="$PWD/configure-attempt.log" status name flag f found dropped
 
     while true; do
         set +e
-        ./configure "${FFMPEG_FLAGS[@]}" "${optional[@]}" 2>&1 | tee "$cfg_log"
-        status=${PIPESTATUS[0]}
+        status=0
+        ./configure "${FFMPEG_FLAGS[@]}" "${optional[@]}" 2>&1 | tee "$cfg_log" || status=${PIPESTATUS[0]}
         set -e
 
         if [ "$status" -eq 0 ]; then
@@ -157,6 +157,7 @@ configure_ffmpeg() {
 
             if [ -n "$name" ] && { [ "$flag" = "${name//_/-}" ] || [ "$flag" = "lib${name//_/-}" ]; }; then
                 found=1
+                dropped="$f"
             else
                 rest+=("$f")
             fi
@@ -167,7 +168,7 @@ configure_ffmpeg() {
             return 1
         fi
 
-        log "Отключаю --enable-$name (не найдена или не слинковалась), пробую снова"
+        log "Отключаю $dropped (не найдена или не слинковалась), пробую снова"
         FAILED_LIBS+=("$name")
         optional=("${rest[@]}")
     done
