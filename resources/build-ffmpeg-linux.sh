@@ -375,7 +375,6 @@ EXTRA_LIBS=(
     "speex|libspeex-dev|--enable-libspeex"
     "twolame|libtwolame-dev|--enable-libtwolame"
     "amr|libopencore-amrnb-dev libopencore-amrwb-dev|--enable-libopencore-amrnb --enable-libopencore-amrwb"
-    "soxr|libsoxr-dev|--enable-libsoxr"
     "rubberband|librubberband-dev|--enable-librubberband"
     "zimg|libzimg-dev|--enable-libzimg"
     "bluray|libbluray-dev|--enable-libbluray"
@@ -670,6 +669,35 @@ build_srt() {
 }
 
 run_optional srt build_srt --enable-libsrt
+
+# ------------------------------------------------------------------ soxr
+# libsoxr-dev в Ubuntu без статической libsoxr.a, а ffmpeg ищет её без
+# pkg-config (просто -lsoxr), поэтому собираем сами. OpenMP выключаем, чтобы
+# не тянуть libgomp в статическую линковку. POLICY_VERSION_MINIMUM нужен,
+# потому что CMakeLists soxr слишком старый для CMake 4.x.
+build_soxr() {
+    log "soxr"
+    cd "$SOURCES_DIR"
+    git_fetch https://git.code.sf.net/p/soxr/code soxr
+    rm -rf soxr/build
+    mkdir -p soxr/build
+    cd soxr/build
+    cmake -G "Unix Makefiles" \
+        -DCMAKE_INSTALL_PREFIX="$BUILD_DIR" \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+        -DBUILD_SHARED_LIBS=OFF \
+        -DBUILD_TESTS=OFF \
+        -DBUILD_EXAMPLES=OFF \
+        -DWITH_OPENMP=OFF \
+        -DWITH_LSR_BINDINGS=OFF \
+        ..
+    make -j"$JOBS"
+    make install
+}
+
+run_optional soxr build_soxr --enable-libsoxr
 
 # ----------------------------------------------------------------- ffmpeg
 log "FFmpeg"
