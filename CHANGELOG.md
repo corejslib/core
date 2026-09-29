@@ -1,5 +1,41 @@
 # Changelog
 
+### v8.26.0 (2026-09-29)
+
+**New features:**
+
+- \[MINOR] feat: add ffmpeg builder (● [f42d193](https://github.com/corejslib/core/commit/f42d19390), [08aa5e9](https://github.com/corejslib/core/commit/08aa5e907), [7412282](https://github.com/corejslib/core/commit/74122820b), [1e7638a](https://github.com/corejslib/core/commit/1e7638a71), [60c7de6](https://github.com/corejslib/core/commit/60c7de6b8), [e2f2aad](https://github.com/corejslib/core/commit/e2f2aad7f), [402f2d5](https://github.com/corejslib/core/commit/402f2d500), [117e883](https://github.com/corejslib/core/commit/117e88368), [b96f15d](https://github.com/corejslib/core/commit/b96f15d5f), [a5e25d5](https://github.com/corejslib/core/commit/a5e25d541), [1298cf1](https://github.com/corejslib/core/commit/1298cf132), [225ec6e](https://github.com/corejslib/core/commit/225ec6ef7), [9f1a768](https://github.com/corejslib/core/commit/9f1a76807), [70cbf74](https://github.com/corejslib/core/commit/70cbf742c), [0bba62d](https://github.com/corejslib/core/commit/0bba62d34), [502717f](https://github.com/corejslib/core/commit/502717f89), [c2066c0](https://github.com/corejslib/core/commit/c2066c070), [0b90a7e](https://github.com/corejslib/core/commit/0b90a7e1c), [913f1e7](https://github.com/corejslib/core/commit/913f1e718), [5867718](https://github.com/corejslib/core/commit/5867718d7), [06b7524](https://github.com/corejslib/core/commit/06b75244d), [b34316f](https://github.com/corejslib/core/commit/b34316fb9), [981ad40](https://github.com/corejslib/core/commit/981ad4004); 👬 zdm)
+
+- \[MINOR] feat: add GitHub commit, reference, and tag endpoints (● [39dd8cc](https://github.com/corejslib/core/commit/39dd8cc32); 👬 zdm)
+
+- \[MINOR] feat: add github listTags() (● [291c5d5](https://github.com/corejslib/core/commit/291c5d537); 👬 zdm)
+
+- \[MINOR] feat: add remote tag retrieval from repositoriesfeat: add remote tag retrieval from repositories (● [8455f56](https://github.com/corejslib/core/commit/8455f5698); 👬 zdm)
+
+- \[MINOR] feat: update external-resources export (● [e2b2c56](https://github.com/corejslib/core/commit/e2b2c5677); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: correct GitHub tag API endpoint (● [d00e96b](https://github.com/corejslib/core/commit/d00e96b6b); 👬 zdm)
+
+- \[PATCH] fix: fix firebase api (● [a6420b0](https://github.com/corejslib/core/commit/a6420b008); 👬 zdm)
+
+- \[PATCH] fix: fix git getRemoteTags (● [5ad6e07](https://github.com/corejslib/core/commit/5ad6e07f6); 👬 zdm)
+
+- \[PATCH] fix: fix github api call (● [37d8503](https://github.com/corejslib/core/commit/37d8503bf); 👬 zdm)
+
+- \[PATCH] fix: normalize FFmpeg repository names in release lookups (● [44013a5](https://github.com/corejslib/core/commit/44013a5ec); 👬 zdm)
+
+- \[PATCH] fix: update Google Cloud Messaging topic subscriptions (● [20fc89a](https://github.com/corejslib/core/commit/20fc89aa1); 👬 zdm)
+
+    Use the FCM per-device topic subscription API for subscribing and unsubscribing tokens.
+
+**Other changes:**
+
+- docs: update Firebase Cloud Messaging reference link (● [ae8c260](https://github.com/corejslib/core/commit/ae8c26031); 👬 zdm)
+
+Compare with the previous release: [v8.25.1...v8.26.0](https://github.com/corejslib/core/compare/v8.25.1...v8.26.0)
+
 ### v8.25.1 (2026-09-27)
 
 **Code refactoring:**
