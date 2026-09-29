@@ -2,7 +2,6 @@
 
 import Cli from "#lib/cli";
 import ExternalResourceBuilder from "#lib/external-resource-builder";
-import FfmpegLinux from "#lib/external-resources/ffmpeg-linux";
 import FfmpegWin32 from "#lib/external-resources/ffmpeg-win32";
 
 const CLI = {
@@ -30,7 +29,6 @@ const res = await ExternalResourceBuilder.build(
     [
 
         //
-        FfmpegLinux,
         FfmpegWin32,
     ],
     {
