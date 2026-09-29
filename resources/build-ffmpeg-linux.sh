@@ -209,7 +209,6 @@ EXTRA_LIBS=(
     "srt|libsrt-gnutls-dev|--enable-libsrt"
     "bluray|libbluray-dev|--enable-libbluray"
     "xml2|libxml2-dev|--enable-libxml2"
-    "tesseract|libtesseract-dev libleptonica-dev|--enable-libtesseract"
 )
 
 for entry in "${EXTRA_LIBS[@]}"; do

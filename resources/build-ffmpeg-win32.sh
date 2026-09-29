@@ -14,7 +14,7 @@ trap 'echo "⚠  Error ($0:$LINENO, exit code: $?): $BASH_COMMAND" >&2' ERR
 # Дополнительно (каждая необязательна — при ошибке сборки пропускается):
 #           libwebp, libjxl, openjpeg, vvenc, rav1e, theora, openh264, xvid,
 #           kvazaar, speex, twolame, opencore-amr, soxr, vidstab, rubberband,
-#           zimg, srt (без шифрования), bluray, libxml2, tesseract
+#           zimg, srt (без шифрования), bluray, libxml2
 # НЕ включено: ffplay (нужен SDL2).
 #
 # ВНИМАНИЕ: из-за --enable-nonfree (fdk-aac) итоговые .exe
@@ -874,33 +874,6 @@ build_xml2() {
         --with-zlib="$BUILD_DIR"
 }
 
-build_tesseract() {
-    log "leptonica + tesseract"
-    cd "$SOURCES_DIR"
-    git_fetch https://github.com/DanBloomberg/leptonica.git leptonica 1.87.0
-    cross_cmake leptonica leptonica/build-mingw \
-        -DBUILD_PROG=OFF \
-        -DSW_BUILD=OFF \
-        -DCMAKE_DISABLE_FIND_PACKAGE_GIF=ON \
-        -DCMAKE_DISABLE_FIND_PACKAGE_JPEG=ON \
-        -DCMAKE_DISABLE_FIND_PACKAGE_PNG=ON \
-        -DCMAKE_DISABLE_FIND_PACKAGE_TIFF=ON \
-        -DCMAKE_DISABLE_FIND_PACKAGE_WebP=ON \
-        -DCMAKE_DISABLE_FIND_PACKAGE_OpenJPEG=ON \
-        -DCMAKE_DISABLE_FIND_PACKAGE_ZLIB=ON
-
-    git_fetch https://github.com/tesseract-ocr/tesseract.git tesseract 5.4.1
-    cross_cmake tesseract tesseract/build-mingw \
-        -DSW_BUILD=OFF \
-        -DBUILD_TESTS=OFF \
-        -DBUILD_TRAINING_TOOLS=OFF \
-        -DGRAPHICS_DISABLED=ON \
-        -DDISABLE_CURL=ON \
-        -DDISABLE_ARCHIVE=ON \
-        -DOPENMP_BUILD=OFF \
-        -DLeptonica_DIR="$BUILD_DIR/lib/cmake/leptonica"
-}
-
 run_optional webp build_webp --enable-libwebp
 run_optional jxl build_jxl --enable-libjxl
 run_optional openjpeg build_openjpeg --enable-libopenjpeg
@@ -920,7 +893,6 @@ run_optional zimg build_zimg --enable-libzimg
 run_optional srt build_srt --enable-libsrt
 run_optional bluray build_bluray --enable-libbluray
 run_optional xml2 build_xml2 --enable-libxml2
-run_optional tesseract build_tesseract --enable-libtesseract
 
 # ----------------------------------------------------------------- ffmpeg
 log "FFmpeg ($FFMPEG_REF)"
