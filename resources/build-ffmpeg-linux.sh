@@ -254,6 +254,27 @@ build_harfbuzz() {
     ninja -C build install
 }
 
+# openssl.pc в новых Ubuntu требует статический libjitterentropy.a; если пакета
+# нет или в нём нет .a — собираем сами. Библиотека маленькая (несколько .c файлов,
+# без зависимостей). Ей нужна сборка без оптимизаций (-O0), как в её Makefile.
+build_jitterentropy() {
+    log "jitterentropy (зависимость статического OpenSSL)"
+    cd "$SOURCES_DIR"
+    git_fetch https://github.com/smuellerDD/jitterentropy-library.git jitterentropy-library
+    cd jitterentropy-library
+    rm -rf .objs
+    mkdir .objs
+
+    local src
+    for src in src/*.c; do
+        gcc -O0 -fwrapv -fPIC -Wall -I. -Isrc -c "$src" -o ".objs/$(basename "$src" .c).o"
+    done
+
+    mkdir -p "$BUILD_DIR/lib" "$BUILD_DIR/include"
+    ar rcs "$BUILD_DIR/lib/libjitterentropy.a" .objs/*.o
+    cp jitterentropy.h "$BUILD_DIR/include/"
+}
+
 [ -f "$BUILD_DIR/lib/pkgconfig/libunibreak.pc" ] || build_libunibreak
 [ -f "$BUILD_DIR/lib/pkgconfig/harfbuzz.pc" ] || build_harfbuzz
 
@@ -294,6 +315,12 @@ for stub in dl pthread rt util; do
         ar rcs "$BUILD_DIR/lib/lib$stub.a"
     fi
 done
+
+if pkg-config --static --libs openssl | grep -q jitterentropy \
+    && [ "$(gcc -print-file-name=libjitterentropy.a)" = "libjitterentropy.a" ] \
+    && [ ! -f "$BUILD_DIR/lib/libjitterentropy.a" ]; then
+    build_jitterentropy
+fi
 
 OPENSSL_TEST_DIR="$(mktemp -d)"
 printf '#include <openssl/ssl.h>\nint main(void) { OPENSSL_init_ssl(0, NULL); return 0; }\n' \
