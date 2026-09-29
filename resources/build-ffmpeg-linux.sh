@@ -28,6 +28,7 @@ trap 'echo "⚠  Error ($0:$LINENO, exit code: $?): $BASH_COMMAND" >&2' ERR
 #   BIN_DIR      куда ставить бинарники  (по умолчанию ~/bin)
 #   JOBS         число потоков make      (по умолчанию nproc)
 #   FFMPEG_REF   ветка/тег FFmpeg        (по умолчанию release/9.0; можно master или n9.0.1)
+#   HARFBUZZ_REF ветка/тег harfbuzz      (по умолчанию — ветка по умолчанию репозитория)
 #   SKIP_LIBS    необязательные библиотеки, которые не нужно подключать,
 #                например: SKIP_LIBS="jxl rav1e" (имена — в списке EXTRA_LIBS ниже)
 
@@ -201,15 +202,59 @@ sudo apt-get -y install \
     yasm \
     zlib1g-dev
 
-# libunibreak нужен новым версиям libass (Requires.private); в старых релизах
-# Ubuntu пакета нет — это не ошибка, поэтому ставим отдельно.
-sudo apt-get -y install libunibreak-dev || true
+# ------------------------------------------- цепочка зависимостей libass
+# В Ubuntu нет статических libunibreak.a и libharfbuzz.a, а бинарник мы
+# линкуем с -static. libass.a, fribidi и fontconfig берём из apt, а эти две
+# библиотеки собираем сами в $BUILD_DIR (он стоит первым в PKG_CONFIG_PATH).
+build_libunibreak() {
+    log "libunibreak (зависимость libass)"
+    cd "$SOURCES_DIR"
+    git_fetch https://github.com/adah1972/libunibreak.git libunibreak
+    cd libunibreak
+    make distclean > /dev/null 2>&1 || true
+    autoreconf -fiv
+    ./configure \
+        --prefix="$BUILD_DIR" \
+        --disable-shared \
+        --enable-static \
+        --with-pic
+    make -j"$JOBS"
+    make install
+}
+
+build_harfbuzz() {
+    log "harfbuzz (зависимость libass)"
+    cd "$SOURCES_DIR"
+    git_fetch https://github.com/harfbuzz/harfbuzz.git harfbuzz ${HARFBUZZ_REF:+"$HARFBUZZ_REF"}
+    cd harfbuzz
+    rm -rf build
+    # freetype=disabled: libass'у не нужен hb-ft, а так harfbuzz.pc не зависит
+    # от freetype2.pc (который сам требует harfbuzz) — без циклической зависимости.
+    meson setup build \
+        --prefix="$BUILD_DIR" \
+        --libdir=lib \
+        --buildtype=release \
+        --default-library=static \
+        -Dfreetype=disabled \
+        -Dglib=disabled \
+        -Dgobject=disabled \
+        -Dcairo=disabled \
+        -Dicu=disabled \
+        -Dtests=disabled \
+        -Ddocs=disabled \
+        -Dbenchmark=disabled \
+        -Dutilities=disabled
+    ninja -C build -j"$JOBS"
+    ninja -C build install
+}
+
+[ -f "$BUILD_DIR/lib/pkgconfig/libunibreak.pc" ] || build_libunibreak
+[ -f "$BUILD_DIR/lib/pkgconfig/harfbuzz.pc" ] || build_harfbuzz
 
 # libass обязателен (--enable-libass). При статической сборке pkg-config
 # проверяет всю цепочку Requires.private, поэтому падаем заранее и понятно.
 if ! pkg-config --static --print-errors "libass >= 0.11.0"; then
     echo "libass не проходит проверку pkg-config --static (см. вывод выше)." >&2
-    echo "Установите недостающие -dev пакеты и запустите скрипт снова." >&2
     exit 1
 fi
 
@@ -219,9 +264,10 @@ LIBASS_TEST_DIR="$(mktemp -d)"
 printf '#include <ass/ass.h>\nint main(void) { ass_library_init(); return 0; }\n' \
     > "$LIBASS_TEST_DIR/t.c"
 
+# shellcheck disable=SC2046
 if ! gcc "$LIBASS_TEST_DIR/t.c" -static \
     $(pkg-config --static --cflags --libs libass) \
-    -o "$LIBASS_TEST_DIR/t" -lpthread -lm; then
+    -o "$LIBASS_TEST_DIR/t" -lstdc++ -lpthread -lm; then
     echo "Статическая линковка libass не удалась (ошибки линкера выше)." >&2
     rm -rf "$LIBASS_TEST_DIR"
     exit 1
