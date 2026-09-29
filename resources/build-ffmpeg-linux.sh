@@ -200,7 +200,13 @@ sudo apt-get -y install \
     texinfo \
     wget \
     yasm \
-    zlib1g-dev
+    zlib1g-dev \
+    libzstd-dev
+
+# openssl.pc (Libs.private) в новых Ubuntu требует статические libjitterentropy.a
+# и libzstd.a. Пакета libjitterentropy-dev может не быть в старых релизах —
+# там OpenSSL этого и не требует, поэтому ошибку установки не считаем фатальной.
+sudo apt-get -y install libjitterentropy-dev || true
 
 # ------------------------------------------- цепочка зависимостей libass
 # В Ubuntu нет статических libunibreak.a и libharfbuzz.a, а бинарник мы
@@ -294,6 +300,13 @@ printf '#include <openssl/ssl.h>\nint main(void) { OPENSSL_init_ssl(0, NULL); re
     > "$OPENSSL_TEST_DIR/t.c"
 
 echo "openssl static libs: $(pkg-config --static --libs openssl)"
+
+for n in jitterentropy zstd; do
+    if pkg-config --static --libs openssl | grep -q "$n" \
+        && [ "$(gcc -print-file-name="lib$n.a")" = "lib$n.a" ]; then
+        echo "ВНИМАНИЕ: openssl.pc требует lib$n.a, но его нет в системе" >&2
+    fi
+done
 
 # shellcheck disable=SC2046
 if ! gcc "$OPENSSL_TEST_DIR/t.c" -static -L"$BUILD_DIR/lib" \
