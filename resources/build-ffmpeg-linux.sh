@@ -144,8 +144,8 @@ configure_ffmpeg() {
             echo "configure упал не из-за необязательной библиотеки — см. ffbuild/config.log" >&2
 
             if [ -f ffbuild/config.log ]; then
-                echo "----- ffbuild/config.log (последние 80 строк) -----" >&2
-                tail -n 80 ffbuild/config.log >&2
+                echo "----- ffbuild/config.log (последние 250 строк) -----" >&2
+                tail -n 250 ffbuild/config.log >&2
                 echo "----- конец config.log -----" >&2
             fi
 
@@ -274,6 +274,37 @@ if ! gcc "$LIBASS_TEST_DIR/t.c" -static \
 fi
 
 rm -rf "$LIBASS_TEST_DIR"
+
+# ------------------------------------------------- статический OpenSSL
+# openssl.pc (Libs.private) просит -ldl -pthread. В glibc >= 2.34 эти функции
+# живут в самой libc, и в новых дистрибутивах отдельных libdl.a / libpthread.a
+# может не быть — тогда статическая линковка падает на "cannot find -ldl".
+# Кладём пустые заглушки в $BUILD_DIR/lib (он есть в -L), только если файла нет.
+for stub in dl pthread rt util; do
+    if [ "$(gcc -print-file-name="lib$stub.a")" = "lib$stub.a" ] \
+        && [ ! -f "$BUILD_DIR/lib/lib$stub.a" ]; then
+        log "lib$stub.a нет в системе — создаю пустую заглушку"
+        mkdir -p "$BUILD_DIR/lib"
+        ar rcs "$BUILD_DIR/lib/lib$stub.a"
+    fi
+done
+
+OPENSSL_TEST_DIR="$(mktemp -d)"
+printf '#include <openssl/ssl.h>\nint main(void) { OPENSSL_init_ssl(0, NULL); return 0; }\n' \
+    > "$OPENSSL_TEST_DIR/t.c"
+
+echo "openssl static libs: $(pkg-config --static --libs openssl)"
+
+# shellcheck disable=SC2046
+if ! gcc "$OPENSSL_TEST_DIR/t.c" -static -L"$BUILD_DIR/lib" \
+    $(pkg-config --static --cflags --libs openssl) \
+    -o "$OPENSSL_TEST_DIR/t" -lpthread -lm; then
+    echo "Статическая линковка openssl не удалась (ошибки линкера выше)." >&2
+    rm -rf "$OPENSSL_TEST_DIR"
+    exit 1
+fi
+
+rm -rf "$OPENSSL_TEST_DIR"
 
 # ------------------------------------------- дополнительные библиотеки (apt)
 # Формат: "имя|пакеты apt|флаги configure".
