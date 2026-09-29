@@ -8,7 +8,7 @@ trap 'echo "⚠  Error ($0:$LINENO, exit code: $?): $BASH_COMMAND" >&2' ERR
 #
 # Собирается ffmpeg/ffprobe (без ffplay) с кодеками:
 #   x264, x265, libvpx (VP8/VP9), fdk-aac, mp3lame, opus,
-#   libaom (AV1), SVT-AV1, dav1d, libvorbis, libass, freetype, gnutls
+#   libaom (AV1), SVT-AV1, dav1d, libvorbis, libass, freetype, openssl
 #
 # Бинарники линкуются полностью статически (-static): ldd покажет
 # "not a dynamic executable", никаких .so на целевой машине не нужно.
@@ -171,7 +171,7 @@ sudo apt-get -y install \
     git-core \
     libass-dev \
     libfreetype6-dev \
-    libgnutls28-dev \
+    libssl-dev \
     libnuma-dev \
     libtool \
     libvorbis-dev \
@@ -206,7 +206,7 @@ EXTRA_LIBS=(
     "vidstab|libvidstab-dev|--enable-libvidstab"
     "rubberband|librubberband-dev|--enable-librubberband"
     "zimg|libzimg-dev|--enable-libzimg"
-    "srt|libsrt-gnutls-dev|--enable-libsrt"
+    "srt|libsrt-openssl-dev|--enable-libsrt"
     "bluray|libbluray-dev|--enable-libbluray"
     "xml2|libxml2-dev|--enable-libxml2"
 )
@@ -477,7 +477,7 @@ FFMPEG_FLAGS=(
     --bindir="$BIN_DIR"
     --enable-gpl
     --enable-version3
-    --enable-gnutls
+    --enable-openssl
     --enable-libaom
     --enable-libass
     --enable-libdav1d
