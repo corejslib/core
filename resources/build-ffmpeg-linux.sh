@@ -491,6 +491,9 @@ FFMPEG_FLAGS=(
     --enable-libx264
     --enable-libx265
     --enable-nonfree
+    # sndio подтягивается через libsdl2-dev и автоопределяется, но на целевой
+    # машине его обычно нет (libsndio.so.7: cannot open shared object file)
+    --disable-sndio
 )
 
 # Необязательные библиотеки, которые не подошли configure, отключаются
@@ -503,6 +506,14 @@ hash -r
 
 # ----------------------------------------------------------------- done
 log "Готово!"
+
+# Проверка: бинарники не должны требовать нестандартных .so
+for bin in ffmpeg ffprobe ffplay; do
+    if [ -x "$BIN_DIR/$bin" ] && ldd "$BIN_DIR/$bin" | grep -q "not found"; then
+        echo "ВНИМАНИЕ: $bin ссылается на отсутствующие библиотеки:"
+        ldd "$BIN_DIR/$bin" | grep "not found"
+    fi
+done
 "$BIN_DIR/ffmpeg" -version | head -n 1
 if [ "${#FAILED_LIBS[@]}" -gt 0 ]; then
     echo "Не подключены (не собрались/не нашлись): ${FAILED_LIBS[*]}"
