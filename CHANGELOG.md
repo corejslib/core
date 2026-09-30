@@ -1,5 +1,19 @@
 # Changelog
 
+### v8.26.1 (2026-09-30)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix acme (● [1c8ec2e](https://github.com/corejslib/core/commit/1c8ec2e3d), [b3edc70](https://github.com/corejslib/core/commit/b3edc70d3), [e1a652c](https://github.com/corejslib/core/commit/e1a652ce4), [765fba8](https://github.com/corejslib/core/commit/765fba87f), [147b1da](https://github.com/corejslib/core/commit/147b1daa8), [cca2d34](https://github.com/corejslib/core/commit/cca2d3448), [2fdc6ac](https://github.com/corejslib/core/commit/2fdc6ac62), [6b2eb1d](https://github.com/corejslib/core/commit/6b2eb1dfe), [95f8c55](https://github.com/corejslib/core/commit/95f8c55c1), [d877268](https://github.com/corejslib/core/commit/d877268b7), [66349cb](https://github.com/corejslib/core/commit/66349cbc8), [d498ce3](https://github.com/corejslib/core/commit/d498ce3f9), [831d388](https://github.com/corejslib/core/commit/831d38824), [77f6017](https://github.com/corejslib/core/commit/77f60176d), [9ff3101](https://github.com/corejslib/core/commit/9ff31015e); 👬 zdm)
+
+- \[PATCH] fix: remove unneeded headers in google firebase (● [81ecef2](https://github.com/corejslib/core/commit/81ecef2d7); 👬 zdm)
+
+**Other changes:**
+
+- style: update code layout (● [dc86c8e](https://github.com/corejslib/core/commit/dc86c8eb3), [47d815c](https://github.com/corejslib/core/commit/47d815c27); 👬 zdm)
+
+Compare with the previous release: [v8.26.0...v8.26.1](https://github.com/corejslib/core/compare/v8.26.0...v8.26.1)
+
 ### v8.26.0 (2026-09-29)
 
 **New features:**
