@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.26.2 (2026-09-30)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix substring (● [3a87a84](https://github.com/corejslib/core/commit/3a87a8436); 👬 zdm)
+
+Compare with the previous release: [v8.26.1...v8.26.2](https://github.com/corejslib/core/compare/v8.26.1...v8.26.2)
+
 ### v8.26.1 (2026-09-30)
 
 **Bug fixes:**
