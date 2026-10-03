@@ -1,5 +1,15 @@
 # Changelog
 
+### v8.27.0 (2026-10-03)
+
+**New features:**
+
+- \[MINOR] feat: add service discovery client (● [6542e52](https://github.com/corejslib/core/commit/6542e5252); 👬 zdm)
+
+    This adds a service discovery client for registering local services, syncing them with the API, and merging remote service data while emitting add/delete events for discovered services.
+
+Compare with the previous release: [v8.26.2...v8.27.0](https://github.com/corejslib/core/compare/v8.26.2...v8.27.0)
+
 ### v8.26.2 (2026-09-30)
 
 **Bug fixes:**
