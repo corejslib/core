@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.28.0 (2026-10-03)
+
+**New features:**
+
+- \[MINOR] feat: add short aliases for API CLI options (● [99e39d3](https://github.com/corejslib/core/commit/99e39d30e); 👬 zdm)
+
+Compare with the previous release: [v8.27.1...v8.28.0](https://github.com/corejslib/core/compare/v8.27.1...v8.28.0)
+
 ### v8.27.1 (2026-10-03)
 
 **Bug fixes:**
