@@ -19,6 +19,7 @@ const CLI = {
 `.trim(),
     "globalOptions": {
         "url": {
+            "short": "u",
             "description": "API url",
             "default": "http://127.0.0.1:81/api",
             "schema": {
@@ -35,12 +36,14 @@ const CLI = {
             },
         },
         "token": {
+            "short": "t",
             "description": "API token",
             "schema": {
                 "type": "string",
             },
         },
         "locale": {
+            "short": "l",
             "description": "API locale",
             "schema": {
                 "type": "string",
