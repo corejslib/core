@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.27.1 (2026-10-03)
+
+**Bug fixes:**
+
+- \[PATCH] fix: reconcile services when initializing discovery client (● [6d9b2cf](https://github.com/corejslib/core/commit/6d9b2cf0b); 👬 zdm)
+
+Compare with the previous release: [v8.27.0...v8.27.1](https://github.com/corejslib/core/compare/v8.27.0...v8.27.1)
+
 ### v8.27.0 (2026-10-03)
 
 **New features:**
