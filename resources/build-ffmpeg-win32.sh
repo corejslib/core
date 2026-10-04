@@ -45,7 +45,7 @@ trap 'echo "⚠  Error ($0:$LINENO, exit code: $?): $BASH_COMMAND" >&2' ERR
 #                репозиторий Debian trixie; 0 — не трогать настройки apt
 
 FFMPEG_REF="${FFMPEG_REF:-master}"
-FFMPEG_BUILD_DIR="${FFMPEG_BUILD_DIR:-$TMP/ffmpeg-build-win32-ucrt}"
+FFMPEG_BUILD_DIR="${FFMPEG_BUILD_DIR:-$TMP/ffmpeg-build-win32}"
 
 SOURCES_DIR="$FFMPEG_BUILD_DIR/sources"
 BUILD_DIR="$FFMPEG_BUILD_DIR/build"
@@ -55,12 +55,11 @@ OGG_VERSION="1.3.6"
 VORBIS_VERSION="1.3.7"
 LAME_VERSION="3.100"
 FREETYPE_VERSION="2.14.3"
-FRIBIDI_VERSION="1.0.16"
-HARFBUZZ_VERSION="14.2.1"
-LIBASS_VERSION="0.17.4"
+FRIBIDI_VERSION="1.0.17"
+HARFBUZZ_VERSION="14.5.1"
+LIBASS_VERSION="0.17.5"
 
 JOBS="${JOBS:-$(nproc)}"
-# UCRT-тулчейн в Debian/Ubuntu имеет префикс ...-mingw32ucrt (не ...-mingw32)
 HOST="x86_64-w64-mingw32ucrt"
 
 # Нужен posix-вариант потоков (C++ потоки в x265/SVT-AV1). Если отдельных
@@ -398,7 +397,7 @@ EOF
 # ------------------------------------------------------------------ zlib
 log "zlib"
 cd "$SOURCES_DIR"
-git_fetch https://github.com/madler/zlib.git zlib v1.3.1
+git_fetch https://github.com/madler/zlib.git zlib v1.3.2
 cd zlib
 make distclean > /dev/null 2>&1 || true
 CHOST="$HOST" ./configure --prefix="$BUILD_DIR" --static
@@ -737,7 +736,7 @@ build_jxl() {
     cd "$SOURCES_DIR"
 
     if [ ! -d libjxl/.git ]; then
-        git clone --depth 1 --branch v0.11.2 --recursive --shallow-submodules \
+        git clone --depth 1 --branch v0.12.0 --recursive --shallow-submodules \
             https://github.com/libjxl/libjxl.git libjxl
     fi
 
@@ -760,7 +759,7 @@ build_jxl() {
 build_openjpeg() {
     log "openjpeg"
     cd "$SOURCES_DIR"
-    git_fetch https://github.com/uclouvain/openjpeg.git openjpeg v2.5.2
+    git_fetch https://github.com/uclouvain/openjpeg.git openjpeg v2.5.4
     cross_cmake openjpeg openjpeg/build-mingw \
         -DBUILD_CODEC=OFF \
         -DBUILD_TESTING=OFF \
@@ -796,7 +795,7 @@ build_rav1e() {
     fi
 
     cd "$SOURCES_DIR"
-    git_fetch https://github.com/xiph/rav1e.git rav1e v0.7.1
+    git_fetch https://github.com/xiph/rav1e.git rav1e v0.8.1
     cd rav1e
     # Сбрасываем CC/CXX хоста, чтобы build-скрипты Rust собирались обычным gcc
     env -u CC -u CXX -u AR -u RANLIB -u STRIP -u WINDRES -u PKG_CONFIG_LIBDIR \
@@ -820,7 +819,7 @@ build_rav1e() {
 
 build_theora() {
     log "libtheora"
-    fetch_tarball https://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.bz2 libtheora-1.1.1
+    fetch_tarball https://downloads.xiph.org/releases/theora/libtheora-1.2.0.tar.gz libtheora-1.2.0
     cross_autotools \
         --disable-examples \
         --disable-spec \
@@ -834,7 +833,7 @@ build_theora() {
 build_openh264() {
     log "libopenh264"
     cd "$SOURCES_DIR"
-    git_fetch https://github.com/cisco/openh264.git openh264 v2.3.1
+    git_fetch https://github.com/cisco/openh264.git openh264 v2.6.0
     cd openh264
     rm -rf build-mingw
     meson setup build-mingw \
@@ -907,7 +906,7 @@ build_soxr() {
 build_vidstab() {
     log "libvidstab"
     cd "$SOURCES_DIR"
-    git_fetch https://github.com/georgmartius/vid.stab.git vid.stab v1.1.1
+    git_fetch https://github.com/georgmartius/vid.stab.git vid.stab v1.1.2
     cross_cmake vid.stab vid.stab/build-mingw \
         -DUSE_OMP=OFF
 }
@@ -953,7 +952,7 @@ build_zimg() {
 build_srt() {
     log "libsrt (без шифрования)"
     cd "$SOURCES_DIR"
-    git_fetch https://github.com/Haivision/srt.git srt v1.5.5
+    git_fetch https://github.com/Haivision/srt.git srt v1.5.7
     cross_cmake srt srt/build-mingw \
         -DENABLE_SHARED=OFF \
         -DENABLE_STATIC=ON \
@@ -984,10 +983,9 @@ build_bluray() {
 
 build_xml2() {
     log "libxml2"
-    fetch_tarball https://download.gnome.org/sources/libxml2/2.11/libxml2-2.11.4.tar.xz libxml2-2.11.4
+    fetch_tarball https://download.gnome.org/sources/libxml2/2.15/libxml2-2.15.4.tar.xz libxml2-2.15.4
     cross_autotools \
         --without-python \
-        --without-lzma \
         --without-iconv \
         --without-icu \
         --without-readline \
