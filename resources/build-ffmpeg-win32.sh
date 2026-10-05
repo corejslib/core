@@ -3,8 +3,16 @@
 set -Eeuo pipefail
 trap 'echo "⚠  Error ($0:$LINENO, exit code: $?): $BASH_COMMAND" >&2' ERR
 
-# Кросс-компиляция FFmpeg для Windows (x86_64) на Ubuntu через mingw-w64
-# Результат: статические ffmpeg.exe и ffprobe.exe (без DLL-зависимостей)
+# Кросс-компиляция FFmpeg для Windows (x86_64, UCRT) на Ubuntu/Debian через mingw-w64
+# Результат: статические ffmpeg.exe и ffprobe.exe, слинкованные с Universal CRT
+# (импортируют только системные api-ms-win-crt-*.dll; Windows 10/11 — из коробки,
+# на Windows 7/8.1 нужен Update for Universal C Runtime).
+#
+# Нужны пакеты gcc-mingw-w64-ucrt64 / g++-mingw-w64-ucrt64 (префикс x86_64-w64-mingw32ucrt).
+# В Debian 13+ они есть. Если их нет в репозиториях (например, Ubuntu 26.04), скрипт сам
+# подключает Debian trixie (низкий приоритет, точечный pin только для gcc-mingw-w64-*):
+# всё остальное остаётся из Ubuntu. Ubuntu-пакеты msvcrt-тулчейна (gcc-mingw-w64-x86-64*)
+# при этом удаляются — вместе с UCRT-компилятором они не уживаются. Отключить: DEBIAN_TRIXIE=0
 #
 # Включено: x264, x265, libvpx (VP8/VP9), fdk-aac, mp3lame, opus,
 #           libaom (AV1), SVT-AV1, dav1d, libvorbis, zlib,
@@ -33,6 +41,8 @@ trap 'echo "⚠  Error ($0:$LINENO, exit code: $?): $BASH_COMMAND" >&2' ERR
 #   FFMPEG_REF   ветка/тег FFmpeg    (по умолчанию release/9.0; можно master или n9.0.1)
 #   SKIP_LIBS    необязательные библиотеки, которые не нужно собирать,
 #                например: SKIP_LIBS="jxl rav1e" (имена — первый аргумент run_optional)
+#   DEBIAN_TRIXIE  1 (по умолчанию) — при отсутствии gcc-mingw-w64-ucrt64 подключить
+#                репозиторий Debian trixie; 0 — не трогать настройки apt
 
 FFMPEG_REF="${FFMPEG_REF:-master}"
 FFMPEG_BUILD_DIR="${FFMPEG_BUILD_DIR:-$TMP/ffmpeg-build-win32}"
@@ -45,16 +55,23 @@ OGG_VERSION="1.3.6"
 VORBIS_VERSION="1.3.7"
 LAME_VERSION="3.100"
 FREETYPE_VERSION="2.14.3"
-FRIBIDI_VERSION="1.0.16"
-HARFBUZZ_VERSION="14.2.1"
-LIBASS_VERSION="0.17.4"
+FRIBIDI_VERSION="1.0.17"
+HARFBUZZ_VERSION="14.5.1"
+LIBASS_VERSION="0.17.5"
 
 JOBS="${JOBS:-$(nproc)}"
-HOST="x86_64-w64-mingw32"
+HOST="x86_64-w64-mingw32ucrt"
 
-# Используем posix-вариант mingw (нужен для C++ потоков в x265/SVT-AV1)
-CC="${HOST}-gcc-posix"
-CXX="${HOST}-g++-posix"
+# Нужен posix-вариант потоков (C++ потоки в x265/SVT-AV1). Если отдельных
+# *-posix бинарников нет — берём обычные, модель потоков проверяется ниже.
+if command -v "${HOST}-gcc-posix" > /dev/null 2>&1; then
+    CC="${HOST}-gcc-posix"
+    CXX="${HOST}-g++-posix"
+else
+    CC="${HOST}-gcc"
+    CXX="${HOST}-g++"
+fi
+
 AR="${HOST}-ar"
 RANLIB="${HOST}-ranlib"
 STRIP="${HOST}-strip"
@@ -69,6 +86,9 @@ export ACLOCAL_PATH="$BUILD_DIR/share/aclocal"
 
 TOOLCHAIN_FILE="$SOURCES_DIR/toolchain-mingw64.cmake"
 MESON_CROSS_FILE="$SOURCES_DIR/meson-mingw64.txt"
+
+TRIXIE_LIST="/etc/apt/sources.list.d/debian-trixie.list"
+TRIXIE_PREFS="/etc/apt/preferences.d/debian-trixie"
 
 log() {
     printf '\n\033[1;32m==> %s\033[0m\n' "$*"
@@ -223,6 +243,14 @@ cross_autotools() {
 if [ "${1:-}" = "--clean" ]; then
     log "Удаляю $SOURCES_DIR, $BUILD_DIR и $BIN_DIR"
     rm -rf "$SOURCES_DIR" "$BUILD_DIR" "$BIN_DIR"
+
+    # Репозиторий Debian trixie, если его добавил этот скрипт (установленные пакеты остаются)
+    if [ -f "$TRIXIE_LIST" ] || [ -f "$TRIXIE_PREFS" ]; then
+        log "Удаляю настройки apt для Debian trixie"
+        sudo rm -f "$TRIXIE_LIST" "$TRIXIE_PREFS"
+        sudo apt-get update -qq || true
+    fi
+
     exit 0
 fi
 
@@ -231,16 +259,77 @@ mkdir -p "$SOURCES_DIR" "$BUILD_DIR" "$BIN_DIR"
 # ---------------------------------------------------------- dependencies
 log "Установка системных зависимостей"
 sudo apt-get update -qq
-sudo apt-get -y install \
+
+# Ubuntu-пакеты msvcrt-тулчейна (gcc-mingw-w64-x86-64* и т.п.) жёстко привязаны к
+# версии gcc-mingw-w64-base из Ubuntu, а UCRT-компилятор из Debian — к версии из
+# Debian. Одновременно они поставлены быть не могут, поэтому старые удаляем.
+remove_msvcrt_toolchain() {
+    local -a old=()
+
+    mapfile -t old < <(
+        dpkg-query -W -f='${db:Status-Abbrev} ${binary:Package}\n' 'gcc-mingw-w64*' 'g++-mingw-w64*' 2> /dev/null \
+            | awk '$1 == "ii" && $2 !~ /ucrt64/ && $2 != "gcc-mingw-w64-base" { print $2 }'
+    )
+
+    if [ "${#old[@]}" -gt 0 ]; then
+        log "Удаляю msvcrt-тулчейн из Ubuntu (конфликтует с UCRT из Debian): ${old[*]}"
+        sudo apt-get -y remove "${old[@]}"
+    fi
+}
+
+# UCRT-кросс-компилятор есть в Debian 13+, но может отсутствовать в Ubuntu.
+# Подключаем trixie: для всех пакетов приоритет 100 (Ubuntu остаётся главным),
+# а для семейства gcc-mingw-w64-ucrt64 и gcc-mingw-w64-base — 990, чтобы apt
+# выбирал их версии из trixie (их зависимости требуют точное совпадение версий).
+ensure_ucrt_toolchain_repo() {
+    if [ ! -f "$TRIXIE_LIST" ]; then
+        if apt-cache show gcc-mingw-w64-ucrt64 > /dev/null 2>&1; then
+            return 0
+        fi
+
+        if [ "${DEBIAN_TRIXIE:-1}" != "1" ]; then
+            echo "В репозиториях нет gcc-mingw-w64-ucrt64, а DEBIAN_TRIXIE=0 запрещает подключать Debian trixie." >&2
+            return 1
+        fi
+    fi
+
+    log "Подключаю Debian trixie для UCRT-тулчейна"
+    sudo apt-get -y install debian-archive-keyring
+
+    echo "deb [signed-by=/usr/share/keyrings/debian-archive-keyring.gpg] http://deb.debian.org/debian trixie main" \
+        | sudo tee "$TRIXIE_LIST" > /dev/null
+    printf 'Package: *\nPin: release n=trixie\nPin-Priority: 100\n\nPackage: gcc-mingw-w64-base gcc-mingw-w64-ucrt64* g++-mingw-w64-ucrt64*\nPin: release n=trixie\nPin-Priority: 990\n' \
+        | sudo tee "$TRIXIE_PREFS" > /dev/null
+
+    sudo apt-get update -qq
+    remove_msvcrt_toolchain
+
+    apt-cache show gcc-mingw-w64-ucrt64 > /dev/null 2>&1
+}
+
+# Установка пакетов; если новый solver apt (3.x) не справился с зависимостями —
+# повторяем классическим (-o APT::Solver=internal)
+apt_install() {
+    sudo apt-get -y install "$@" \
+        || sudo apt-get -y -o APT::Solver=internal install "$@"
+}
+
+ensure_ucrt_toolchain_repo || {
+    echo "Не удалось получить gcc-mingw-w64-ucrt64. Варианты: Debian 13 (контейнер/chroot)" >&2
+    echo "или готовый тулчейн (например llvm-mingw, ucrt-вариант)." >&2
+    exit 1
+}
+
+apt_install \
     autoconf \
     automake \
-    binutils-mingw-w64-x86-64 \
+    binutils-mingw-w64-ucrt64 \
     build-essential \
     bzip2 \
     cmake \
     curl \
-    g++-mingw-w64-x86-64-posix \
-    gcc-mingw-w64-x86-64-posix \
+    g++-mingw-w64-ucrt64 \
+    gcc-mingw-w64-ucrt64 \
     git-core \
     libtool \
     meson \
@@ -260,6 +349,15 @@ for tool in "$CC" "$CXX" "$AR" "$RANLIB" "$STRIP" "$WINDRES"; do
         exit 1
     }
 done
+
+# x265/SVT-AV1 требуют posix-потоки (std::thread и т.п.)
+thread_model="$("$CXX" -v 2>&1 | sed -n 's/^Thread model: //p' || true)"
+
+if [ "$thread_model" != "posix" ]; then
+    echo "$CXX использует модель потоков '$thread_model', а нужна posix." >&2
+    echo "Нужен posix-вариант тулчейна (проверь ls /usr/bin/${HOST}-g++* и update-alternatives)." >&2
+    exit 1
+fi
 
 # ------------------------------------------- toolchain-файлы (cmake/meson)
 cat > "$TOOLCHAIN_FILE" << EOF
@@ -299,7 +397,7 @@ EOF
 # ------------------------------------------------------------------ zlib
 log "zlib"
 cd "$SOURCES_DIR"
-git_fetch https://github.com/madler/zlib.git zlib v1.3.1
+git_fetch https://github.com/madler/zlib.git zlib v1.3.2
 cd zlib
 make distclean > /dev/null 2>&1 || true
 CHOST="$HOST" ./configure --prefix="$BUILD_DIR" --static
@@ -638,7 +736,7 @@ build_jxl() {
     cd "$SOURCES_DIR"
 
     if [ ! -d libjxl/.git ]; then
-        git clone --depth 1 --branch v0.11.2 --recursive --shallow-submodules \
+        git clone --depth 1 --branch v0.12.0 --recursive --shallow-submodules \
             https://github.com/libjxl/libjxl.git libjxl
     fi
 
@@ -661,7 +759,7 @@ build_jxl() {
 build_openjpeg() {
     log "openjpeg"
     cd "$SOURCES_DIR"
-    git_fetch https://github.com/uclouvain/openjpeg.git openjpeg v2.5.2
+    git_fetch https://github.com/uclouvain/openjpeg.git openjpeg v2.5.4
     cross_cmake openjpeg openjpeg/build-mingw \
         -DBUILD_CODEC=OFF \
         -DBUILD_TESTING=OFF \
@@ -697,7 +795,7 @@ build_rav1e() {
     fi
 
     cd "$SOURCES_DIR"
-    git_fetch https://github.com/xiph/rav1e.git rav1e v0.7.1
+    git_fetch https://github.com/xiph/rav1e.git rav1e v0.8.1
     cd rav1e
     # Сбрасываем CC/CXX хоста, чтобы build-скрипты Rust собирались обычным gcc
     env -u CC -u CXX -u AR -u RANLIB -u STRIP -u WINDRES -u PKG_CONFIG_LIBDIR \
@@ -711,11 +809,17 @@ build_rav1e() {
         --libdir "$BUILD_DIR/lib" \
         --library-type staticlib \
         --crt-static
+
+    # staticlib для rust-таргета windows-gnu тянет -lmsvcrt — это смешало бы
+    # msvcrt и UCRT в одном .exe
+    if [ -f "$BUILD_DIR/lib/pkgconfig/rav1e.pc" ]; then
+        sed -i 's/-lmsvcrt//g' "$BUILD_DIR/lib/pkgconfig/rav1e.pc"
+    fi
 }
 
 build_theora() {
     log "libtheora"
-    fetch_tarball https://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.bz2 libtheora-1.1.1
+    fetch_tarball https://downloads.xiph.org/releases/theora/libtheora-1.2.0.tar.gz libtheora-1.2.0
     cross_autotools \
         --disable-examples \
         --disable-spec \
@@ -729,7 +833,7 @@ build_theora() {
 build_openh264() {
     log "libopenh264"
     cd "$SOURCES_DIR"
-    git_fetch https://github.com/cisco/openh264.git openh264 v2.3.1
+    git_fetch https://github.com/cisco/openh264.git openh264 v2.6.0
     cd openh264
     rm -rf build-mingw
     meson setup build-mingw \
@@ -802,7 +906,7 @@ build_soxr() {
 build_vidstab() {
     log "libvidstab"
     cd "$SOURCES_DIR"
-    git_fetch https://github.com/georgmartius/vid.stab.git vid.stab v1.1.1
+    git_fetch https://github.com/georgmartius/vid.stab.git vid.stab v1.1.2
     cross_cmake vid.stab vid.stab/build-mingw \
         -DUSE_OMP=OFF
 }
@@ -848,7 +952,7 @@ build_zimg() {
 build_srt() {
     log "libsrt (без шифрования)"
     cd "$SOURCES_DIR"
-    git_fetch https://github.com/Haivision/srt.git srt v1.5.5
+    git_fetch https://github.com/Haivision/srt.git srt v1.5.7
     cross_cmake srt srt/build-mingw \
         -DENABLE_SHARED=OFF \
         -DENABLE_STATIC=ON \
@@ -879,10 +983,9 @@ build_bluray() {
 
 build_xml2() {
     log "libxml2"
-    fetch_tarball https://download.gnome.org/sources/libxml2/2.11/libxml2-2.11.4.tar.xz libxml2-2.11.4
+    fetch_tarball https://download.gnome.org/sources/libxml2/2.15/libxml2-2.15.4.tar.xz libxml2-2.15.4
     cross_autotools \
         --without-python \
-        --without-lzma \
         --without-iconv \
         --without-icu \
         --without-readline \
@@ -963,6 +1066,16 @@ configure_ffmpeg "${OPTIONAL_FLAGS[@]}"
 
 make -j"$JOBS"
 make install
+
+# ----------------------------------------------------------------- verify
+# В UCRT-сборке .exe не должны импортировать msvcrt.dll
+for exe in "$BIN_DIR/ffmpeg.exe" "$BIN_DIR/ffprobe.exe"; do
+    mixed="$("${HOST}-objdump" -p "$exe" | grep -i 'DLL Name: msvcrt\.dll' || true)"
+
+    if [ -n "$mixed" ]; then
+        echo "⚠  $exe импортирует msvcrt.dll — в сборке смешаны CRT (проверь необязательные библиотеки, особенно rav1e)" >&2
+    fi
+done
 
 # ----------------------------------------------------------------- done
 log "Готово!"
