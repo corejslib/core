@@ -1,5 +1,69 @@
 # Changelog
 
+### v8.28.1 (2026-10-05)
+
+**Bug fixes:**
+
+- \[PATCH] fix: correct counter wait and destroy lifecycle (● [8ea0930](https://github.com/corejslib/core/commit/8ea0930cb); 👬 zdm)
+
+    Fix waiter cleanup and destroy checks in Counter so aborting waits resolve cleanly and the instance tears down only when safe.
+
+- \[PATCH] fix: correct signal waiting-thread cleanup (● [1eab936](https://github.com/corejslib/core/commit/1eab93697); 👬 zdm)
+
+    - fix destroyability checks for empty waiting-thread queues
+    - rename the empty-state helper and correct abort cleanup flow
+    - ensure promise resolvers are removed from waiting threads before destruction
+
+- \[PATCH] fix: correct ThreadsPool validation and destroy flow (● [6059122](https://github.com/corejslib/core/commit/6059122a3); 👬 zdm)
+
+    - fix maxWaitingThreads and maxRunningThreads validation error messages
+    - simplify event watcher to call destroyIfPossible when the pool is destroyable
+    - correct paused and queue comment typos
+
+- \[PATCH] fix: ensure nginx proxy updates use monotonic versioning (● [868589b](https://github.com/corejslib/core/commit/868589b64); 👬 zdm)
+
+- \[PATCH] fix: ensure websocket waitConnect returns connection state (● [f4f4082](https://github.com/corejslib/core/commit/f4f40823f); 👬 zdm)
+
+    Return true when no persistent connection is required or when already connected. Await the opened connection signal and resolve with the actual connection state so aborted waits do not incorrectly report success.
+
+- \[PATCH] fix: guard destroy/init race and ignore unpaired activity end (● [9ee3fc8](https://github.com/corejslib/core/commit/9ee3fc8b9); 👬 zdm)
+
+    Handle async initialization before destroy and avoid decrementing the active request counter when no activity is active.
+
+- \[PATCH] fix: guard service discovery reads during remote updates (● [fa06a12](https://github.com/corejslib/core/commit/fa06a1231); 👬 zdm)
+
+- \[PATCH] fix: handle concurrent activity start and stop (● [79abf07](https://github.com/corejslib/core/commit/79abf074e); 👬 zdm)
+
+    Coordinate start and stop abort signals, and return the correct state when either operation is aborted or fails.
+
+- \[PATCH] fix: handle mutex lock aborts and destroy cleanup (● [a3373fc](https://github.com/corejslib/core/commit/a3373fc15); 👬 zdm)
+
+- \[PATCH] fix: handle stale mutex unlocks and finalize lock state (● [771aff4](https://github.com/corejslib/core/commit/771aff468); 👬 zdm)
+
+- \[PATCH] fix: reject waiting threads when pausing or destroying pool (● [080f912](https://github.com/corejslib/core/commit/080f91206); 👬 zdm)
+
+- \[PATCH] fix: release waiting consumers for queued results (● [d5cf5f3](https://github.com/corejslib/core/commit/d5cf5f3f4); 👬 zdm)
+
+- \[PATCH] fix: return connection status from waitConnect (● [41592bb](https://github.com/corejslib/core/commit/41592bb8f); 👬 zdm)
+
+- \[PATCH] fix: return true from waitConnect (● [6b3ef83](https://github.com/corejslib/core/commit/6b3ef83e0); 👬 zdm)
+
+- \[PATCH] fix: stop proxy updates when connection wait fails (● [789a608](https://github.com/corejslib/core/commit/789a60892); 👬 zdm)
+
+- \[PATCH] fix: wait for reconnect before retrying mutex operations (● [d978f17](https://github.com/corejslib/core/commit/d978f1787); 👬 zdm)
+
+**Other changes:**
+
+- build: switch Windows FFmpeg build to UCRT toolchain (● [a1af61e](https://github.com/corejslib/core/commit/a1af61edc); 👬 zdm)
+
+    Add UCRT-based mingw detection with Debian trixie fallback, remove conflicting msvcrt toolchains, and validate the produced ffmpeg/ffprobe binaries do not import msvcrt.dll.
+
+- build: update Win32 ffmpeg build dependencies (● [0955961](https://github.com/corejslib/core/commit/095596183); 👬 zdm)
+
+    Update the Win32 FFmpeg build script to use the new build directory name and refresh the bundled dependency versions for zlib, libjxl, openjpeg, rav1e, libtheora, openh264, vid.stab, srt, and libxml2.
+
+Compare with the previous release: [v8.28.0...v8.28.1](https://github.com/corejslib/core/compare/v8.28.0...v8.28.1)
+
 ### v8.28.0 (2026-10-03)
 
 **New features:**
