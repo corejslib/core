@@ -91,8 +91,14 @@ Default ports:
 - `hostname` {string} IP address or host name.
 - Returns: `integer\` Fulfils with the random free port for the specified host name.
 
-### net.portIsFree( port, hostname )
+### net.isPortFree( port, hostname )
 
 - `port` {integer} Port to check.
 - `hostname` {string} IP address or host name to check port.
 - Returns: {Promise} Fulfils with the {boolean} `true` if port is not used.
+
+### net.tryConnect( port, hostname )
+
+- `port` {integer} Port to connect to.
+- `hostname` {string} IP address or host name to connect to.
+- Returns: {Promise} Fulfils with the {boolean} `true` if a connection is established.
