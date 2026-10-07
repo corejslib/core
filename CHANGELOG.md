@@ -1,5 +1,23 @@
 # Changelog
 
+### v8.30.0 (2026-10-07)
+
+**New features:**
+
+- \[MINOR] feat: make PO files iterable (● [f0f8fdb](https://github.com/corejslib/core/commit/f0f8fdbc4); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix iterator (● [c45f872](https://github.com/corejslib/core/commit/c45f872e2), [531ea63](https://github.com/corejslib/core/commit/531ea63cb); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: simplify activity controller callback configuration (● [4d0b433](https://github.com/corejslib/core/commit/4d0b43355); 👬 zdm)
+
+- \[PATCH] refactor: update po messages sorter (● [c786ce5](https://github.com/corejslib/core/commit/c786ce5c3); 👬 zdm)
+
+Compare with the previous release: [v8.29.1...v8.30.0](https://github.com/corejslib/core/compare/v8.29.1...v8.30.0)
+
 ### v8.29.1 (2026-10-07)
 
 **Code refactoring:**
