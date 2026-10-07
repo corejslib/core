@@ -1,5 +1,19 @@
 # Changelog
 
+### v8.30.1 (2026-10-07)
+
+**Bug fixes:**
+
+- \[PATCH] fix: process old messages when extracted messages are absent (● [3bde5e7](https://github.com/corejslib/core/commit/3bde5e7ae); 👬 zdm)
+
+- \[PATCH] fix: read extracted messages from serialized PO files (● [bf5f44f](https://github.com/corejslib/core/commit/bf5f44f28); 👬 zdm)
+
+**Other changes:**
+
+- style: write PO references one per line (● [912acd2](https://github.com/corejslib/core/commit/912acd246); 👬 zdm)
+
+Compare with the previous release: [v8.30.0...v8.30.1](https://github.com/corejslib/core/compare/v8.30.0...v8.30.1)
+
 ### v8.30.0 (2026-10-07)
 
 **New features:**
