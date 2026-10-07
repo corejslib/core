@@ -1,5 +1,56 @@
 # Changelog
 
+### v8.29.0 (2026-10-07)
+
+**New features:**
+
+- \[MINOR] feat: add activity controller onExternalStop() (● [dda04bc](https://github.com/corejslib/core/commit/dda04bc18); 👬 zdm)
+
+- \[MINOR] feat: add activity controller waitStarted() (● [1421f42](https://github.com/corejslib/core/commit/1421f4224); 👬 zdm)
+
+- \[MINOR] feat: add deleteDisabledMessages (● [4302c7f](https://github.com/corejslib/core/commit/4302c7f67); 👬 zdm)
+
+- \[MINOR] feat: add hash getter for PO files (● [72734e2](https://github.com/corejslib/core/commit/72734e2bd); 👬 zdm)
+
+    - add a SHA-256 hash getter for PO file contents
+    - return the instance from setRevisionDate
+    - stop memoizing toString output so it regenerates from current state
+
+- \[MINOR] feat: add revision date support (● [6e22329](https://github.com/corejslib/core/commit/6e22329c1); 👬 zdm)
+
+- \[MINOR] feat: add template PO file loader (● [6ef6943](https://github.com/corejslib/core/commit/6ef6943d8); 👬 zdm)
+
+    Set the language and plural-form metadata for PO files created from a template,
+    reusing the shared language initialization logic.
+
+- \[MINOR] feat: add tryConnect() function (● [5e8e43b](https://github.com/corejslib/core/commit/5e8e43ba5); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: preserve spaces in PO source references (● [36f241c](https://github.com/corejslib/core/commit/36f241c9a); 👬 zdm)
+
+- \[PATCH] fix: sort PO file headers before serialization (● [380d016](https://github.com/corejslib/core/commit/380d0167f); 👬 zdm)
+
+- \[PATCH] fix: synchronize PO revision dates and reject invalid headers (● [08d5b86](https://github.com/corejslib/core/commit/08d5b86f2); 👬 zdm)
+
+    Document the renamed `net.isPortFree` method and new `net.tryConnect` method.
+
+**Code refactoring:**
+
+- \[PATCH] refactor: rename activity controller setters (● [821e7c0](https://github.com/corejslib/core/commit/821e7c0bb); 👬 zdm)
+
+- \[PATCH] refactor: rename disabled message state to obsolete (● [c5b9d3d](https://github.com/corejslib/core/commit/c5b9d3da0); 👬 zdm)
+
+- \[PATCH] refactor: rename portIsFree to isPortFree (● [aee5903](https://github.com/corejslib/core/commit/aee590322); 👬 zdm)
+
+- \[PATCH] refactor: rename proxy finalization registry to objects registry (● [91dd533](https://github.com/corejslib/core/commit/91dd5335a); 👬 zdm)
+
+**Other changes:**
+
+- style: fix comments (● [900d2e0](https://github.com/corejslib/core/commit/900d2e06d); 👬 zdm)
+
+Compare with the previous release: [v8.28.1...v8.29.0](https://github.com/corejslib/core/compare/v8.28.1...v8.29.0)
+
 ### v8.28.1 (2026-10-05)
 
 **Bug fixes:**
