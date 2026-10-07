@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.29.1 (2026-10-07)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: rename activity lifecycle callbacks (● [14d3fef](https://github.com/corejslib/core/commit/14d3fefed); 👬 zdm)
+
+Compare with the previous release: [v8.29.0...v8.29.1](https://github.com/corejslib/core/compare/v8.29.0...v8.29.1)
+
 ### v8.29.0 (2026-10-07)
 
 **New features:**
