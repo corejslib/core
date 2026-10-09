@@ -1,6 +1,6 @@
 {
     "name": "@corejslib/core",
-    "version": "8.28.1",
+    "version": "8.31.0",
     "description": "Softisio core",
     "keywords": [
         "core"
@@ -29,6 +29,10 @@
             "browser": "./lib/_browser/blob.js",
             "node": "./lib/blob.js"
         },
+        "#lib/data-structures/message-buffer": {
+            "browser": "./lib/_browser/data-structures/message-buffer.js",
+            "node": "./lib/data-structures/message-buffer.js"
+        },
         "#lib/ejs": {
             "browser": "./lib/_browser/ejs.js",
             "node": "./lib/ejs.js"
@@ -53,6 +57,10 @@
             "browser": "./lib/_browser/is-browser.js",
             "node": "./lib/is-browser.js"
         },
+        "#lib/message-pack": {
+            "browser": "./lib/_browser/message-pack.js",
+            "node": "./lib/message-pack.js"
+        },
         "#lib/utils": {
             "browser": "./lib/_browser/utils.js",
             "node": "./lib/utils.js"
@@ -72,6 +80,10 @@
         "./blob": {
             "browser": "./lib/_browser/blob.js",
             "node": "./lib/blob.js"
+        },
+        "./data-structures/message-buffer": {
+            "browser": "./lib/_browser/data-structures/message-buffer.js",
+            "node": "./lib/data-structures/message-buffer.js"
         },
         "./ejs": {
             "browser": "./lib/_browser/ejs.js",
@@ -96,6 +108,10 @@
         "./is-browser": {
             "browser": "./lib/_browser/is-browser.js",
             "node": "./lib/is-browser.js"
+        },
+        "./message-pack": {
+            "browser": "./lib/_browser/message-pack.js",
+            "node": "./lib/message-pack.js"
         },
         "./utils": {
             "browser": "./lib/_browser/utils.js",
@@ -125,7 +141,6 @@
         "test": "node --test \"tests/**/*.test.js\""
     },
     "dependencies": {
-        "@corejslib/msgpack": "^3.0.0",
         "@corejslib/utils": "^1.0.0",
         "@corejslib/uws": "^2.0.0",
         "@nodable/flexible-xml-parser": "^1.11.3",
