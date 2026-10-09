@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.31.0 (2026-10-09)
+
+**New features:**
+
+- \[MINOR] feat: add browser message buffer (● [1378338](https://github.com/corejslib/core/commit/13783383d); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: remove singular translation status getter (● [d918e93](https://github.com/corejslib/core/commit/d918e933e); 👬 zdm)
+
+Compare with the previous release: [v8.30.1...v8.31.0](https://github.com/corejslib/core/compare/v8.30.1...v8.31.0)
+
 ### v8.30.1 (2026-10-07)
 
 **Bug fixes:**
