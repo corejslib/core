@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.31.2 (2026-10-09)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: use message buffer writer to finalize PostgreSQL messages (● [cf344fe](https://github.com/corejslib/core/commit/cf344fe70); 👬 zdm)
+
+Compare with the previous release: [v8.31.1...v8.31.2](https://github.com/corejslib/core/compare/v8.31.1...v8.31.2)
+
 ### v8.31.1 (2026-10-09)
 
 **Bug fixes:**
