@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.31.1 (2026-10-09)
+
+**Bug fixes:**
+
+- \[PATCH] fix: correct Temporal module import casing (● [f8dde27](https://github.com/corejslib/core/commit/f8dde27d1); 👬 zdm)
+
+Compare with the previous release: [v8.31.0...v8.31.1](https://github.com/corejslib/core/compare/v8.31.0...v8.31.1)
+
 ### v8.31.0 (2026-10-09)
 
 **New features:**
