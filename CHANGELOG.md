@@ -1,5 +1,19 @@
 # Changelog
 
+### v8.31.3 (2026-10-10)
+
+**Bug fixes:**
+
+- \[PATCH] fix: prefer known locale plural expressions over PO headers (● [959a6cd](https://github.com/corejslib/core/commit/959a6cd2e); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: clarify MessagePack stream class names (● [ab42881](https://github.com/corejslib/core/commit/ab42881a4); 👬 zdm)
+
+    Rename the stream module and encoder/decoder classes to use “MessagePack.”
+
+Compare with the previous release: [v8.31.2...v8.31.3](https://github.com/corejslib/core/compare/v8.31.2...v8.31.3)
+
 ### v8.31.2 (2026-10-09)
 
 **Code refactoring:**
