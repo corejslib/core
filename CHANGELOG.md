@@ -1,5 +1,94 @@
 # Changelog
 
+### v8.32.0 (2026-10-10)
+
+**New features:**
+
+- \[MINOR] feat: add ArrayBuffer-backed binary decoding (● [0b41c19](https://github.com/corejslib/core/commit/0b41c19ca); 👬 zdm)
+
+    This adds safe copying helpers for ArrayBuffer and Uint8Array reads in MessageBuffer, exposes readArrayBuffer(), and updates binary decoding to use ArrayBuffer-backed values.
+
+- \[MINOR] feat: add offset-based MessageBuffer reads (● [751eabe](https://github.com/corejslib/core/commit/751eabe3e); 👬 zdm)
+
+- \[MINOR] feat: export MessagePack class from message-pack module (● [f95275e](https://github.com/corejslib/core/commit/f95275e16); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: allow MessageBuffer subclasses to grow buffers safely (● [859905c](https://github.com/corejslib/core/commit/859905c9c); 👬 zdm)
+
+- \[PATCH] fix: avoid ArrayBuffer wrapping in MessagePack decoding (● [02be779](https://github.com/corejslib/core/commit/02be77951); 👬 zdm)
+
+- \[PATCH] fix: correct message pack extension handling (● [9ae8961](https://github.com/corejslib/core/commit/9ae8961f6); 👬 zdm)
+
+    Update the browser message pack extension logic to encode and decode Temporal.Instant values directly, and simplify Buffer extension handling to use raw bytes instead of the view helper exports.
+
+- \[PATCH] fix: correct Uint8Array buffer slicing for message reads (● [073dfc9](https://github.com/corejslib/core/commit/073dfc9e2); 👬 zdm)
+
+    The change fixes a bug in `MessageBuffer` by removing the custom `copyBytes` helper and using `Uint8Array.prototype.slice.call(...).buffer` directly when reading bytes. This preserves the intended behavior of returning a copied ArrayBuffer instead of a view while aligning with the explicit Buffer/Uint8Array semantics noted in the code.
+
+- \[PATCH] fix: decode MessagePack binary buffers from ArrayBuffer (● [99be24f](https://github.com/corejslib/core/commit/99be24fd9); 👬 zdm)
+
+- \[PATCH] fix: encode undefined as an empty extension payload (● [5f03135](https://github.com/corejslib/core/commit/5f03135b4); 👬 zdm)
+
+- \[PATCH] fix: fix bigint extension encoding and decoding buffers (● [3014917](https://github.com/corejslib/core/commit/3014917d7); 👬 zdm)
+
+    The message pack bigint extension was using string conversion directly instead of writing/reading binary buffer data. This change adds binary-aware encoding/decoding, marks the extension as binary, and defines its size so bigint values serialize correctly in the browser message pack implementation.
+
+- \[PATCH] fix: fix recirsive messagepack encoder (● [fa76234](https://github.com/corejslib/core/commit/fa76234d8); 👬 zdm)
+
+- \[PATCH] fix: handle invalid MsgPack BigInt decoding (● [5c697bf](https://github.com/corejslib/core/commit/5c697bf8d); 👬 zdm)
+
+- \[PATCH] fix: handle Temporal values as binary in message pack (● [65ad52d](https://github.com/corejslib/core/commit/65ad52d75); 👬 zdm)
+
+    Encode Temporal objects using their string representation, size the encoded payload from the string length, and decode them from binary buffers to preserve the original Temporal values.
+
+- \[PATCH] fix: handle undefined extension payloads (● [2c3b076](https://github.com/corejslib/core/commit/2c3b07677); 👬 zdm)
+
+    Encode undefined MessagePack extension payloads as empty bytes instead of rejecting them, and update extension validation to allow undefined values.
+
+- \[PATCH] fix: preserve copy semantics in message buffer reset (● [d1e92aa](https://github.com/corejslib/core/commit/d1e92aa08); 👬 zdm)
+
+    - ensure the browser buffer reset returns an actual copied Uint8Array instead of a view
+    - optimize Node buffer reset for larger typed arrays while keeping small values on-heap
+    - re-export MessagePack from the main message buffer module
+
+- \[PATCH] fix: preserve leading BOM in MessageBuffer (● [2ed0af8](https://github.com/corejslib/core/commit/2ed0af870); 👬 zdm)
+
+    Use TextDecoder with ignoreBOM to keep a leading U+FEFF instead of stripping it in the browser implementation, and add a fast path for longer UTF-8 strings in the Node MessageBuffer while preserving the same BOM behavior and invalid UTF-8 replacement semantics.
+
+- \[PATCH] fix: remove unused reset parameter (● [f92bfdc](https://github.com/corejslib/core/commit/f92bfdc27); 👬 zdm)
+
+    This change removes the unused `copy` argument from `MessageBuffer.reset()` without altering behavior.
+
+- \[PATCH] fix: reuse message buffers after clear (● [d6b2653](https://github.com/corejslib/core/commit/d6b265305); 👬 zdm)
+
+    The message buffer now keeps a configurable max buffer size and reuses oversized buffers instead of forcing reallocation after clear(). The encoder also initializes its buffer with a bounded max size to improve reuse across messages.
+
+- \[PATCH] fix: support binary extension encoding without explicit size (● [583a60f](https://github.com/corejslib/core/commit/583a60faf); 👬 zdm)
+
+- \[PATCH] fix: validate offset handling and bigint reads (● [def63b7](https://github.com/corejslib/core/commit/def63b798); 👬 zdm)
+
+    This change adds offset bounds checks, preserves explicit read offsets without advancing buffer state, and fixes bigint/string/byte-array reads to honor custom positions while keeping default offset behavior consistent.
+
+**Code refactoring:**
+
+- \[PATCH] refactor: align Uint8Array handling in message buffer (● [12c7840](https://github.com/corejslib/core/commit/12c7840f9); 👬 zdm)
+
+    - rename the local buffer variable in MessageBuffer to match the Uint8Array API
+    - pass the truncated result directly when encoding binary extensions
+
+- \[PATCH] refactor: improve MessageBuffer internals and default buffer size (● [4a953c1](https://github.com/corejslib/core/commit/4a953c163); 👬 zdm)
+
+- \[PATCH] refactor: rename message buffer byte accessors (● [118c065](https://github.com/corejslib/core/commit/118c0652a); 👬 zdm)
+
+- \[PATCH] refactor: rename message buffer variables (● [3364ef3](https://github.com/corejslib/core/commit/3364ef3c0); 👬 zdm)
+
+- \[PATCH] refactor: simplify MessageBuffer byte handling (● [2842586](https://github.com/corejslib/core/commit/284258665); 👬 zdm)
+
+- \[PATCH] refactor: standardize MessageBuffer byte access naming (● [e9854ba](https://github.com/corejslib/core/commit/e9854ba91); 👬 zdm)
+
+Compare with the previous release: [v8.31.3...v8.32.0](https://github.com/corejslib/core/compare/v8.31.3...v8.32.0)
+
 ### v8.31.3 (2026-10-10)
 
 **Bug fixes:**
