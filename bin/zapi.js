@@ -5,6 +5,7 @@ import ansi from "#lib/ansi";
 import Api from "#lib/api";
 import Cli from "#lib/cli";
 import File from "#lib/file";
+import * as json5 from "#lib/json5";
 import Message from "#lib/message";
 import Table from "#lib/text/table";
 import * as yaml from "#lib/yaml";
@@ -329,7 +330,7 @@ else if ( process.cli.command === "call" ) {
     let args, hasAttachments;
 
     if ( process.cli.arguments.arguments ) {
-        args = JSON.parse( process.cli.arguments.arguments, ( key, value, context ) => {
+        args = json5.fromJson5( process.cli.arguments.arguments, ( key, value, context ) => {
             if ( typeof value === "string" ) {
 
                 // attachment
