@@ -74,6 +74,15 @@ const CLI = {
 
         "call": {
             "title": "Make API call",
+            "description": `
+\`\`\`sh
+MSYS2_ARG_CONV_EXCL="*" zapi --url "http://devel:81/api" call "/v1/test" $(
+    cat << 'EOF'
+[ "arg1", { "key": "value" } ]
+EOF
+)
+\`\`\`
+`.trim(),
             "arguments": {
                 "method": {
                     "description": "API method",
@@ -82,11 +91,10 @@ const CLI = {
                         "type": "string",
                     },
                 },
-                "argument": {
-                    "description": "API method argument in JSON format",
+                "arguments": {
+                    "description": "API method arguments in JSON format",
                     "schema": {
-                        "type": "array",
-                        "items": { "type": "string" },
+                        "type": "string",
                     },
                 },
             },
@@ -172,9 +180,7 @@ class ApiCli {
     }
 
     async call ( method, ...args ) {
-        const parans = Array.from( args, arg => JSON.parse( arg ) );
-
-        const res = await this.#getApi().call( method, ...parans );
+        const res = await this.#getApi().call( method, ...args );
 
         if ( !res.ok ) return this.#logError( res );
 
@@ -305,7 +311,20 @@ if ( process.cli.command === "schema" ) {
     res = await apiCli.schema( process.cli.arguments.method );
 }
 else if ( process.cli.command === "call" ) {
-    res = await apiCli.call( process.cli.arguments.method, ...( process.cli.arguments.argument || [] ) );
+    let args;
+
+    if ( process.cli.arguments.arguments ) {
+        args = JSON.parse( process.cli.arguments.arguments );
+
+        if ( !Array.isArray( args ) ) {
+            args = [ args ];
+        }
+    }
+    else {
+        args = [];
+    }
+
+    res = await apiCli.call( process.cli.arguments.method, ...args );
 }
 else if ( process.cli.command === "listen" ) {
     res = await apiCli.listen( process.cli.arguments.event, {
