@@ -5,6 +5,7 @@ import ansi from "#lib/ansi";
 import Api from "#lib/api";
 import Cli from "#lib/cli";
 import File from "#lib/file";
+import Message from "#lib/message";
 import Table from "#lib/text/table";
 import * as yaml from "#lib/yaml";
 
@@ -337,12 +338,16 @@ else if ( process.cli.command === "call" ) {
 
                     // absolute path
                     if ( value.startsWith( "file://" ) ) {
-                        value = new File( fileURLToPath( value ) );
+                        value = new Message( {
+                            "body": new File( fileURLToPath( value ) ),
+                        } );
                     }
 
                     // relative path
                     else {
-                        value = new File( value.slice( 5 ) );
+                        value = new Message( {
+                            "body": new File( value.slice( 5 ) ),
+                        } );
                     }
                 }
             }
