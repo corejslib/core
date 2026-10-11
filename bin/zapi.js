@@ -3,6 +3,7 @@
 import ansi from "#lib/ansi";
 import Api from "#lib/api";
 import Cli from "#lib/cli";
+import File from "#lib/file";
 import Table from "#lib/text/table";
 import * as yaml from "#lib/yaml";
 
@@ -76,11 +77,11 @@ const CLI = {
             "title": "Make API call",
             "description": `
 \`\`\`sh
-MSYS2_ARG_CONV_EXCL="*" zapi --url "http://devel:81/api" call "/v1/test" $(
+MSYS2_ARG_CONV_EXCL="*" zapi --url "http://devel:81/api" call "/v1/test" "$(
     cat << 'EOF'
-[ "arg1", { "key": "value" } ]
+[ "arg1", { "attachment": "file:1.mp3" } ]
 EOF
-)
+)"
 \`\`\`
 `.trim(),
             "arguments": {
@@ -314,7 +315,15 @@ else if ( process.cli.command === "call" ) {
     let args;
 
     if ( process.cli.arguments.arguments ) {
-        args = JSON.parse( process.cli.arguments.arguments );
+        args = JSON.parse( process.cli.arguments.arguments, ( key, value, context ) => {
+            if ( typeof value === "string" ) {
+                if ( value.startsWith( "file:" ) ) {
+                    value = new File( value.slice( 5 ) );
+                }
+            }
+
+            return value;
+        } );
 
         if ( !Array.isArray( args ) ) {
             args = [ args ];
