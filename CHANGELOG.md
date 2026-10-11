@@ -1,5 +1,41 @@
 # Changelog
 
+### v8.33.0 (2026-10-11)
+
+**New features:**
+
+- \[MINOR] feat: add JSON-RPC request IDs for HTTP calls (● [f09f099](https://github.com/corejslib/core/commit/f09f09955); 👬 zdm)
+
+- \[MINOR] feat: add zapi attachments (● [655217e](https://github.com/corejslib/core/commit/655217ee1); 👬 zdm)
+
+- \[MINOR] feat: parse API call arguments as JSON5 (● [b8313cc](https://github.com/corejslib/core/commit/b8313ccd4); 👬 zdm)
+
+- \[MINOR] feat: support file arguments in API calls (● [e9b03f3](https://github.com/corejslib/core/commit/e9b03f3ea); 👬 zdm)
+
+- \[MINOR] feat: support file messages in API calls (● [8576c11](https://github.com/corejslib/core/commit/8576c11db); 👬 zdm)
+
+- \[MINOR] feat: wrap upload payloads in JSON-RPC requests (● [fe09797](https://github.com/corejslib/core/commit/fe0979770); 👬 zdm)
+
+    Include request IDs and params in upload data, and correct request ID creation across API clients.
+
+**Bug fixes:**
+
+- \[PATCH] fix: correct websocket utility import path (● [d8af952](https://github.com/corejslib/core/commit/d8af95263); 👬 zdm)
+
+- \[PATCH] fix: parse CLI call arguments as JSON array (● [fa343fb](https://github.com/corejslib/core/commit/fa343fbe3); 👬 zdm)
+
+    Updated the zapi call command to accept a single JSON arguments value, normalize it to an array when needed, and pass it directly to the API client instead of parsing each item separately. Also refreshed the command description and argument schema to match the new interface.
+
+- \[PATCH] fix: support writing with explicit offsets in MessageBuffer (● [b11ef8e](https://github.com/corejslib/core/commit/b11ef8e46); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: add api utils (● [bd8e0f1](https://github.com/corejslib/core/commit/bd8e0f193); 👬 zdm)
+
+- \[PATCH] refactor: mark API client helpers as protected (● [3e3d2d3](https://github.com/corejslib/core/commit/3e3d2d306); 👬 zdm)
+
+Compare with the previous release: [v8.32.0...v8.33.0](https://github.com/corejslib/core/compare/v8.32.0...v8.33.0)
+
 ### v8.32.0 (2026-10-10)
 
 **New features:**
