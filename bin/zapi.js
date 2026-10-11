@@ -1,5 +1,6 @@
 #!/usr/bin/env -S node
 
+import { fileURLToPath } from "node:url";
 import ansi from "#lib/ansi";
 import Api from "#lib/api";
 import Cli from "#lib/cli";
@@ -190,6 +191,18 @@ class ApiCli {
         return res;
     }
 
+    async upload ( method, ...args ) {
+        const res = await this.#getApi()
+            .upload( method, ...args )
+            .start();
+
+        if ( !res.ok ) return this.#logError( res );
+
+        console.log( JSON.stringify( res, null, 4 ) );
+
+        return res;
+    }
+
     async listen ( events, { listenSystemEvents } = {} ) {
         if ( !Array.isArray( events ) ) events = [ events ];
 
@@ -312,13 +325,25 @@ if ( process.cli.command === "schema" ) {
     res = await apiCli.schema( process.cli.arguments.method );
 }
 else if ( process.cli.command === "call" ) {
-    let args;
+    let args, hasAttachments;
 
     if ( process.cli.arguments.arguments ) {
         args = JSON.parse( process.cli.arguments.arguments, ( key, value, context ) => {
             if ( typeof value === "string" ) {
+
+                // attachment
                 if ( value.startsWith( "file:" ) ) {
-                    value = new File( value.slice( 5 ) );
+                    hasAttachments = true;
+
+                    // absolute path
+                    if ( value.startsWith( "file://" ) ) {
+                        value = new File( fileURLToPath( value ) );
+                    }
+
+                    // relative path
+                    else {
+                        value = new File( value.slice( 5 ) );
+                    }
                 }
             }
 
@@ -333,7 +358,12 @@ else if ( process.cli.command === "call" ) {
         args = [];
     }
 
-    res = await apiCli.call( process.cli.arguments.method, ...args );
+    if ( hasAttachments ) {
+        res = await apiCli.upload( process.cli.arguments.method, ...args );
+    }
+    else {
+        res = await apiCli.call( process.cli.arguments.method, ...args );
+    }
 }
 else if ( process.cli.command === "listen" ) {
     res = await apiCli.listen( process.cli.arguments.event, {
