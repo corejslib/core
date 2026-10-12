@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.35.0 (2026-10-12)
+
+**New features:**
+
+- \[MINOR] feat: bundle uWebSockets as an external resource (● [d361531](https://github.com/corejslib/core/commit/d36153154); 👬 zdm)
+
+    Add a build workflow for uWebSockets binaries, load the packaged binary at runtime, and remove the npm dependency.
+
+- \[MINOR] feat: implement ANSI utilities (● [541b8fc](https://github.com/corejslib/core/commit/541b8fc3d); 👬 zdm)
+
+Compare with the previous release: [v8.34.0...v8.35.0](https://github.com/corejslib/core/compare/v8.34.0...v8.35.0)
+
 ### v8.34.0 (2026-10-12)
 
 **New features:**
