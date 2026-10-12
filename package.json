@@ -142,7 +142,7 @@
         "test": "node --test \"tests/**/*.test.js\""
     },
     "dependencies": {
-        "@corejslib/utils": "^1.0.0",
+        "@corejslib/result": "^6.1.1",
         "@nodable/flexible-xml-parser": "^1.11.3",
         "adm-zip": "^0.6.0",
         "ajv": "^8.0.1",
@@ -163,6 +163,7 @@
         "mmdb-lib": "^3.0.0",
         "pkijs": "^3.2.4",
         "semver": "^7.7.2",
+        "tar": "^7.0.0",
         "temporal-polyfill": "^1.0.0",
         "undici": "^8.11.2",
         "xz-decompress": "^0.2.3"
