@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.35.1 (2026-10-12)
+
+**Other changes:**
+
+- docs: note cyclic dependency alternatives in external resource imports (● [d7cca66](https://github.com/corejslib/core/commit/d7cca6601); 👬 zdm)
+
+Compare with the previous release: [v8.35.0...v8.35.1](https://github.com/corejslib/core/compare/v8.35.0...v8.35.1)
+
 ### v8.35.0 (2026-10-12)
 
 **New features:**
