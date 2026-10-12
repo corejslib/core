@@ -1,5 +1,23 @@
 # Changelog
 
+### v8.34.0 (2026-10-12)
+
+**New features:**
+
+- \[MINOR] feat: support attach: attachment references (● [6513f55](https://github.com/corejslib/core/commit/6513f55c0); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: change attachment IDs to shorter attach prefix (● [b8e1251](https://github.com/corejslib/core/commit/b8e1251ed); 👬 zdm)
+
+    This updates generated upload attachment identifiers from "attachment:" to "attach:" in both browser and standard API clients.
+
+**Other changes:**
+
+- docs: clarify attachment examples in zapi usage (● [b8071e6](https://github.com/corejslib/core/commit/b8071e6e1); 👬 zdm)
+
+Compare with the previous release: [v8.33.0...v8.34.0](https://github.com/corejslib/core/compare/v8.33.0...v8.34.0)
+
 ### v8.33.0 (2026-10-11)
 
 **New features:**
