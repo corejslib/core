@@ -82,7 +82,7 @@ const CLI = {
 \`\`\`sh
 MSYS2_ARG_CONV_EXCL="*" zapi --url "http://devel:81/api" call "/v1/test" "$(
     cat << 'EOF'
-[ "arg1", { "attachment": "file:1.mp3" } ]
+[ "arg1", { "attachment": "attach:1.mp3" } ]
 EOF
 )"
 \`\`\`
@@ -334,13 +334,13 @@ else if ( process.cli.command === "call" ) {
             if ( typeof value === "string" ) {
 
                 // attachment
-                if ( value.startsWith( "file:" ) ) {
+                if ( value.startsWith( "attach:" ) ) {
                     hasAttachments = true;
 
                     // absolute path
-                    if ( value.startsWith( "file://" ) ) {
+                    if ( value.startsWith( "attach://" ) ) {
                         value = new Message( {
-                            "body": new File( fileURLToPath( value ) ),
+                            "body": new File( fileURLToPath( value.replace( /^attach:/v, "file:" ) ) ),
                         } );
                     }
 
