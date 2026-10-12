@@ -82,7 +82,14 @@ const CLI = {
 \`\`\`sh
 MSYS2_ARG_CONV_EXCL="*" zapi --url "http://devel:81/api" call "/v1/test" "$(
     cat << 'EOF'
-[ "arg1", { "attachment": "attach:1.mp3" } ]
+[
+    "argument-1",
+    "argument-2",
+    {
+        "relative-attachment": "attach:1.mp3",
+        "absolute-attachment": "attach:///1.mp3",
+    }
+]
 EOF
 )"
 \`\`\`
