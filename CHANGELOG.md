@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.35.2 (2026-10-12)
+
+**Bug fixes:**
+
+- \[PATCH] fix: decode Uint8Array extensions correctly (● [a7d885f](https://github.com/corejslib/core/commit/a7d885f29); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: unify Buffer and Uint8Array MessagePack extensions (● [6264830](https://github.com/corejslib/core/commit/62648306b); 👬 zdm)
+
+Compare with the previous release: [v8.35.1...v8.35.2](https://github.com/corejslib/core/compare/v8.35.1...v8.35.2)
+
 ### v8.35.1 (2026-10-12)
 
 **Other changes:**
