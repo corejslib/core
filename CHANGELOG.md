@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.36.0 (2026-10-12)
+
+**New features:**
+
+- \[MINOR] feat: support environment-specific MessagePack binary decoding (● [70988cd](https://github.com/corejslib/core/commit/70988cd14); 👬 zdm)
+
+Compare with the previous release: [v8.35.2...v8.36.0](https://github.com/corejslib/core/compare/v8.35.2...v8.36.0)
+
 ### v8.35.2 (2026-10-12)
 
 **Bug fixes:**
