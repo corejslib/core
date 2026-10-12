@@ -1,0 +1,26 @@
+name: build-uws
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "0 0 * * *" # every day at 00:00
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/zerocluster/node
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      HOME: /root
+    steps:
+      - uses: softvisio/actions/checkout@v1
+
+      - run: |
+          apt-get update
+          apt-get install -y git
+          npm install --ignore-scripts
+          npm run build-uws

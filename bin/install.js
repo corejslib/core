@@ -27,6 +27,16 @@ externalResources.add( "corejslib/core/resources/public-suffixes" );
 externalResources.add( "corejslib/core/resources/subnets" );
 externalResources.add( "corejslib/core/resources/tld" );
 externalResources.add( "corejslib/core/resources/user-agent" );
+externalResources.add(
+    {
+        "id": "corejslib/core/resources/uws",
+        "node": true,
+        "caller": import.meta.url,
+    },
+    {
+        "location": "package",
+    }
+);
 
 const res = await externalResources.update( {
     "force": process.cli.options.force,
