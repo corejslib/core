@@ -1,5 +1,37 @@
 # Changelog
 
+### v8.37.0 (2026-10-13)
+
+**New features:**
+
+- \[MINOR] feat: allow configuring MessagePack binary decoding (● [d59e2bc](https://github.com/corejslib/core/commit/d59e2bc2f); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: correct UUID version bits and v7 counter initialization (● [67c9fb1](https://github.com/corejslib/core/commit/67c9fb1a3); 👬 zdm)
+
+- \[PATCH] fix: fix random values get buffer (● [6a31c01](https://github.com/corejslib/core/commit/6a31c01f0); 👬 zdm)
+
+- \[PATCH] fix: sort cli command aliases (● [34d3c30](https://github.com/corejslib/core/commit/34d3c301e); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: compose the encoder internally (● [8b1e29a](https://github.com/corejslib/core/commit/8b1e29a1a); 👬 zdm)
+
+    Delegate `toMessagePack` to a lazily initialized `Encoder` instead of extending it.
+
+- \[PATCH] refactor: rename buffer length configuration to generic length (● [d9e0482](https://github.com/corejslib/core/commit/d9e048239); 👬 zdm)
+
+- \[PATCH] refactor: rename message buffer size options to byte lengths (● [5a09263](https://github.com/corejslib/core/commit/5a09263aa); 👬 zdm)
+
+- \[PATCH] refactor: rename random byte offset field (● [c638645](https://github.com/corejslib/core/commit/c638645a8); 👬 zdm)
+
+- \[PATCH] refactor: rename random values byte length to length (● [e46ebc0](https://github.com/corejslib/core/commit/e46ebc073); 👬 zdm)
+
+- \[PATCH] refactor: use Uint8Array as the random buffer backing store (● [037435b](https://github.com/corejslib/core/commit/037435b53); 👬 zdm)
+
+Compare with the previous release: [v8.36.0...v8.37.0](https://github.com/corejslib/core/compare/v8.36.0...v8.37.0)
+
 ### v8.36.0 (2026-10-12)
 
 **New features:**
