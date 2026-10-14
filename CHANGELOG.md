@@ -1,5 +1,25 @@
 # Changelog
 
+### v8.38.0 (2026-10-14)
+
+**New features:**
+
+- \[MINOR] feat: add lifecycle callback setters (● [caffd7c](https://github.com/corejslib/core/commit/caffd7c5a); 👬 zdm)
+
+- \[MINOR] feat: add lifecycle states and activity events (● [29898b0](https://github.com/corejslib/core/commit/29898b0ef); 👬 zdm)
+
+    Expose controller state and idle status, and emit lifecycle and idle events.
+
+- \[MINOR] feat: emit GeoIP country resource updates (● [821fc2b](https://github.com/corejslib/core/commit/821fc2bf0); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: align GeoIP imports and initialization (● [151b745](https://github.com/corejslib/core/commit/151b745e7); 👬 zdm)
+
+- \[PATCH] refactor: store GeoIP database path on instance (● [f4bc808](https://github.com/corejslib/core/commit/f4bc808f7); 👬 zdm)
+
+Compare with the previous release: [v8.37.0...v8.38.0](https://github.com/corejslib/core/compare/v8.37.0...v8.38.0)
+
 ### v8.37.0 (2026-10-13)
 
 **New features:**
