@@ -10,9 +10,30 @@ trap 'echo "⚠  Error ($0:$LINENO, exit code: $?): $BASH_COMMAND" >&2' ERR
 #   x264, x265, libvpx (VP8/VP9), fdk-aac, mp3lame, opus,
 #   libaom (AV1), SVT-AV1, dav1d, libvorbis, libass, freetype, openssl
 #
-# Бинарники линкуются полностью статически (-static): ldd покажет
-# "not a dynamic executable", никаких .so на целевой машине не нужно.
-# Из-за этого отключены VAAPI/VDPAU (им нужны драйверы через dlopen).
+# Два режима сборки:
+#
+#   GPU=0 — полностью статический бинарник (-static): ldd покажет
+#       "not a dynamic executable", никаких .so на целевой машине не нужно.
+#       GPU-кодеки в таком режиме невозможны (драйверы грузятся через dlopen,
+#       а статический glibc этого не умеет), поэтому VAAPI/VDPAU отключены.
+#
+#   GPU=1 (по умолчанию) — поддержка GPU. Все кодеки по-прежнему вшиты статически, но glibc
+#       линкуется динамически (-no-pie -static-libgcc -static-libstdc++).
+#       Включается NVIDIA NVENC/NVDEC (через nv-codec-headers: только заголовки,
+#       libcuda.so.1 / libnvidia-encode.so.1 подгружаются в рантайме). Без драйвера
+#       NVIDIA бинарник запускается и работает, просто h264_nvenc и т.п. выдадут
+#       ошибку при использовании. Сборка не требует ни видеокарты, ни CUDA Toolkit.
+#       Дополнительно:
+#         GPU_VAAPI=static   (по умолчанию) VAAPI (Intel/AMD) со статически вшитой libva (+ libdrm):
+#                            libva собирается из исходников (только DRM), ffmpeg
+#                            запускается и без libva.so на машине. Драйвер
+#                            (intel-media-va-driver / mesa-va-drivers) ищется в системе
+#                            в рантайме; без него VAAPI-кодеки просто не открываются.
+#         GPU_VAAPI=1        (вместо static) VAAPI с динамической libva из apt (libva-dev). Без libva2
+#                            на целевой машине ffmpeg не запустится вообще.
+#         GPU_VAAPI=0        без VAAPI
+#         GPU_QSV=1          (по умолчанию выключено) Intel QSV через libvpl (libvpl.so — динамически)
+#         GPU_CUDA_FILTERS=1 (по умолчанию выключено) CUDA-фильтры (scale_cuda и др.) через clang
 #
 # ВНИМАНИЕ: из-за --enable-nonfree (fdk-aac) итоговый бинарник
 # нельзя распространять — только для личного использования.
@@ -23,17 +44,32 @@ trap 'echo "⚠  Error ($0:$LINENO, exit code: $?): $BASH_COMMAND" >&2' ERR
 #   ./build-ffmpeg-ubuntu.sh --clean    # удалить всё, что создал скрипт
 #
 # Переменные окружения (необязательно):
-#   SOURCES_DIR  куда качать исходники   (по умолчанию ~/ffmpeg_sources)
-#   BUILD_DIR    куда ставить библиотеки (по умолчанию ~/ffmpeg_build)
-#   BIN_DIR      куда ставить бинарники  (по умолчанию ~/bin)
+#   FFMPEG_BUILD_DIR  общий каталог сборки (по умолчанию $TMP/ffmpeg-build-linux,
+#                     а если TMP не задан — $TMPDIR или /tmp); внутри него
+#                     sources/ (исходники), build/ (библиотеки), bin/ (бинарники)
 #   JOBS         число потоков make      (по умолчанию nproc)
-#   FFMPEG_REF   ветка/тег FFmpeg        (по умолчанию release/9.0; можно master или n9.0.1)
+#   FFMPEG_REF   ветка/тег FFmpeg        (по умолчанию master; можно release/9.0 или n9.0.1)
 #   HARFBUZZ_REF ветка/тег harfbuzz      (по умолчанию — ветка по умолчанию репозитория)
 #   SKIP_LIBS    необязательные библиотеки, которые не нужно подключать,
-#                например: SKIP_LIBS="jxl rav1e" (имена — в списке EXTRA_LIBS ниже)
+#                например: SKIP_LIBS="jxl rav1e" (имена — в списке EXTRA_LIBS ниже;
+#                для GPU: nvcodec, vaapi, libvpl, cuda-llvm)
+#   GPU          1 (по умолчанию) — с GPU (см. выше); 0 — полностью статическая сборка без GPU
+#   GPU_VAAPI, GPU_QSV, GPU_CUDA_FILTERS   дополнительные GPU-возможности (только при GPU=1);
+#                GPU_VAAPI принимает static (по умолчанию), 1 (динамическая libva) или 0 (без VAAPI)
+#   LIBVA_REF    ветка/тег libva для GPU_VAAPI=static (по умолчанию — ветка по умолчанию репозитория)
+#   NVCODEC_REF  ветка/тег nv-codec-headers (по умолчанию — ветка по умолчанию репозитория).
+#                Если драйвер NVIDIA старый и FFmpeg пишет "Driver does not support the
+#                required nvenc API version" — возьмите ветку под ваш драйвер, например
+#                NVCODEC_REF=sdk/12.1
+#
+# Примеры:
+#   ./build-ffmpeg-ubuntu.sh                          # NVENC/NVDEC + VAAPI (libva вшита статически)
+#   GPU_VAAPI=0 ./build-ffmpeg-ubuntu.sh              # только NVIDIA, без VAAPI
+#   GPU_VAAPI=1 ./build-ffmpeg-ubuntu.sh              # VAAPI с libva.so из системы
+#   GPU=0 ./build-ffmpeg-ubuntu.sh                    # полностью статическая сборка без GPU
 
 FFMPEG_REF="${FFMPEG_REF:-master}"
-FFMPEG_BUILD_DIR="${FFMPEG_BUILD_DIR:-$TMP/ffmpeg-build-linux}"
+FFMPEG_BUILD_DIR="${FFMPEG_BUILD_DIR:-${TMP:-${TMPDIR:-/tmp}}/ffmpeg-build-linux}"
 
 SOURCES_DIR="$FFMPEG_BUILD_DIR/sources"
 BUILD_DIR="$FFMPEG_BUILD_DIR/build"
@@ -43,6 +79,38 @@ NASM_VERSION="2.16.01"
 LAME_VERSION="3.100"
 
 JOBS="${JOBS:-$(nproc)}"
+
+# ------------------------------------------------------------------ GPU
+GPU="${GPU:-1}"
+GPU_VAAPI="${GPU_VAAPI:-static}"
+GPU_QSV="${GPU_QSV:-0}"
+GPU_CUDA_FILTERS="${GPU_CUDA_FILTERS:-0}"
+NVCODEC_REF="${NVCODEC_REF:-}"
+LIBVA_REF="${LIBVA_REF:-}"
+
+# QSV на Linux работает поверх VAAPI
+if [ "$GPU" = 1 ] && [ "$GPU_QSV" = 1 ] && [ "$GPU_VAAPI" = 0 ]; then
+    GPU_VAAPI=1
+fi
+
+# off — без VAAPI, dynamic — libva.so из apt, static — libva.a, собранная из исходников
+VAAPI_MODE=off
+
+if [ "$GPU" = 1 ]; then
+    case "$GPU_VAAPI" in
+        static) VAAPI_MODE=static ;;
+        1 | yes | dynamic) VAAPI_MODE=dynamic ;;
+    esac
+fi
+
+if [ "$GPU" = 1 ]; then
+    # glibc — динамически (нужен для dlopen драйверов), остальное — статически
+    LINK_MODE_FLAGS="-static-libgcc -static-libstdc++ -no-pie"
+    LINK_TEST_FLAGS="-no-pie"
+else
+    LINK_MODE_FLAGS="-static"
+    LINK_TEST_FLAGS="-static"
+fi
 
 export PATH="$BIN_DIR:$PATH"
 export PKG_CONFIG_PATH="$BUILD_DIR/lib/pkgconfig"
@@ -124,6 +192,7 @@ configure_ffmpeg() {
         case "$name" in
             libopenjp2) name="libopenjpeg" ;;
             libxml-2.0) name="libxml2" ;;
+            libva) name="vaapi" ;;
         esac
 
         found=0
@@ -307,7 +376,7 @@ printf '#include <ass/ass.h>\nint main(void) { ass_library_init(); return 0; }\n
     > "$LIBASS_TEST_DIR/t.c"
 
 # shellcheck disable=SC2046
-if ! gcc "$LIBASS_TEST_DIR/t.c" -static \
+if ! gcc "$LIBASS_TEST_DIR/t.c" $LINK_TEST_FLAGS \
     $(pkg-config --static --cflags --libs libass) \
     -o "$LIBASS_TEST_DIR/t" -lstdc++ -lpthread -lm; then
     echo "Статическая линковка libass не удалась (ошибки линкера выше)." >&2
@@ -350,7 +419,7 @@ for n in jitterentropy zstd; do
 done
 
 # shellcheck disable=SC2046
-if ! gcc "$OPENSSL_TEST_DIR/t.c" -static -L"$BUILD_DIR/lib" \
+if ! gcc "$OPENSSL_TEST_DIR/t.c" $LINK_TEST_FLAGS -L"$BUILD_DIR/lib" \
     $(pkg-config --static --cflags --libs openssl) \
     -o "$OPENSSL_TEST_DIR/t" -lpthread -lm; then
     echo "Статическая линковка openssl не удалась (ошибки линкера выше)." >&2
@@ -380,6 +449,22 @@ EXTRA_LIBS=(
     "bluray|libbluray-dev|--enable-libbluray"
     "xml2|libxml2-dev|--enable-libxml2"
 )
+
+# GPU-библиотеки из apt (только при GPU=1). Недоступные пакеты пропускаются так же,
+# как и остальные необязательные библиотеки.
+if [ "$GPU" = 1 ]; then
+    if [ "$VAAPI_MODE" = dynamic ]; then
+        EXTRA_LIBS+=("vaapi|libva-dev|--enable-vaapi")
+    fi
+
+    if [ "$GPU_QSV" = 1 ]; then
+        EXTRA_LIBS+=("libvpl|libvpl-dev|--enable-libvpl")
+    fi
+
+    if [ "$GPU_CUDA_FILTERS" = 1 ]; then
+        EXTRA_LIBS+=("cuda-llvm|clang|--enable-cuda-llvm")
+    fi
+fi
 
 for entry in "${EXTRA_LIBS[@]}"; do
     IFS="|" read -r lib_name lib_pkgs lib_flags <<< "$entry"
@@ -699,6 +784,138 @@ build_soxr() {
 
 run_optional soxr build_soxr --enable-libsoxr
 
+# ------------------------------------------------------- NVIDIA NVENC/NVDEC
+# nv-codec-headers — только заголовки (+ ffnvcodec.pc). Сами библиотеки драйвера
+# (libcuda.so.1, libnvidia-encode.so.1, libnvcuvid.so.1) FFmpeg грузит через
+# dlopen в рантайме, поэтому на машине сборки драйвер не нужен.
+build_nvcodec_headers() {
+    log "nv-codec-headers (NVENC/NVDEC)"
+    cd "$SOURCES_DIR"
+    git_fetch https://github.com/FFmpeg/nv-codec-headers.git nv-codec-headers ${NVCODEC_REF:+"$NVCODEC_REF"}
+    cd nv-codec-headers
+    make install PREFIX="$BUILD_DIR"
+}
+
+if [ "$GPU" = 1 ]; then
+    run_optional nvcodec build_nvcodec_headers --enable-ffnvcodec
+fi
+
+# ------------------------------------------------- VAAPI: libva статически
+# libva сама видео не обрабатывает: она находит драйвер (iHD_drv_video.so,
+# radeonsi_drv_video.so...) и грузит его через dlopen. Поэтому саму libva можно
+# спокойно вшить в ffmpeg: бинарник запускается без libva.so, а драйвер подхватывается
+# из системы в рантайме (если его нет — vaInitialize вернёт ошибку, и только).
+# Собираем только DRM-часть (без X11/GLX/Wayland): нужна libdrm (в apt есть libdrm.a).
+build_libva_static() {
+    local driver_dirs test_dir
+
+    log "libva (статически, только DRM)"
+    sudo apt-get -y install libdrm-dev
+
+    cd "$SOURCES_DIR"
+
+    # Возвращаем исходный meson.build: патч ниже накладывается заново при каждом запуске
+    if [ -d libva/.git ]; then
+        git -C libva checkout -- va/meson.build || true
+    fi
+
+    git_fetch https://github.com/intel/libva.git libva ${LIBVA_REF:+"$LIBVA_REF"}
+    cd libva
+
+    # В meson.build libva библиотеки объявлены как shared_library(), поэтому
+    # --default-library=static на них не действует. library() же подчиняется ему.
+    sed -i 's/shared_library(/library(/' va/meson.build
+
+    # Каталоги драйверов зашиваются в libva при сборке (по умолчанию это был бы
+    # $BUILD_DIR/lib/dri). Список через двоеточие; в рантайме переопределяется
+    # переменной окружения LIBVA_DRIVERS_PATH.
+    driver_dirs="/usr/lib/$(gcc -print-multiarch)/dri:/usr/lib64/dri:/usr/lib/dri"
+
+    rm -rf build-static
+    meson setup build-static \
+        --prefix="$BUILD_DIR" \
+        --libdir=lib \
+        --buildtype=release \
+        --default-library=static \
+        -Ddriverdir="$driver_dirs" \
+        -Dwith_x11=no \
+        -Dwith_glx=no \
+        -Dwith_wayland=no
+    ninja -C build-static -j"$JOBS"
+    ninja -C build-static install
+
+    if [ ! -f "$BUILD_DIR/lib/libva.a" ] || [ ! -f "$BUILD_DIR/lib/libva-drm.a" ]; then
+        echo "libva.a / libva-drm.a не созданы — видимо, в meson.build libva изменилось объявление библиотек" >&2
+        return 1
+    fi
+
+    # Пробная линковка так же, как её сделает configure FFmpeg (pkg-config --static)
+    test_dir="$(mktemp -d)"
+    printf '#include <va/va.h>\n#include <va/va_drm.h>\nint main(void) { return vaGetDisplayDRM(-1) == 0; }\n' \
+        > "$test_dir/t.c"
+
+    # shellcheck disable=SC2046
+    if ! gcc "$test_dir/t.c" -no-pie -L"$BUILD_DIR/lib" \
+        $(pkg-config --static --cflags --libs libva-drm libva) \
+        -o "$test_dir/t"; then
+        echo "Пробная линковка libva-drm не удалась (ошибки линкера выше)" >&2
+        rm -rf "$test_dir"
+        return 1
+    fi
+
+    rm -rf "$test_dir"
+}
+
+if [ "$VAAPI_MODE" = static ]; then
+    run_optional vaapi build_libva_static --enable-vaapi
+fi
+
+# --------------------------------------- статические .a для динамического glibc
+# Без -static линкер при поиске -lfoo берёт libfoo.so, если он есть в системе,
+# и бинарник обрастает зависимостями от apt-библиотек (libssl.so.3, libfreetype.so.6...).
+# Линкер проверяет каталоги из -L по порядку и в первом, где нашёл libfoo.so ИЛИ
+# libfoo.a, останавливается. Каталог $BUILD_DIR/lib стоит первым, поэтому кладём в него
+# симлинки на все системные .a (кроме glibc, libva*/libvpl* и — если не GPU_VAAPI=static —
+# libdrm*, которые должны оставаться динамическими) — так линкуются именно статические версии.
+shim_static_archives() {
+    local multiarch dir archive base skip g
+    local -a glibc_archives=()
+
+    multiarch="$(gcc -print-multiarch)"
+    mapfile -t glibc_archives < <(dpkg -L libc6-dev 2> /dev/null | grep -E '\.a$' | xargs -r -n1 basename || true)
+
+    mkdir -p "$BUILD_DIR/lib"
+
+    for dir in "/usr/lib/$multiarch" /usr/lib; do
+        for archive in "$dir"/lib*.a; do
+            [ -e "$archive" ] || continue
+            base="$(basename "$archive")"
+
+            case "$base" in
+                libva* | libvpl*) continue ;;
+                libdrm*) [ "$VAAPI_MODE" = static ] || continue ;;
+            esac
+
+            skip=0
+
+            for g in "${glibc_archives[@]}"; do
+                if [ "$g" = "$base" ]; then
+                    skip=1
+                fi
+            done
+
+            if [ "$skip" = 0 ] && [ ! -e "$BUILD_DIR/lib/$base" ]; then
+                ln -s "$archive" "$BUILD_DIR/lib/$base"
+            fi
+        done
+    done
+}
+
+if [ "$GPU" = 1 ]; then
+    log "Статические .a из системы -> $BUILD_DIR/lib (динамический glibc)"
+    shim_static_archives
+fi
+
 # ----------------------------------------------------------------- ffmpeg
 log "FFmpeg"
 cd "$SOURCES_DIR"
@@ -708,11 +925,23 @@ git_fetch https://git.ffmpeg.org/ffmpeg.git ffmpeg "$FFMPEG_REF"
 cd ffmpeg
 make distclean > /dev/null 2>&1 || true
 
+# VAAPI выключаем всегда, а когда он нужен, --enable-vaapi добавляется ПОЗЖЕ через
+# OPTIONAL_FLAGS (при конфликте флагов побеждает последний). Так, если libva не собралась
+# или недоступна, configure не подцепит libva-dev, случайно оставшуюся в системе
+# (это была бы динамическая зависимость от libva.so.2).
+GPU_FLAGS=(--disable-vaapi)
+
+# xlib нужен FFmpeg только для vaapi_x11 (libva-x11.so), а он втянул бы системную
+# libva.so.2 рядом со статической. Нам хватает DRM (-vaapi_device /dev/dri/renderD128).
+if [ "$VAAPI_MODE" = static ]; then
+    GPU_FLAGS+=(--disable-xlib)
+fi
+
 FFMPEG_FLAGS=(
     --prefix="$BUILD_DIR"
     --pkg-config-flags="--static"
     --extra-cflags="-I$BUILD_DIR/include"
-    --extra-ldflags="-L$BUILD_DIR/lib -static"
+    --extra-ldflags="-L$BUILD_DIR/lib $LINK_MODE_FLAGS"
     --extra-libs="-lpthread -lm"
     --ld="g++"
     --bindir="$BIN_DIR"
@@ -733,9 +962,9 @@ FFMPEG_FLAGS=(
     --enable-libx265
     --enable-nonfree
     --disable-ffplay
-    # VAAPI/VDPAU грузят драйверы через dlopen — в статическом бинарнике не работают
-    --disable-vaapi
+    # VDPAU выключен всегда; VAAPI — см. GPU_FLAGS выше
     --disable-vdpau
+    "${GPU_FLAGS[@]}"
     # На случай, если SDL2/sndio остались в системе от прошлых сборок:
     # автоопределение подцепило бы их как динамические зависимости
     --disable-sdl2
@@ -753,7 +982,7 @@ hash -r
 # ----------------------------------------------------------------- done
 log "Готово!"
 
-# Проверка, что бинарники действительно статические
+# Проверка линковки бинарников
 for bin in ffmpeg ffprobe; do
     [ -x "$BIN_DIR/$bin" ] || continue
 
@@ -761,13 +990,38 @@ for bin in ffmpeg ffprobe; do
     # проверку в pipe (и set -e) — поэтому сначала забираем вывод целиком
     ldd_out="$(LC_ALL=C ldd "$BIN_DIR/$bin" 2>&1 || true)"
 
-    if grep -qE "not a dynamic executable|statically linked" <<< "$ldd_out"; then
+    if [ "$GPU" = 1 ]; then
+        # Ожидаем только glibc (+ libva*.so при GPU_VAAPI=1, libvpl.so при GPU_QSV;
+        # libdrm.so.2 в списке при GPU_VAAPI=static значит, что libdrm.a не нашлась)
+        extra_deps="$(awk '{ print $1 }' <<< "$ldd_out" \
+            | grep -vE '^(linux-vdso\.so|/lib64/ld-linux|/lib/ld-linux|libc\.so|libm\.so|libdl\.so|libpthread\.so|librt\.so|libutil\.so|libresolv\.so)' \
+            || true)"
+
+        if [ -z "$extra_deps" ]; then
+            echo "$bin: динамический только по glibc"
+        else
+            echo "$bin: помимо glibc требует (должны быть на целевой машине):"
+            awk '{ print "  " $0 }' <<< "$extra_deps"
+        fi
+    elif grep -qE "not a dynamic executable|statically linked" <<< "$ldd_out"; then
         echo "$bin: статический бинарник, внешние .so не нужны"
     else
         echo "ВНИМАНИЕ: $bin всё ещё динамический, зависимости:"
         awk '{ print "  " $0 }' <<< "$ldd_out"
     fi
 done
+
+if [ "$GPU" = 1 ]; then
+    hw_encoders="$("$BIN_DIR/ffmpeg" -hide_banner -encoders 2> /dev/null \
+        | awk '/nvenc|_vaapi|_qsv/ { print $2 }' | tr '\n' ' ' || true)"
+
+    if [ -n "$hw_encoders" ]; then
+        echo "GPU-кодеки в сборке: $hw_encoders"
+        echo "(для работы нужен драйвер GPU на целевой машине)"
+    else
+        echo "ВНИМАНИЕ: GPU-кодеков в сборке нет — см. Не подключены ниже и вывод configure"
+    fi
+fi
 
 "$BIN_DIR/ffmpeg" -version | head -n 1
 if [ "${#FAILED_LIBS[@]}" -gt 0 ]; then
