@@ -466,6 +466,67 @@ if [ "$GPU" = 1 ]; then
     fi
 fi
 
+# --------------------------------- проверка: у apt-библиотеки есть статические .a
+# configure не отличает libfoo.so от libfoo.a: если .a нет, он молча слинкуется с .so,
+# и бинарник получит зависимость (libjxl.so, librav1e.so, libudfread.so...). Поэтому
+# перед включением библиотеки проверяем, что для неё и всех её зависимостей
+# (pkg-config --static) есть .a в $BUILD_DIR/lib или в путях gcc.
+static_archive_exists() {
+    local n="$1" found
+
+    if [ -e "$BUILD_DIR/lib/lib$n.a" ]; then
+        return 0
+    fi
+
+    found="$(gcc -print-file-name="lib$n.a")"
+
+    [ "$found" != "lib$n.a" ]
+}
+
+apt_pkgs_static_ok() {
+    local pkg file base name pc tok
+    local -a files=()
+
+    for pkg in "$@"; do
+        mapfile -t files < <(dpkg -L "$pkg" 2> /dev/null || true)
+
+        for file in "${files[@]}"; do
+            case "$file" in
+                *.so)
+                    base="$(basename "$file" .so)"
+                    name="${base#lib}"
+
+                    if ! static_archive_exists "$name"; then
+                        echo "  нет lib$name.a (пакет $pkg)" >&2
+                        return 1
+                    fi
+                    ;;
+                */pkgconfig/*.pc)
+                    pc="$(basename "$file" .pc)"
+
+                    # shellcheck disable=SC2046
+                    for tok in $(pkg-config --static --libs "$pc" 2> /dev/null || true); do
+                        case "$tok" in
+                            -lm | -lpthread | -ldl | -lrt | -lc | -lutil | -lresolv | -lstdc++ | -lgcc | -lgcc_s | -latomic)
+                                ;;
+                            -l:*)
+                                ;;
+                            -l*)
+                                if ! static_archive_exists "${tok#-l}"; then
+                                    echo "  нет lib${tok#-l}.a (зависимость $pc)" >&2
+                                    return 1
+                                fi
+                                ;;
+                        esac
+                    done
+                    ;;
+            esac
+        done
+    done
+
+    return 0
+}
+
 for entry in "${EXTRA_LIBS[@]}"; do
     IFS="|" read -r lib_name lib_pkgs lib_flags <<< "$entry"
 
@@ -482,6 +543,19 @@ for entry in "${EXTRA_LIBS[@]}"; do
     done
 
     if [ "$pkgs_ok" = 1 ] && sudo apt-get -y install $lib_pkgs; then
+        # GPU-библиотеки (libva, libvpl) линкуются динамически по задумке — их не проверяем
+        case "$lib_name" in
+            vaapi | libvpl | cuda-llvm) ;;
+            *)
+                # shellcheck disable=SC2086
+                if ! apt_pkgs_static_ok $lib_pkgs; then
+                    FAILED_LIBS+=("$lib_name")
+                    printf '\n\033[1;33m!!! %s: нет статических .a — пропускаю (иначе бинарник зависел бы от .so)\033[0m\n' "$lib_name"
+                    continue
+                fi
+                ;;
+        esac
+
         read -r -a lib_flags_arr <<< "$lib_flags"
         OPTIONAL_FLAGS+=("${lib_flags_arr[@]}")
     else
@@ -1095,7 +1169,7 @@ for bin in ffmpeg ffprobe; do
         # Ожидаем только glibc (+ libva*.so при GPU_VAAPI=1, libvpl.so при GPU_QSV;
         # libdrm.so.2 в списке при GPU_VAAPI=static значит, что libdrm.a не нашлась)
         extra_deps="$(awk '{ print $1 }' <<< "$ldd_out" \
-            | grep -vE '^(linux-vdso\.so|/lib64/ld-linux|/lib/ld-linux|libc\.so|libm\.so|libdl\.so|libpthread\.so|librt\.so|libutil\.so|libresolv\.so)' \
+            | grep -vE '^(linux-vdso\.so|/lib64/ld-linux|/lib/ld-linux|libc\.so|libm\.so|libmvec\.so|libdl\.so|libpthread\.so|librt\.so|libutil\.so|libresolv\.so)' \
             || true)"
 
         if [ -z "$extra_deps" ]; then
