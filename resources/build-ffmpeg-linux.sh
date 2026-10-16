@@ -916,6 +916,47 @@ if [ "$GPU" = 1 ]; then
     shim_static_archives
 fi
 
+# ------------------------------------- libbluray: конфликт глобальных символов
+# В статическом libbluray.a наружу торчат внутренние символы без префикса (dec_init и
+# др.), и они совпадают с символами fftools/ffmpeg_dec.c: "multiple definition of
+# `dec_init'". В .so их скрывает version script, в .a — нет. Делаем копию архива в
+# $BUILD_DIR/lib (этот каталог идёт в -L первым) и переименовываем все определённые
+# глобальные символы без префикса bd_/libbluray_ — objcopy правит и определения,
+# и ссылки внутри архива, так что он остаётся согласованным.
+prefix_libbluray_symbols() {
+    local src multiarch tmp map
+
+    multiarch="$(gcc -print-multiarch)"
+
+    for src in "/usr/lib/$multiarch/libbluray.a" /usr/lib/libbluray.a; do
+        [ -e "$src" ] && break
+        src=""
+    done
+
+    if [ -z "$src" ] || ! command -v objcopy > /dev/null; then
+        return 0
+    fi
+
+    tmp="$(mktemp -d)"
+    map="$tmp/redefine.txt"
+    cp -L "$src" "$tmp/libbluray.a"
+
+    nm --defined-only -g "$tmp/libbluray.a" 2> /dev/null \
+        | awk '$2 ~ /^[TDBRVW]$/ && $3 !~ /^(bd_|libbluray_|_)/ { print $3 " bdpriv_" $3 }' \
+        | sort -u > "$map"
+
+    if [ -s "$map" ]; then
+        objcopy --redefine-syms="$map" "$tmp/libbluray.a"
+    fi
+
+    mkdir -p "$BUILD_DIR/lib"
+    rm -f "$BUILD_DIR/lib/libbluray.a"
+    cp "$tmp/libbluray.a" "$BUILD_DIR/lib/libbluray.a"
+    rm -rf "$tmp"
+}
+
+prefix_libbluray_symbols
+
 # ----------------------------------------------------------------- ffmpeg
 log "FFmpeg"
 cd "$SOURCES_DIR"
