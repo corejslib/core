@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.39.3 (2026-10-16)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: rename waitStarted to waitStart (● [7f44efc](https://github.com/corejslib/core/commit/7f44efc74); 👬 zdm)
+
+**Other changes:**
+
+- docs: remove obsolete connection wait comment (● [2c0fe16](https://github.com/corejslib/core/commit/2c0fe16ff); 👬 zdm)
+
+Compare with the previous release: [v8.39.2...v8.39.3](https://github.com/corejslib/core/compare/v8.39.2...v8.39.3)
+
 ### v8.39.2 (2026-10-16)
 
 **Bug fixes:**
