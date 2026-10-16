@@ -1,5 +1,61 @@
 # Changelog
 
+### v8.39.0 (2026-10-16)
+
+**New features:**
+
+- \[MINOR] feat: add GPU support to Linux FFmpeg builds (● [a5c964c](https://github.com/corejslib/core/commit/a5c964ce8); 👬 zdm)
+
+- \[MINOR] feat: add list entry reordering and detach cleanup (● [be45d40](https://github.com/corejslib/core/commit/be45d4061); 👬 zdm)
+
+    Add methods to move entries to either end of a list, and clear entry references when they are removed.
+
+- \[MINOR] feat: add optional GPU codec support to Windows FFmpeg builds (● [b84012c](https://github.com/corejslib/core/commit/b84012c2a); 👬 zdm)
+
+- \[MINOR] feat: add sorting to List (● [2b69b6d](https://github.com/corejslib/core/commit/2b69b6d26); 👬 zdm)
+
+    Add a sort method with a configurable comparator and place undefined values last.
+
+- \[MINOR] feat: add thread lifecycle manager (● [1d2f166](https://github.com/corejslib/core/commit/1d2f16603); 👬 zdm)
+
+- \[MINOR] feat: stop activity controller after idle timeout (● [7854c88](https://github.com/corejslib/core/commit/7854c88b4); 👬 zdm)
+
+    Add configurable idle timeout and emit activity-count updates when activity begins or ends.
+
+**Bug fixes:**
+
+- \[PATCH] fix: handle typed arrays and partial stream delimiters (● [f288548](https://github.com/corejslib/core/commit/f288548b2); 👬 zdm)
+
+    Normalize non-Buffer views and copy the unprocessed tail to avoid retaining or aliasing caller memory. Keep the line-boundary state accurate when a partial delimiter is pending.
+
+- \[PATCH] fix: keep indexed list keys and values in list order (● [a09870a](https://github.com/corejslib/core/commit/a09870a45); 👬 zdm)
+
+- \[PATCH] fix: make clear chainable and sort large lists safely (● [6b76276](https://github.com/corejslib/core/commit/6b762765c); 👬 zdm)
+
+    Return the list from `clear()` and avoid spreading undefined entries into `push()`.
+
+- \[PATCH] fix: recognize completed EOL tokens with buffered data (● [57b9e2e](https://github.com/corejslib/core/commit/57b9e2e59); 👬 zdm)
+
+- \[PATCH] fix: stop returning the underlying list result from deque clear (● [a39b262](https://github.com/corejslib/core/commit/a39b2622a); 👬 zdm)
+
+- \[PATCH] fix: use service URIs in discovery client (● [5122c65](https://github.com/corejslib/core/commit/5122c65a3); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: move existing entries through push and unshift (● [f6800c4](https://github.com/corejslib/core/commit/f6800c467); 👬 zdm)
+
+- \[PATCH] refactor: remove list sorting and clarify entry moves (● [1c7cfe5](https://github.com/corejslib/core/commit/1c7cfe56d); 👬 zdm)
+
+- \[PATCH] refactor: remove reverse iteration from collections (● [bc2ccb1](https://github.com/corejslib/core/commit/bc2ccb132); 👬 zdm)
+
+- \[PATCH] refactor: replace activity controller with lifecycle manager (● [515d84b](https://github.com/corejslib/core/commit/515d84b21); 👬 zdm)
+
+**Other changes:**
+
+- build: avoid libbluray symbol collisions in static builds (● [cb9d3d8](https://github.com/corejslib/core/commit/cb9d3d801); 👬 zdm)
+
+Compare with the previous release: [v8.38.0...v8.39.0](https://github.com/corejslib/core/compare/v8.38.0...v8.39.0)
+
 ### v8.38.0 (2026-10-14)
 
 **New features:**
