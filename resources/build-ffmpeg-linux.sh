@@ -916,6 +916,66 @@ if [ "$GPU" = 1 ]; then
     shim_static_archives
 fi
 
+# ---------------------------------- libsamplerate: статическая версия для rubberband
+# librubberband тянет за собой -lsamplerate. Если libsamplerate.a в системе нет (или
+# линкер берёт .so), бинарник получает зависимость от libsamplerate.so.0 и не
+# запускается на машине без неё. Собираем статическую libsamplerate сами:
+# $BUILD_DIR/lib идёт в -L первым и содержит только .a, поэтому линкер выберет её.
+build_libsamplerate() {
+    log "libsamplerate (static)"
+    cd "$SOURCES_DIR"
+    git_fetch https://github.com/libsndfile/libsamplerate.git libsamplerate
+    rm -rf libsamplerate/build
+    mkdir -p libsamplerate/build
+    cd libsamplerate/build
+    cmake -G "Unix Makefiles" \
+        -DCMAKE_INSTALL_PREFIX="$BUILD_DIR" \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+        -DBUILD_SHARED_LIBS=OFF \
+        -DBUILD_TESTING=OFF \
+        -DLIBSAMPLERATE_EXAMPLES=OFF \
+        -DLIBSAMPLERATE_INSTALL=ON \
+        ..
+    make -j"$JOBS"
+    make install
+    rm -f "$BUILD_DIR"/lib/libsamplerate.so*
+}
+
+rubberband_flag_present=0
+
+for flag in "${OPTIONAL_FLAGS[@]}"; do
+    if [ "$flag" = "--enable-librubberband" ]; then
+        rubberband_flag_present=1
+    fi
+done
+
+if [ "$rubberband_flag_present" = 1 ]; then
+    libsamplerate_status=0
+
+    (
+        set -e
+        build_libsamplerate
+    ) &
+    wait $! || libsamplerate_status=$?
+
+    if [ "$libsamplerate_status" -ne 0 ]; then
+        FAILED_LIBS+=(rubberband)
+        printf '\n!!! libsamplerate не собралась — rubberband отключён\n'
+
+        new_flags=()
+
+        for flag in "${OPTIONAL_FLAGS[@]}"; do
+            if [ "$flag" != "--enable-librubberband" ]; then
+                new_flags+=("$flag")
+            fi
+        done
+
+        OPTIONAL_FLAGS=("${new_flags[@]}")
+    fi
+fi
+
 # ------------------------------------- libbluray: конфликт глобальных символов
 # В статическом libbluray.a наружу торчат внутренние символы без префикса (dec_init и
 # др.), и они совпадают с символами fftools/ffmpeg_dec.c: "multiple definition of
@@ -1043,6 +1103,15 @@ for bin in ffmpeg ffprobe; do
         else
             echo "$bin: помимо glibc требует (должны быть на целевой машине):"
             awk '{ print "  " $0 }' <<< "$extra_deps"
+
+            # Допустимы только GPU-библиотеки; любая другая .so — не статическая линковка
+            unexpected_deps="$(grep -vE '^(libva|libvpl|libdrm)' <<< "$extra_deps" || true)"
+
+            if [ -n "$unexpected_deps" ]; then
+                echo "ОШИБКА: $bin динамически зависит от библиотек, которых не должно быть:" >&2
+                awk '{ print "  " $0 }' <<< "$unexpected_deps" >&2
+                exit 1
+            fi
         fi
     elif grep -qE "not a dynamic executable|statically linked" <<< "$ldd_out"; then
         echo "$bin: статический бинарник, внешние .so не нужны"
