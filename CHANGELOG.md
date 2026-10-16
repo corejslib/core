@@ -1,5 +1,21 @@
 # Changelog
 
+### v8.39.2 (2026-10-16)
+
+**Bug fixes:**
+
+- \[PATCH] fix: pass wait signals through options objects (● [de1e097](https://github.com/corejslib/core/commit/de1e0979c); 👬 zdm)
+
+- \[PATCH] fix: prevent optional libraries from linking dynamically (● [2fb607b](https://github.com/corejslib/core/commit/2fb607baa); 👬 zdm)
+
+    Verify static archives for optional apt libraries and their pkg-config dependencies before enabling them; exclude libmvec from runtime dependency checks.
+
+**Other changes:**
+
+- build(deps): statically link libsamplerate for rubberband (● [f2742fd](https://github.com/corejslib/core/commit/f2742fde2); 👬 zdm)
+
+Compare with the previous release: [v8.39.1...v8.39.2](https://github.com/corejslib/core/compare/v8.39.1...v8.39.2)
+
 ### v8.39.1 (2026-10-16)
 
 **Bug fixes:**
