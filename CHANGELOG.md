@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.39.1 (2026-10-16)
+
+**Bug fixes:**
+
+- \[PATCH] fix: correct LifecycleManager spelling (● [7a9e048](https://github.com/corejslib/core/commit/7a9e04878); 👬 zdm)
+
+Compare with the previous release: [v8.39.0...v8.39.1](https://github.com/corejslib/core/compare/v8.39.0...v8.39.1)
+
 ### v8.39.0 (2026-10-16)
 
 **New features:**
