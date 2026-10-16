@@ -23,6 +23,16 @@ trap 'echo "⚠  Error ($0:$LINENO, exit code: $?): $BASH_COMMAND" >&2' ERR
 #           libwebp, libjxl, openjpeg, vvenc, rav1e, theora, openh264, xvid,
 #           kvazaar, speex, twolame, opencore-amr, soxr, vidstab, rubberband,
 #           zimg, srt (без шифрования), bluray, libxml2
+# GPU (по умолчанию включено, GPU=0 — выключить):
+#           NVIDIA NVENC/NVDEC (через nv-codec-headers), AMD AMF (через AMF headers),
+#           плюс D3D11VA/DXVA2 (автоопределение по заголовкам mingw-w64).
+#           Intel QSV (libvpl) — тоже включено (GPU_QSV=0 — выключить).
+#           Бинарник остаётся полностью статическим: драйверные DLL (nvcuda.dll,
+#           nvEncodeAPI64.dll, nvcuvid.dll, amfrt64.dll, libvpl-рантайм) FFmpeg грузит сам
+#           через LoadLibrary при использовании. Без видеокарты/драйвера ffmpeg.exe
+#           запускается и работает с программными кодеками, а h264_nvenc, h264_amf
+#           и т.п. выдают ошибку только при попытке ими воспользоваться.
+#           Ни видеокарта, ни CUDA Toolkit для сборки не нужны.
 # НЕ включено: ffplay (нужен SDL2).
 #
 # ВНИМАНИЕ: из-за --enable-nonfree (fdk-aac) итоговые .exe
@@ -40,12 +50,26 @@ trap 'echo "⚠  Error ($0:$LINENO, exit code: $?): $BASH_COMMAND" >&2' ERR
 #   JOBS         число потоков make  (по умолчанию nproc)
 #   FFMPEG_REF   ветка/тег FFmpeg    (по умолчанию release/9.0; можно master или n9.0.1)
 #   SKIP_LIBS    необязательные библиотеки, которые не нужно собирать,
-#                например: SKIP_LIBS="jxl rav1e" (имена — первый аргумент run_optional)
+#                например: SKIP_LIBS="jxl rav1e" (имена — первый аргумент run_optional;
+#                для GPU: nvcodec, amf, libvpl)
+#   GPU          1 (по умолчанию) — NVENC/NVDEC + AMF + QSV; 0 — без GPU-кодеков
+#   GPU_QSV      1 (по умолчанию) — Intel QSV через libvpl; 0 — выключить. Сборка libvpl
+#                под mingw не проверена — при ошибке скрипт её пропустит
+#   NVCODEC_REF  ветка/тег nv-codec-headers (по умолчанию — ветка по умолчанию репозитория).
+#                Если драйвер NVIDIA старый и FFmpeg пишет "Driver does not support the
+#                required nvenc API version" — возьмите ветку под ваш драйвер, например
+#                NVCODEC_REF=sdk/12.1
+#   AMF_REF      ветка/тег AMF headers (по умолчанию — ветка по умолчанию репозитория)
 #   DEBIAN_TRIXIE  1 (по умолчанию) — при отсутствии gcc-mingw-w64-ucrt64 подключить
 #                репозиторий Debian trixie; 0 — не трогать настройки apt
 
 FFMPEG_REF="${FFMPEG_REF:-master}"
-FFMPEG_BUILD_DIR="${FFMPEG_BUILD_DIR:-$TMP/ffmpeg-build-win32}"
+FFMPEG_BUILD_DIR="${FFMPEG_BUILD_DIR:-${TMP:-${TMPDIR:-/tmp}}/ffmpeg-build-win32}"
+
+GPU="${GPU:-1}"
+GPU_QSV="${GPU_QSV:-1}"
+NVCODEC_REF="${NVCODEC_REF:-}"
+AMF_REF="${AMF_REF:-}"
 
 SOURCES_DIR="$FFMPEG_BUILD_DIR/sources"
 BUILD_DIR="$FFMPEG_BUILD_DIR/build"
@@ -1012,6 +1036,51 @@ run_optional srt build_srt --enable-libsrt
 run_optional bluray build_bluray --enable-libbluray
 run_optional xml2 build_xml2 --enable-libxml2
 
+# ------------------------------------------------------------------- GPU
+# NVIDIA NVENC/NVDEC: nv-codec-headers — только заголовки (+ ffnvcodec.pc).
+# nvcuda.dll / nvEncodeAPI64.dll / nvcuvid.dll FFmpeg грузит через LoadLibrary в рантайме.
+build_nvcodec_headers() {
+    log "nv-codec-headers (NVENC/NVDEC)"
+    cd "$SOURCES_DIR"
+    git_fetch https://github.com/FFmpeg/nv-codec-headers.git nv-codec-headers ${NVCODEC_REF:+"$NVCODEC_REF"}
+    cd nv-codec-headers
+    make install PREFIX="$BUILD_DIR"
+}
+
+# AMD AMF: тоже только заголовки. FFmpeg ищет их как AMF/core/Version.h,
+# поэтому содержимое amf/public/include кладём в include/AMF.
+# amfrt64.dll приходит с драйвером AMD и грузится в рантайме.
+build_amf_headers() {
+    log "AMF headers (AMD)"
+    cd "$SOURCES_DIR"
+    git_fetch https://github.com/GPUOpen-LibrariesAndSDKs/AMF.git AMF ${AMF_REF:+"$AMF_REF"}
+    rm -rf "$BUILD_DIR/include/AMF"
+    mkdir -p "$BUILD_DIR/include/AMF"
+    cp -r AMF/amf/public/include/. "$BUILD_DIR/include/AMF/"
+    [ -f "$BUILD_DIR/include/AMF/core/Version.h" ]
+}
+
+# Intel QSV через libvpl (oneVPL). Диспетчер собирается статически;
+# сам рантайм Intel (libvpl/ MFX) приходит с драйвером Intel.
+build_libvpl() {
+    log "libvpl (Intel QSV)"
+    cd "$SOURCES_DIR"
+    git_fetch https://github.com/intel/libvpl.git libvpl
+    cross_cmake libvpl libvpl/build-mingw \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -DBUILD_TESTS=OFF \
+        -DINSTALL_EXAMPLES=OFF
+}
+
+if [ "$GPU" = 1 ]; then
+    run_optional nvcodec build_nvcodec_headers --enable-ffnvcodec
+    run_optional amf build_amf_headers --enable-amf
+
+    if [ "$GPU_QSV" = 1 ]; then
+        run_optional libvpl build_libvpl --enable-libvpl
+    fi
+fi
+
 # ----------------------------------------------------------------- ffmpeg
 log "FFmpeg ($FFMPEG_REF)"
 cd "$SOURCES_DIR"
@@ -1021,6 +1090,14 @@ make distclean > /dev/null 2>&1 || true
 
 STATIC_DEFINES="-DLIBXML_STATIC -DLIBTWOLAME_STATIC -DOPJ_STATIC -DKVZ_STATIC_LIB"
 STATIC_DEFINES="$STATIC_DEFINES -DJXL_STATIC_DEFINE -DJXL_THREADS_STATIC_DEFINE -DJXL_CMS_STATIC_DEFINE"
+
+# При GPU=0 явно выключаем NVENC/AMF: иначе configure мог бы подхватить заголовки,
+# оставшиеся в $BUILD_DIR от прошлой сборки с GPU=1.
+GPU_FLAGS=()
+
+if [ "$GPU" != 1 ]; then
+    GPU_FLAGS+=(--disable-ffnvcodec --disable-amf)
+fi
 
 FFMPEG_FLAGS=(
     --prefix="$BUILD_DIR"
@@ -1058,6 +1135,7 @@ FFMPEG_FLAGS=(
     --enable-libx264
     --enable-libx265
     --enable-nonfree
+    "${GPU_FLAGS[@]}"
 )
 
 # Необязательные библиотеки, которые не подошли configure, отключаются
@@ -1076,6 +1154,23 @@ for exe in "$BIN_DIR/ffmpeg.exe" "$BIN_DIR/ffprobe.exe"; do
         echo "⚠  $exe импортирует msvcrt.dll — в сборке смешаны CRT (проверь необязательные библиотеки, особенно rav1e)" >&2
     fi
 done
+
+# GPU: что реально попало в сборку (смотрим config.h и строки в .exe — запускать
+# ffmpeg.exe на Linux-машине сборки мы не можем)
+log "GPU-поддержка в сборке"
+
+gpu_cfg="$(grep -E '^#define CONFIG_(FFNVCODEC|NVENC|NVDEC|CUVID|AMF|LIBVPL|D3D11VA|D3D12VA|DXVA2) 1$' config.h \
+    | awk '{ print $2 }' | sed 's/^CONFIG_//' | tr '\n' ' ' || true)"
+gpu_enc="$(grep -a -o -E '(h264|hevc|av1)_(nvenc|amf|qsv)' "$BIN_DIR/ffmpeg.exe" | sort -u | tr '\n' ' ' || true)"
+
+echo "config.h: ${gpu_cfg:-ничего из GPU не включено}"
+echo "кодеки в ffmpeg.exe: ${gpu_enc:-нет}"
+
+if [ "$GPU" = 1 ] && [ -z "$gpu_enc" ]; then
+    echo "⚠  GPU-кодеков в ffmpeg.exe нет — см. список «Не подключены» ниже и вывод configure" >&2
+fi
+
+echo "(для работы нужен драйвер видеокарты на Windows-машине; проверка: ffmpeg -hwaccels / -encoders)"
 
 # ----------------------------------------------------------------- done
 log "Готово!"
