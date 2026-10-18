@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.39.5 (2026-10-18)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix api method path (● [6d930b4](https://github.com/corejslib/core/commit/6d930b4e2); 👬 zdm)
+
+Compare with the previous release: [v8.39.4...v8.39.5](https://github.com/corejslib/core/compare/v8.39.4...v8.39.5)
+
 ### v8.39.4 (2026-10-18)
 
 **Code refactoring:**
