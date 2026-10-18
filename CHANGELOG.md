@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.39.4 (2026-10-18)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: split browser API modules (● [aade193](https://github.com/corejslib/core/commit/aade193d0); 👬 zdm)
+
+Compare with the previous release: [v8.39.3...v8.39.4](https://github.com/corejslib/core/compare/v8.39.3...v8.39.4)
+
 ### v8.39.3 (2026-10-16)
 
 **Code refactoring:**
