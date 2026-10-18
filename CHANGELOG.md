@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.39.6 (2026-10-18)
+
+**Bug fixes:**
+
+- \[PATCH] fix: skip version prefix for falsy API versions (● [268a06b](https://github.com/corejslib/core/commit/268a06b31); 👬 zdm)
+
+Compare with the previous release: [v8.39.5...v8.39.6](https://github.com/corejslib/core/compare/v8.39.5...v8.39.6)
+
 ### v8.39.5 (2026-10-18)
 
 **Bug fixes:**
