@@ -1,5 +1,77 @@
 # Changelog
 
+### v8.40.0 (2026-10-19)
+
+**New features:**
+
+- \[MINOR] feat: add custom inspect output for uploads (● [ee0140f](https://github.com/corejslib/core/commit/ee0140fe1); 👬 zdm)
+
+- \[MINOR] feat: expose connection lifecycle state (● [7877b4f](https://github.com/corejslib/core/commit/7877b4fb6); 👬 zdm)
+
+- \[MINOR] feat: expose uploaded bytes and status text (● [2d32ad7](https://github.com/corejslib/core/commit/2d32ad745); 👬 zdm)
+
+- \[MINOR] feat: support disabling API versioning (● [c90c18d](https://github.com/corejslib/core/commit/c90c18d13); 👬 zdm)
+
+    Accept `false` as an API client version and leave method paths unversioned.
+
+- \[MINOR] feat: use JSON-RPC headers for multipart requests and responses (● [526fec8](https://github.com/corejslib/core/commit/526fec8c1); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: accept responses with any content type (● [ed796c6](https://github.com/corejslib/core/commit/ed796c679); 👬 zdm)
+
+- \[PATCH] fix: add .po headers (● [faaf6d5](https://github.com/corejslib/core/commit/faaf6d5ad); 👬 zdm)
+
+- \[PATCH] fix: clean up connection lifecycle and refresh request authorization (● [257d139](https://github.com/corejslib/core/commit/257d1398f); 👬 zdm)
+
+- \[PATCH] fix: correct browser API client connection and cache handling (● [63bf127](https://github.com/corejslib/core/commit/63bf127b2); 👬 zdm)
+
+- \[PATCH] fix: correct upload size tracking and progress reporting (● [bdc83a9](https://github.com/corejslib/core/commit/bdc83a95d); 👬 zdm)
+
+- \[PATCH] fix: emit correctly named stop event (● [ccffa16](https://github.com/corejslib/core/commit/ccffa166d); 👬 zdm)
+
+- \[PATCH] fix: fix api attacment field name (● [0b4daeb](https://github.com/corejslib/core/commit/0b4daeb8b); 👬 zdm)
+
+- \[PATCH] fix: fix api download (● [d8caf6a](https://github.com/corejslib/core/commit/d8caf6a84); 👬 zdm)
+
+- \[PATCH] fix: fix api token header (● [b4b5ab8](https://github.com/corejslib/core/commit/b4b5ab810); 👬 zdm)
+
+- \[PATCH] fix: handle synchronous upload completion and abort races (● [aabe25b](https://github.com/corejslib/core/commit/aabe25bb8); 👬 zdm)
+
+- \[PATCH] fix: handle upload abort signals consistently (● [95a94d0](https://github.com/corejslib/core/commit/95a94d08f); 👬 zdm)
+
+- \[PATCH] fix: honor fetchOptions in object-form API calls (● [fe069af](https://github.com/corejslib/core/commit/fe069aff6); 👬 zdm)
+
+- \[PATCH] fix: parse JSON responses without the JSON-RPC marker (● [ea0540b](https://github.com/corejslib/core/commit/ea0540b56); 👬 zdm)
+
+- \[PATCH] fix: pass whisper header timeout through fetch options (● [ab7af2d](https://github.com/corejslib/core/commit/ab7af2d11); 👬 zdm)
+
+- \[PATCH] fix: preserve request headers in uploads (● [7fd561d](https://github.com/corejslib/core/commit/7fd561d1a); 👬 zdm)
+
+- \[PATCH] fix: prevent uploads on destroyed connections (● [cba2c4e](https://github.com/corejslib/core/commit/cba2c4e89); 👬 zdm)
+
+- \[PATCH] fix: request JSON responses from API (● [ea55646](https://github.com/corejslib/core/commit/ea55646e2); 👬 zdm)
+
+- \[PATCH] fix: serialize normalized PO header names (● [80b32fe](https://github.com/corejslib/core/commit/80b32fe43); 👬 zdm)
+
+- \[PATCH] fix: stop sending the JSON-RPC method header (● [aa2b072](https://github.com/corejslib/core/commit/aa2b0721c); 👬 zdm)
+
+- \[PATCH] fix: use WebSocket close status for connection results (● [74c7b88](https://github.com/corejslib/core/commit/74c7b883e); 👬 zdm)
+
+- \[PATCH] fix: validate service discovery paths and omit empty ports (● [d77d398](https://github.com/corejslib/core/commit/d77d398d5); 👬 zdm)
+
+- \[PATCH] fix: wake start waiters when service restarts (● [185b014](https://github.com/corejslib/core/commit/185b0145b); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: cache JSON-RPC response header (● [4ba4f90](https://github.com/corejslib/core/commit/4ba4f9009); 👬 zdm)
+
+**Other changes:**
+
+- style: reorder upload progress setter (● [28646ed](https://github.com/corejslib/core/commit/28646ed05); 👬 zdm)
+
+Compare with the previous release: [v8.39.6...v8.40.0](https://github.com/corejslib/core/compare/v8.39.6...v8.40.0)
+
 ### v8.39.6 (2026-10-18)
 
 **Bug fixes:**
