@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.42.2 (2026-10-19)
+
+**Bug fixes:**
+
+- \[PATCH] fix: await service discovery results (● [a9ebe64](https://github.com/corejslib/core/commit/a9ebe643a); 👬 zdm)
+
+Compare with the previous release: [v8.42.1...v8.42.2](https://github.com/corejslib/core/compare/v8.42.1...v8.42.2)
+
 ### v8.42.1 (2026-10-19)
 
 **Bug fixes:**
