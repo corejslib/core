@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.43.0 (2026-10-19)
+
+**New features:**
+
+- \[MINOR] feat: add a delay after disconnect event (● [3eaa300](https://github.com/corejslib/core/commit/3eaa30069); 👬 zdm)
+
+Compare with the previous release: [v8.42.2...v8.43.0](https://github.com/corejslib/core/compare/v8.42.2...v8.43.0)
+
 ### v8.42.2 (2026-10-19)
 
 **Bug fixes:**
