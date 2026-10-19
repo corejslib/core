@@ -1,5 +1,15 @@
 # Changelog
 
+### v8.42.1 (2026-10-19)
+
+**Bug fixes:**
+
+- \[PATCH] fix: guard attachment check against null values (● [5c4fb15](https://github.com/corejslib/core/commit/5c4fb1535); 👬 zdm)
+
+- \[PATCH] fix: return true when already connected in waitConnect (● [34392f7](https://github.com/corejslib/core/commit/34392f7bb); 👬 zdm)
+
+Compare with the previous release: [v8.42.0...v8.42.1](https://github.com/corejslib/core/compare/v8.42.0...v8.42.1)
+
 ### v8.42.0 (2026-10-19)
 
 **New features:**
