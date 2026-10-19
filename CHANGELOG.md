@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.42.0 (2026-10-19)
+
+**New features:**
+
+- \[MINOR] feat: add service discovery options to AI APIs and remove Nginx API (● [f6fc2f3](https://github.com/corejslib/core/commit/f6fc2f38f); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: prepare JSON-RPC request payloads with JsonContainer (● [851d7a8](https://github.com/corejslib/core/commit/851d7a82b); 👬 zdm)
+
+Compare with the previous release: [v8.41.0...v8.42.0](https://github.com/corejslib/core/compare/v8.41.0...v8.42.0)
+
 ### v8.41.0 (2026-10-19)
 
 **New features:**
