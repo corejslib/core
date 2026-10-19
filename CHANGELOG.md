@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.41.0 (2026-10-19)
+
+**New features:**
+
+- \[MINOR] feat: expose API client connection status (● [0fa1f15](https://github.com/corejslib/core/commit/0fa1f159b); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: rename service discovery client to service discovery (● [ca13624](https://github.com/corejslib/core/commit/ca13624e8); 👬 zdm)
+
+Compare with the previous release: [v8.40.0...v8.41.0](https://github.com/corejslib/core/compare/v8.40.0...v8.41.0)
+
 ### v8.40.0 (2026-10-19)
 
 **New features:**
