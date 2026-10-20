@@ -1,5 +1,33 @@
 # Changelog
 
+### v8.44.0 (2026-10-20)
+
+**New features:**
+
+- \[MINOR] feat: add customizable idle timeout callback (● [e710a74](https://github.com/corejslib/core/commit/e710a7409); 👬 zdm)
+
+- \[MINOR] feat: add runtime idle timeout configuration (● [95374a0](https://github.com/corejslib/core/commit/95374a022); 👬 zdm)
+
+    Add a setter that updates the idle timeout and restarts the timer when started.
+
+- \[MINOR] feat: expose connection idle timeout (● [9d6c64c](https://github.com/corejslib/core/commit/9d6c64c22); 👬 zdm)
+
+- \[MINOR] feat: expose idle timeout configuration on API connections (● [ed27f04](https://github.com/corejslib/core/commit/ed27f04e2); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: allow shared persistent event connections (● [8a786ab](https://github.com/corejslib/core/commit/8a786abf4); 👬 zdm)
+
+- \[PATCH] fix: prevent idle timeouts from stopping locked connections (● [0a695d9](https://github.com/corejslib/core/commit/0a695d916); 👬 zdm)
+
+- \[PATCH] fix: stop API connections when idle (● [034d4bb](https://github.com/corejslib/core/commit/034d4bb97); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: access websocket factory through API client (● [48d9151](https://github.com/corejslib/core/commit/48d9151d0); 👬 zdm)
+
+Compare with the previous release: [v8.43.1...v8.44.0](https://github.com/corejslib/core/compare/v8.43.1...v8.44.0)
+
 ### v8.43.1 (2026-10-20)
 
 **Other changes:**
