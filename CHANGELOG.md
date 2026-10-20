@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.43.1 (2026-10-20)
+
+**Other changes:**
+
+- style: clarify resource operation logs (● [ddd64e2](https://github.com/corejslib/core/commit/ddd64e262); 👬 zdm)
+
+Compare with the previous release: [v8.43.0...v8.43.1](https://github.com/corejslib/core/compare/v8.43.0...v8.43.1)
+
 ### v8.43.0 (2026-10-19)
 
 **New features:**
