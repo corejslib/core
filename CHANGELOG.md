@@ -1,5 +1,47 @@
 # Changelog
 
+### v8.45.0 (2026-10-21)
+
+**New features:**
+
+- \[MINOR] feat: enhance event listener and forwarding behavior (● [c296b39](https://github.com/corejslib/core/commit/c296b3941); 👬 zdm)
+
+- \[MINOR] feat: expose whether the connection manager has hosts (● [aec4510](https://github.com/corejslib/core/commit/aec451093); 👬 zdm)
+
+- \[MINOR] feat: support callback forwarding and improve event dispatch (● [26ecd93](https://github.com/corejslib/core/commit/26ecd93d4); 👬 zdm)
+
+    Add synchronous callback chaining through forwarded emitters, once-listener cleanup, and safer listener management.
+
+**Bug fixes:**
+
+- \[PATCH] fix: allow unlimited event listeners when maxListeners is zero (● [a86b24e](https://github.com/corejslib/core/commit/a86b24e23); 👬 zdm)
+
+- \[PATCH] fix: contain event callback failures (● [9c036fc](https://github.com/corejslib/core/commit/9c036fcf5); 👬 zdm)
+
+    Catch watcher errors so they do not interrupt notification, and invoke event listeners through a local reference.
+
+- \[PATCH] fix: skip undefined event forwarder results (● [bbd6e52](https://github.com/corejslib/core/commit/bbd6e52ce); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: avoid unnecessary async waits during event dispatch (● [f6532f8](https://github.com/corejslib/core/commit/f6532f81b); 👬 zdm)
+
+    Compact listener entries in place and snapshot forwarding targets during runs.
+
+- \[PATCH] refactor: iterate event listeners without copying collections (● [44f5dd1](https://github.com/corejslib/core/commit/44f5dd189); 👬 zdm)
+
+- \[PATCH] refactor: optimize event listener dispatch and compaction (● [6c3720b](https://github.com/corejslib/core/commit/6c3720bc7); 👬 zdm)
+
+- \[PATCH] refactor: revise event listener handling (● [f56fb89](https://github.com/corejslib/core/commit/f56fb8971); 👬 zdm)
+
+**Other changes:**
+
+- style: prevent useless-spread autofix in event iteration (● [638d303](https://github.com/corejslib/core/commit/638d303db); 👬 zdm)
+
+- style: remove redundant comments (● [ec09fe4](https://github.com/corejslib/core/commit/ec09fe4d4); 👬 zdm)
+
+Compare with the previous release: [v8.44.0...v8.45.0](https://github.com/corejslib/core/compare/v8.44.0...v8.45.0)
+
 ### v8.44.0 (2026-10-20)
 
 **New features:**
