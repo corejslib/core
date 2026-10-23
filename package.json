@@ -161,7 +161,7 @@
         "micromark-extension-frontmatter": "^2.0.0",
         "micromark-extension-gfm": "^3.0.0",
         "mmdb-lib": "^3.0.0",
-        "pkijs": "^3.2.4",
+        "pkijs": "^4.0.0",
         "semver": "^7.7.2",
         "tar": "^7.0.0",
         "temporal-polyfill": "^1.0.0",
