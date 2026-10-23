@@ -1,5 +1,53 @@
 # Changelog
 
+### v8.46.0 (2026-10-23)
+
+**New features:**
+
+- \[MINOR] feat: add JSON and custom inspect output for git commits and footers (● [a82f316](https://github.com/corejslib/core/commit/a82f31654); 👬 zdm)
+
+- \[MINOR] feat: add reserved connections setting (● [378839c](https://github.com/corejslib/core/commit/378839c82); 👬 zdm)
+
+- \[MINOR] feat: add thread-level lifecycle controls (● [6af7a16](https://github.com/corejslib/core/commit/6af7a16da); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: destroy connections through lifecycle manager (● [bbeabe8](https://github.com/corejslib/core/commit/bbeabe897); 👬 zdm)
+
+- \[PATCH] fix: fix cli help layout (● [8a01aec](https://github.com/corejslib/core/commit/8a01aec35); 👬 zdm)
+
+- \[PATCH] fix: force-destroy lifecycle manager on connection removal (● [cc6a4b9](https://github.com/corejslib/core/commit/cc6a4b989); 👬 zdm)
+
+- \[PATCH] fix: handle websocket close during connection setup (● [a15fc45](https://github.com/corejslib/core/commit/a15fc4561); 👬 zdm)
+
+- \[PATCH] fix: initialize subscription state before broadcasting connection (● [e08a65a](https://github.com/corejslib/core/commit/e08a65abf); 👬 zdm)
+
+- \[PATCH] fix: parse commit footers by complete blocks (● [9cb7ee5](https://github.com/corejslib/core/commit/9cb7ee55f); 👬 zdm)
+
+- \[PATCH] fix: preserve lifecycle manager idle timeout when locking connections (● [861ab09](https://github.com/corejslib/core/commit/861ab09a0); 👬 zdm)
+
+- \[PATCH] fix: preserve reserved connections during acquisition (● [c78b6fc](https://github.com/corejslib/core/commit/c78b6fc1a); 👬 zdm)
+
+- \[PATCH] fix: send queued requests after websocket connects (● [870dd9a](https://github.com/corejslib/core/commit/870dd9a3c); 👬 zdm)
+
+- \[PATCH] fix: serialize commit footers in debug output (● [596ddc5](https://github.com/corejslib/core/commit/596ddc582); 👬 zdm)
+
+- \[PATCH] fix: serialize git footers with toJSON (● [5bee334](https://github.com/corejslib/core/commit/5bee334a4); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: rename active request counter to active thread counter (● [f4062e0](https://github.com/corejslib/core/commit/f4062e0a5); 👬 zdm)
+
+- \[PATCH] refactor: rename local event map to lifecycle events (● [fa30164](https://github.com/corejslib/core/commit/fa301648c); 👬 zdm)
+
+**Other changes:**
+
+- build(deps): upgrade pkijs to v4.0.0 (● [6f2443f](https://github.com/corejslib/core/commit/6f2443f84); 👬 zdm)
+
+- docs: correct eslint suppression directives (● [1ce9005](https://github.com/corejslib/core/commit/1ce9005bc); 👬 zdm)
+
+Compare with the previous release: [v8.45.0...v8.46.0](https://github.com/corejslib/core/compare/v8.45.0...v8.46.0)
+
 ### v8.45.0 (2026-10-21)
 
 **New features:**
