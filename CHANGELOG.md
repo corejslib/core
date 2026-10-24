@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.47.1 (2026-10-24)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix connection declaration (● [28603de](https://github.com/corejslib/core/commit/28603de76); 👬 zdm)
+
+Compare with the previous release: [v8.47.0...v8.47.1](https://github.com/corejslib/core/compare/v8.47.0...v8.47.1)
+
 ### v8.47.0 (2026-10-24)
 
 **New features:**
