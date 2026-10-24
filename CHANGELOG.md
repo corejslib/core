@@ -1,5 +1,51 @@
 # Changelog
 
+### v8.48.0 (2026-10-24)
+
+**New features:**
+
+- \[MINOR] feat: add PostgreSQL start and stop methods (● [afd18a3](https://github.com/corejslib/core/commit/afd18a3ca); 👬 zdm)
+
+- \[MINOR] feat: expose listener limits and abort signal (● [1cfbb56](https://github.com/corejslib/core/commit/1cfbb5610); 👬 zdm)
+
+- \[MINOR] feat: wire database start and stop to cron lifecycle (● [145ce6a](https://github.com/corejslib/core/commit/145ce6a34); 👬 zdm)
+
+    Remove debug logging and start the schema cron through `start()` and `stop()`; omit cron startup from initialization.
+
+**Bug fixes:**
+
+- \[PATCH] fix: await transaction completion before disposing stream (● [cba360b](https://github.com/corejslib/core/commit/cba360bfc); 👬 zdm)
+
+- \[PATCH] fix: check listeners and forward payload for remote events (● [86c03aa](https://github.com/corejslib/core/commit/86c03aad4); 👬 zdm)
+
+- \[PATCH] fix: correct SQLite schema migration handling and lock loading (● [19f9fec](https://github.com/corejslib/core/commit/19f9fecb0); 👬 zdm)
+
+- \[PATCH] fix: generate ON and HAVING clauses correctly (● [90d2f68](https://github.com/corejslib/core/commit/90d2f68e7); 👬 zdm)
+
+    Handle null values safely and use prototype-free lookup objects.
+
+- \[PATCH] fix: handle bigint and escaped values in SQL types (● [12bd7a2](https://github.com/corejslib/core/commit/12bd7a2b1); 👬 zdm)
+
+- \[PATCH] fix: handle waitConnect result as a boolean (● [61a27ea](https://github.com/corejslib/core/commit/61a27ea3e); 👬 zdm)
+
+- \[PATCH] fix: make schema migrations transaction-safe (● [3ad4fc0](https://github.com/corejslib/core/commit/3ad4fc026); 👬 zdm)
+
+- \[PATCH] fix: pass limit values through unchanged (● [990690a](https://github.com/corejslib/core/commit/990690adb); 👬 zdm)
+
+- \[PATCH] fix: reject empty SQL IN value lists (● [8a9cd25](https://github.com/corejslib/core/commit/8a9cd25ee); 👬 zdm)
+
+- \[PATCH] fix: validate schema versions and propagate lock query errors (● [22643bb](https://github.com/corejslib/core/commit/22643bbdf); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: organize cron lifecycle methods (● [5e7be8b](https://github.com/corejslib/core/commit/5e7be8bdc); 👬 zdm)
+
+**Other changes:**
+
+- style: remove redundant blank line in large object write loop (● [8040e4c](https://github.com/corejslib/core/commit/8040e4c40); 👬 zdm)
+
+Compare with the previous release: [v8.47.1...v8.48.0](https://github.com/corejslib/core/compare/v8.47.1...v8.48.0)
+
 ### v8.47.1 (2026-10-24)
 
 **Bug fixes:**
