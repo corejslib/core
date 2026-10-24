@@ -1,5 +1,15 @@
 # Changelog
 
+### v8.47.0 (2026-10-24)
+
+**New features:**
+
+- \[MINOR] feat: add JSON container support to browser API (● [29db875](https://github.com/corejslib/core/commit/29db87533); 👬 zdm)
+
+- \[MINOR] feat: refactor connections (● [df8af83](https://github.com/corejslib/core/commit/df8af83b8); 👬 zdm)
+
+Compare with the previous release: [v8.46.0...v8.47.0](https://github.com/corejslib/core/compare/v8.46.0...v8.47.0)
+
 ### v8.46.0 (2026-10-23)
 
 **New features:**
