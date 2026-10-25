@@ -1,5 +1,29 @@
 # Changelog
 
+### v8.49.0 (2026-10-25)
+
+**New features:**
+
+- \[MINOR] feat: add absolute file path format (● [d227f08](https://github.com/corejslib/core/commit/d227f081b); 👬 zdm)
+
+    Adjust PostgreSQL connection defaults and convert idle timeouts to milliseconds.
+
+- \[MINOR] feat: add PostgreSQL idle timeout and large object read defaults (● [a33fe16](https://github.com/corejslib/core/commit/a33fe161f); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix connection declaration (● [e201100](https://github.com/corejslib/core/commit/e201100a1); 👬 zdm)
+
+- \[PATCH] fix: handle service-discovery host configuration (● [9b08ea7](https://github.com/corejslib/core/commit/9b08ea70a); 👬 zdm)
+
+- \[PATCH] fix: use numeric milliseconds for PostgreSQL idle timeout (● [d918d2c](https://github.com/corejslib/core/commit/d918d2c3d); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: rename database handler class variable (● [fb45926](https://github.com/corejslib/core/commit/fb45926e4); 👬 zdm)
+
+Compare with the previous release: [v8.48.0...v8.49.0](https://github.com/corejslib/core/compare/v8.48.0...v8.49.0)
+
 ### v8.48.0 (2026-10-24)
 
 **New features:**
