@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.50.2 (2026-10-26)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: use shared sleep utility for thread connections (● [bc32e72](https://github.com/corejslib/core/commit/bc32e72c2); 👬 zdm)
+
+Compare with the previous release: [v8.50.1...v8.50.2](https://github.com/corejslib/core/compare/v8.50.1...v8.50.2)
+
 ### v8.50.1 (2026-10-26)
 
 **Bug fixes:**
