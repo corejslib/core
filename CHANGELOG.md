@@ -1,5 +1,19 @@
 # Changelog
 
+### v8.50.1 (2026-10-26)
+
+**Bug fixes:**
+
+- \[PATCH] fix: enforce transaction lifecycle and callback constraints (● [33aeb66](https://github.com/corejslib/core/commit/33aeb6647); 👬 zdm)
+
+    Track transaction callbacks explicitly, handle nested transactions with savepoints, and destroy connections left in an open transaction.
+
+**Code refactoring:**
+
+- \[PATCH] refactor: reorganize PostgreSQL protocol constants (● [8b4d6ab](https://github.com/corejslib/core/commit/8b4d6ab2f); 👬 zdm)
+
+Compare with the previous release: [v8.50.0...v8.50.1](https://github.com/corejslib/core/compare/v8.50.0...v8.50.1)
+
 ### v8.50.0 (2026-10-26)
 
 **New features:**
