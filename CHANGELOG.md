@@ -1,5 +1,71 @@
 # Changelog
 
+### v8.50.0 (2026-10-26)
+
+**New features:**
+
+- \[MINOR] feat: add explicit exclusive connection locking (● [aec889b](https://github.com/corejslib/core/commit/aec889b1d); 👬 zdm)
+
+- \[MINOR] feat: expose connection exclusivity state (● [64f9afa](https://github.com/corejslib/core/commit/64f9afa38); 👬 zdm)
+
+- \[MINOR] feat: support PostgreSQL 3.2 and query cancellation (● [d4e3202](https://github.com/corejslib/core/commit/d4e32028e); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: avoid returning connections destroyed during creation (● [0f8410a](https://github.com/corejslib/core/commit/0f8410acd); 👬 zdm)
+
+    Retry connection selection when creation-time destruction leaves no registered connection.
+
+- \[PATCH] fix: cap concurrent exclusive connection locks (● [fbb2586](https://github.com/corejslib/core/commit/fbb258650); 👬 zdm)
+
+- \[PATCH] fix: correct cron scheduling and expression parsing (● [f3d33a7](https://github.com/corejslib/core/commit/f3d33a781); 👬 zdm)
+
+- \[PATCH] fix: correct event listener cleanup and watcher notifications (● [d2d4f08](https://github.com/corejslib/core/commit/d2d4f08c4); 👬 zdm)
+
+    Handle symbol event names, distinguish omitted names from falsy names, and isolate errors from forwarded watchers.
+
+- \[PATCH] fix: decrement host request count when destroying connection (● [46c807c](https://github.com/corejslib/core/commit/46c807c98); 👬 zdm)
+
+- \[PATCH] fix: detect uncommitted transactions before ending thread (● [6c85b1e](https://github.com/corejslib/core/commit/6c85b1ec5); 👬 zdm)
+
+    Reorder connection factory parameters to place the manager first.
+
+- \[PATCH] fix: handle absolute and long-running timeout targets (● [6b62881](https://github.com/corejslib/core/commit/6b628811e); 👬 zdm)
+
+- \[PATCH] fix: isolate PostgreSQL cron task connections (● [4a86421](https://github.com/corejslib/core/commit/4a86421d8); 👬 zdm)
+
+- \[PATCH] fix: manage PostgreSQL events connection lifecycle (● [4227e37](https://github.com/corejslib/core/commit/4227e37d9); 👬 zdm)
+
+- \[PATCH] fix: move re-registered listeners to end of dispatch order (● [e83d067](https://github.com/corejslib/core/commit/e83d067e1); 👬 zdm)
+
+- \[PATCH] fix: reject results from unclosed transactions (● [14f219f](https://github.com/corejslib/core/commit/14f219fa0); 👬 zdm)
+
+    Use private symbols for internal PostgreSQL query options to prevent user-controlled flags.
+
+- \[PATCH] fix: require exclusive lock before starting transactions (● [d56c8aa](https://github.com/corejslib/core/commit/d56c8aa24); 👬 zdm)
+
+- \[PATCH] fix: retry failed thread connections (● [ab20cb6](https://github.com/corejslib/core/commit/ab20cb6bf); 👬 zdm)
+
+- \[PATCH] fix: update host counters when destroying connections (● [5dc091e](https://github.com/corejslib/core/commit/5dc091eb7); 👬 zdm)
+
+- \[PATCH] fix: wait for idle connections when acquiring exclusive locks (● [d8ba0b6](https://github.com/corejslib/core/commit/d8ba0b61d); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: cache event list before removing once listeners (● [cdaf4e6](https://github.com/corejslib/core/commit/cdaf4e659); 👬 zdm)
+
+- \[PATCH] refactor: manage external connections through callbacks (● [51585cd](https://github.com/corejslib/core/commit/51585cd1b); 👬 zdm)
+
+- \[PATCH] refactor: refactor connection manager (● [170f18c](https://github.com/corejslib/core/commit/170f18c3d), [ce74497](https://github.com/corejslib/core/commit/ce744976f); 👬 zdm)
+
+- \[PATCH] refactor: remove API connection lock counter (● [ee7d0c6](https://github.com/corejslib/core/commit/ee7d0c69b); 👬 zdm)
+
+- \[PATCH] refactor: remove event connection PID tracking (● [a116d2f](https://github.com/corejslib/core/commit/a116d2f9e); 👬 zdm)
+
+- \[PATCH] refactor: replace thread and request counters with numbers (● [47a2283](https://github.com/corejslib/core/commit/47a2283e4); 👬 zdm)
+
+Compare with the previous release: [v8.49.0...v8.50.0](https://github.com/corejslib/core/compare/v8.49.0...v8.50.0)
+
 ### v8.49.0 (2026-10-25)
 
 **New features:**
