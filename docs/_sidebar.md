@@ -14,6 +14,7 @@
 - [Env](/env.md)
 - [File](/file.md)
 - [Hostname](/hostname.md)
+- [SASL](/sasl.md)
 - [Stream](/stream.md)
 - [SQL](/sql.md)
 - [Text](/text.md)
