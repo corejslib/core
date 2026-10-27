@@ -1,5 +1,19 @@
 # Changelog
 
+### v8.50.3 (2026-10-27)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: initialize large-object handlers lazily (● [463ef00](https://github.com/corejslib/core/commit/463ef0077); 👬 zdm)
+
+- \[PATCH] refactor: organize PostgreSQL connection getters (● [9780bee](https://github.com/corejslib/core/commit/9780bee64); 👬 zdm)
+
+- \[PATCH] refactor: rename connection lock methods to lockShared (● [9318a3d](https://github.com/corejslib/core/commit/9318a3dad); 👬 zdm)
+
+- \[PATCH] refactor: restructure SASL authentication methods (● [b603535](https://github.com/corejslib/core/commit/b60353547); 👬 zdm)
+
+Compare with the previous release: [v8.50.2...v8.50.3](https://github.com/corejslib/core/compare/v8.50.2...v8.50.3)
+
 ### v8.50.2 (2026-10-26)
 
 **Code refactoring:**
