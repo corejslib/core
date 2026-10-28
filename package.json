@@ -164,7 +164,6 @@
         "pkijs": "^4.0.0",
         "semver": "^7.7.2",
         "tar": "^7.0.0",
-        "temporal-polyfill": "^1.0.0",
         "undici": "^8.11.2",
         "xz-decompress": "^0.2.3"
     },
