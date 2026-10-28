@@ -1,5 +1,29 @@
 # Changelog
 
+### v8.51.0 (2026-10-28)
+
+**New features:**
+
+- \[MINOR] feat: add Unix socket path helper (● [f1ea4db](https://github.com/corejslib/core/commit/f1ea4db28); 👬 zdm)
+
+- \[MINOR] feat: support path and abort signal in tryConnect (● [b3440a7](https://github.com/corejslib/core/commit/b3440a702); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: use provided port when creating PostgreSQL socket path (● [14d1cf1](https://github.com/corejslib/core/commit/14d1cf178); 👬 zdm)
+
+- \[PATCH] fix: use SASL method in initial response (● [4622f89](https://github.com/corejslib/core/commit/4622f8945); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: rename PostgreSQL appName to clientName (● [2f9e776](https://github.com/corejslib/core/commit/2f9e77624); 👬 zdm)
+
+**Other changes:**
+
+- docs: document SASL authentication module (● [d7de5cd](https://github.com/corejslib/core/commit/d7de5cd0c); 👬 zdm)
+
+Compare with the previous release: [v8.50.3...v8.51.0](https://github.com/corejslib/core/compare/v8.50.3...v8.51.0)
+
 ### v8.50.3 (2026-10-27)
 
 **Code refactoring:**
