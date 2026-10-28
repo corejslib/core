@@ -1,5 +1,21 @@
 # Changelog
 
+### v8.52.0 (2026-10-28)
+
+**New features:**
+
+- \[MINOR] feat: add sql query inspect (● [032db8c](https://github.com/corejslib/core/commit/032db8c63); 👬 zdm)
+
+- \[MINOR] feat: expose sql.id() method (● [a895dfb](https://github.com/corejslib/core/commit/a895dfb07); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix sql query generator (● [337e6a3](https://github.com/corejslib/core/commit/337e6a3e6); 👬 zdm)
+
+- \[PATCH] fix: preserve whitespace in SQL template queries (● [200110d](https://github.com/corejslib/core/commit/200110d6c); 👬 zdm)
+
+Compare with the previous release: [v8.51.0...v8.52.0](https://github.com/corejslib/core/compare/v8.51.0...v8.52.0)
+
 ### v8.51.0 (2026-10-28)
 
 **New features:**
