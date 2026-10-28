@@ -52,7 +52,7 @@ function parseFormat ( format ) {
                     .split( "," )
                     .map( extname => `.${ extname }` );
 
-                format.extnames = [ ...new Set( [ ...format.extnames, ...extnames ] ) ].sort();
+                format.extnames = [ ...new Set( Iterator.concat( format.extnames, extnames ) ) ].sort();
             }
             else if ( line.startsWith( "Mime type:" ) ) {
                 format.type = line.slice( 11, -1 );
@@ -72,7 +72,7 @@ function parseFormat ( format ) {
                     .split( "," )
                     .map( extname => `.${ extname }` );
 
-                format.extnames = [ ...new Set( [ ...format.extnames, ...extnames ] ) ].sort();
+                format.extnames = [ ...new Set( Iterator.concat( format.extnames, extnames ) ) ].sort();
             }
         }
     }
