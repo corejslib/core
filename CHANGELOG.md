@@ -1,5 +1,27 @@
 # Changelog
 
+### v8.52.1 (2026-10-29)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: use Buffer hex conversion methods (● [4747465](https://github.com/corejslib/core/commit/4747465b6); 👬 zdm)
+
+- \[PATCH] refactor: use iterator helpers for collection conversion (● [fc5b4b0](https://github.com/corejslib/core/commit/fc5b4b01c); 👬 zdm)
+
+- \[PATCH] refactor: use Iterator.concat for iterable merging (● [b234a36](https://github.com/corejslib/core/commit/b234a36c1); 👬 zdm)
+
+- \[PATCH] refactor: use native Uint8Array hex conversions (● [74a6b18](https://github.com/corejslib/core/commit/74a6b1893); 👬 zdm)
+
+**Other changes:**
+
+- build(deps): remove temporal polyfill dependency (● [65cb40f](https://github.com/corejslib/core/commit/65cb40f05); 👬 zdm)
+
+- chore(metadata): raise minimum supported node.js and npm versions (● [0e4356f](https://github.com/corejslib/core/commit/0e4356ff4); 👬 zdm)
+
+- docs: update zip FIXME target to node 28 (● [c3b51ed](https://github.com/corejslib/core/commit/c3b51ed32); 👬 zdm)
+
+Compare with the previous release: [v8.52.0...v8.52.1](https://github.com/corejslib/core/compare/v8.52.0...v8.52.1)
+
 ### v8.52.0 (2026-10-28)
 
 **New features:**
