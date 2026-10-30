@@ -1,5 +1,19 @@
 # Changelog
 
+### v8.52.2 (2026-10-30)
+
+**Bug fixes:**
+
+- \[PATCH] fix: correct cron scheduling and timeout handling (● [07a6f6c](https://github.com/corejslib/core/commit/07a6f6c92); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: clarify SQL schema cron identifier (● [9f48982](https://github.com/corejslib/core/commit/9f4898201); 👬 zdm)
+
+- \[PATCH] refactor: use native base64 encoding APIs (● [61ad2e1](https://github.com/corejslib/core/commit/61ad2e11a); 👬 zdm)
+
+Compare with the previous release: [v8.52.1...v8.52.2](https://github.com/corejslib/core/compare/v8.52.1...v8.52.2)
+
 ### v8.52.1 (2026-10-29)
 
 **Code refactoring:**
