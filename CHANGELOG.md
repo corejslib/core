@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.52.3 (2026-10-30)
+
+**Bug fixes:**
+
+- \[PATCH] fix: compare normalized cron task update fields (● [3ec9dc4](https://github.com/corejslib/core/commit/3ec9dc45d); 👬 zdm)
+
+- \[PATCH] fix: fix cioher info (● [6c05496](https://github.com/corejslib/core/commit/6c054963d); 👬 zdm)
+
+- \[PATCH] fix: improve SQL query error diagnostics (● [4ef5272](https://github.com/corejslib/core/commit/4ef5272c0); 👬 zdm)
+
+Compare with the previous release: [v8.52.2...v8.52.3](https://github.com/corejslib/core/compare/v8.52.2...v8.52.3)
+
 ### v8.52.2 (2026-10-30)
 
 **Bug fixes:**
