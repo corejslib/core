@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.53.1 (2026-11-01)
+
+**Bug fixes:**
+
+- \[PATCH] fix: return the parsed CLI instance (● [6b22ece](https://github.com/corejslib/core/commit/6b22ece8c); 👬 zdm)
+
+Compare with the previous release: [v8.53.0...v8.53.1](https://github.com/corejslib/core/compare/v8.53.0...v8.53.1)
+
 ### v8.53.0 (2026-11-01)
 
 **New features:**
