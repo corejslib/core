@@ -1,5 +1,39 @@
 # Changelog
 
+### v8.53.0 (2026-11-01)
+
+**New features:**
+
+- \[MINOR] feat: export initEncryption from crypto module (● [92d1ccb](https://github.com/corejslib/core/commit/92d1ccbb5); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: correct stream crypto initialization and validation (● [d455d28](https://github.com/corejslib/core/commit/d455d28e1); 👬 zdm)
+
+- \[PATCH] fix: enforce Argon2 v19 and parallelism 4 defaults (● [15a91e2](https://github.com/corejslib/core/commit/15a91e2e2); 👬 zdm)
+
+- \[PATCH] fix: fix cli short options parser (● [96a8b22](https://github.com/corejslib/core/commit/96a8b2269), [97545ab](https://github.com/corejslib/core/commit/97545ab67), [6cdaad2](https://github.com/corejslib/core/commit/6cdaad2ff), [86a374b](https://github.com/corejslib/core/commit/86a374bbc), [0c7f833](https://github.com/corejslib/core/commit/0c7f8339d); 👬 zdm)
+
+- \[PATCH] fix: update sql constants (● [1c9bfd6](https://github.com/corejslib/core/commit/1c9bfd633); 👬 zdm)
+
+- \[PATCH] fix: validate password hash options and verification (● [3c4977f](https://github.com/corejslib/core/commit/3c4977f78); 👬 zdm)
+
+    Correct the PBKDF2-SHA512 preset and scrypt parallelism, validate algorithm parameters, and tighten hash verification and update handling.
+
+**Code refactoring:**
+
+- \[PATCH] refactor: move sasl module to crypto (● [c26eb08](https://github.com/corejslib/core/commit/c26eb08a6); 👬 zdm)
+
+- \[PATCH] refactor: refactor encryption (● [1ff97d2](https://github.com/corejslib/core/commit/1ff97d2d4), [4a77302](https://github.com/corejslib/core/commit/4a77302b3), [4f360c7](https://github.com/corejslib/core/commit/4f360c7d8), [30eb84c](https://github.com/corejslib/core/commit/30eb84cf8), [32b06f4](https://github.com/corejslib/core/commit/32b06f498), [251b30a](https://github.com/corejslib/core/commit/251b30a06), [b85e768](https://github.com/corejslib/core/commit/b85e768cf), [6129ade](https://github.com/corejslib/core/commit/6129aded0), [9833a47](https://github.com/corejslib/core/commit/9833a47de), [9bdc428](https://github.com/corejslib/core/commit/9bdc428cd), [2ab89fe](https://github.com/corejslib/core/commit/2ab89fedb), [b96070a](https://github.com/corejslib/core/commit/b96070a48); 👬 zdm)
+
+- \[PATCH] refactor: refactor phc (● [358cddf](https://github.com/corejslib/core/commit/358cddfe2), [df4a7b7](https://github.com/corejslib/core/commit/df4a7b7b7), [7c8da6a](https://github.com/corejslib/core/commit/7c8da6ace), [4756c41](https://github.com/corejslib/core/commit/4756c41e3), [b25bf72](https://github.com/corejslib/core/commit/b25bf724d); 👬 zdm)
+
+- \[PATCH] refactor: rename phc.id to .algorithm (● [9e0e582](https://github.com/corejslib/core/commit/9e0e58223); 👬 zdm)
+
+- \[PATCH] refactor: use library message-pack module (● [34821e1](https://github.com/corejslib/core/commit/34821e139); 👬 zdm)
+
+Compare with the previous release: [v8.52.3...v8.53.0](https://github.com/corejslib/core/compare/v8.52.3...v8.53.0)
+
 ### v8.52.3 (2026-10-30)
 
 **Bug fixes:**
