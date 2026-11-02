@@ -1,5 +1,29 @@
 # Changelog
 
+### v8.55.0 (2026-11-02)
+
+**New features:**
+
+- \[MINOR] feat: allow encryption without a secret ID (● [e34e800](https://github.com/corejslib/core/commit/e34e8003c); 👬 zdm)
+
+- \[MINOR] feat: support secret KeyObjects for stream encryption (● [98bc536](https://github.com/corejslib/core/commit/98bc53659); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: encode stream crypto string values as buffers (● [9952bb4](https://github.com/corejslib/core/commit/9952bb410); 👬 zdm)
+
+- \[PATCH] fix: fix Buffer.fromBase64 (● [18e6689](https://github.com/corejslib/core/commit/18e6689b3), [aef32f2](https://github.com/corejslib/core/commit/aef32f209), [94fdb7c](https://github.com/corejslib/core/commit/94fdb7c9f); 👬 zdm)
+
+- \[PATCH] fix: fix toMessagePack under node return Buffer (● [549ad15](https://github.com/corejslib/core/commit/549ad15d7); 👬 zdm)
+
+- \[PATCH] fix: remove hardcoded secret ID from decryption (● [1ea3e97](https://github.com/corejslib/core/commit/1ea3e975f); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: gate read-only test flag on warning setting (● [9133893](https://github.com/corejslib/core/commit/9133893d4); 👬 zdm)
+
+Compare with the previous release: [v8.54.0...v8.55.0](https://github.com/corejslib/core/compare/v8.54.0...v8.55.0)
+
 ### v8.54.0 (2026-11-02)
 
 **New features:**
