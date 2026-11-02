@@ -1,5 +1,23 @@
 # Changelog
 
+### v8.55.1 (2026-11-02)
+
+**Bug fixes:**
+
+- \[PATCH] fix: replace Buffer.fromString with Buffer.from (● [6bce369](https://github.com/corejslib/core/commit/6bce369b2); 👬 zdm)
+
+    Log PostgreSQL disconnect events.
+
+**Code refactoring:**
+
+- \[PATCH] refactor: use string conversion for CSR base64url encoding (● [2459ee0](https://github.com/corejslib/core/commit/2459ee071); 👬 zdm)
+
+**Other changes:**
+
+- chore: remove debug logging from postgres disconnect handler (● [ed79fa6](https://github.com/corejslib/core/commit/ed79fa69b); 👬 zdm)
+
+Compare with the previous release: [v8.55.0...v8.55.1](https://github.com/corejslib/core/compare/v8.55.0...v8.55.1)
+
 ### v8.55.0 (2026-11-02)
 
 **New features:**
