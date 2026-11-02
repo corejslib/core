@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.55.2 (2026-11-02)
+
+**Bug fixes:**
+
+- \[PATCH] fix: encode certificate as base64 (● [5f6c999](https://github.com/corejslib/core/commit/5f6c9994a); 👬 zdm)
+
+Compare with the previous release: [v8.55.1...v8.55.2](https://github.com/corejslib/core/compare/v8.55.1...v8.55.2)
+
 ### v8.55.1 (2026-11-02)
 
 **Bug fixes:**
