@@ -1,5 +1,23 @@
 # Changelog
 
+### v8.54.0 (2026-11-02)
+
+**New features:**
+
+- \[MINOR] feat: rename stream encryptor cipher option to algorithm (● [ff075c9](https://github.com/corejslib/core/commit/ff075c923); 👬 zdm)
+
+- \[MINOR] feat: support cipher metadata lookup for encryption algorithms (● [96491c3](https://github.com/corejslib/core/commit/96491c388); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: convert numeric values to byte strings (● [10263e4](https://github.com/corejslib/core/commit/10263e4ae); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: update crypto stream imports (● [b9f3c29](https://github.com/corejslib/core/commit/b9f3c29fd); 👬 zdm)
+
+Compare with the previous release: [v8.53.1...v8.54.0](https://github.com/corejslib/core/compare/v8.53.1...v8.54.0)
+
 ### v8.53.1 (2026-11-01)
 
 **Bug fixes:**
