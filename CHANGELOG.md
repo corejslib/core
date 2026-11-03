@@ -1,5 +1,31 @@
 # Changelog
 
+### v8.56.0 (2026-11-03)
+
+**New features:**
+
+- \[MINOR] feat: normalize CSV row inputs consistently (● [66481c7](https://github.com/corejslib/core/commit/66481c7e2); 👬 zdm)
+
+- \[MINOR] feat: support end-of-stream CSV parsing and streaming options (● [d07b138](https://github.com/corejslib/core/commit/d07b1384c); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: align ECDSA hashing and omit subject key identifier from CSRs (● [da444a4](https://github.com/corejslib/core/commit/da444a497); 👬 zdm)
+
+- \[PATCH] fix: encode certificate attributes and key usage correctly (● [dde1f7a](https://github.com/corejslib/core/commit/dde1f7adc); 👬 zdm)
+
+    Normalize certificate domains and reject CSRs without domains. Use RFC-compliant attribute string encodings and correct key usage bits.
+
+- \[PATCH] fix: fix cunked stream (● [4a18f56](https://github.com/corejslib/core/commit/4a18f56f5); 👬 zdm)
+
+- \[PATCH] fix: ignore all whitespace in hex input (● [ab9809f](https://github.com/corejslib/core/commit/ab9809fc6); 👬 zdm)
+
+- \[PATCH] fix: stringify CSV chunks directly (● [67f684e](https://github.com/corejslib/core/commit/67f684e3b); 👬 zdm)
+
+- \[PATCH] fix: validate base64 input and safely flush decoder data (● [39c5fb9](https://github.com/corejslib/core/commit/39c5fb9af); 👬 zdm)
+
+Compare with the previous release: [v8.55.2...v8.56.0](https://github.com/corejslib/core/compare/v8.55.2...v8.56.0)
+
 ### v8.55.2 (2026-11-02)
 
 **Bug fixes:**
