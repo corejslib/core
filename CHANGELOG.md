@@ -1,5 +1,21 @@
 # Changelog
 
+### v8.57.0 (2026-11-03)
+
+**New features:**
+
+- \[MINOR] feat: add aes256 wrap / unwrap functions (● [93ba2b9](https://github.com/corejslib/core/commit/93ba2b94f); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: derive SSH secrets with HKDF using a stable key id (● [be8f74d](https://github.com/corejslib/core/commit/be8f74d6f); 👬 zdm)
+
+**Other changes:**
+
+- docs: add PostgreSQL temporal type examples as comments (● [4a22736](https://github.com/corejslib/core/commit/4a2273653); 👬 zdm)
+
+Compare with the previous release: [v8.56.0...v8.57.0](https://github.com/corejslib/core/compare/v8.56.0...v8.57.0)
+
 ### v8.56.0 (2026-11-03)
 
 **New features:**
