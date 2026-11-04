@@ -8,7 +8,7 @@ suite( "locale", () => {
     suite( "po file", () => {
         test( "revision date", () => {
             const date = Temporal.Instant.from( "2024-01-02T03:04:05.000Z" ),
-                poFile = new PoFile( `msgid ""\nmsgstr ""\n"PO-Revision-Date: ${ date.toISOString() }\\n"\n` );
+                poFile = new PoFile( `msgid ""\nmsgstr ""\n"PO-Revision-Date: ${ date.toString() }\\n"\n` );
 
             deepStrictEqual( poFile.revisionDate, date );
 
