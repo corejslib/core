@@ -2,6 +2,7 @@
 
 import { deepStrictEqual } from "node:assert";
 import { suite, test } from "node:test";
+import { instantToHttpDate } from "#lib/dates";
 import Headers from "#lib/http/headers";
 
 const TESTS = [
@@ -52,7 +53,7 @@ const TESTS = [
     // set-cookie
     {
         "headers": {
-            "set-cookie": `name=value; expires=${ new Date( 1000 ).toUTCString() }; path=/  ; domain = .мама.google.com  ;Secure; HttpOnly; SameSite=none`,
+            "set-cookie": `name=value; expires=${ instantToHttpDate( Temporal.Instant.fromEpochMilliseconds( 1000 ) ) }; path=/  ; domain = .мама.google.com  ;Secure; HttpOnly; SameSite=none`,
         },
         "result": headers => {
             const cookies = headers.setCookie.cookies.map( cookie => cookie.toJSON() );
@@ -63,7 +64,7 @@ const TESTS = [
                         "name": "name",
                         "value": "value",
                         "maxAge": undefined,
-                        "expires": new Date( 1000 ),
+                        "expires": Temporal.Instant.fromEpochMilliseconds( 1000 ),
                         "path": "/",
                         "domain": "xn--80aa8ab.google.com",
                         "secure": true,
