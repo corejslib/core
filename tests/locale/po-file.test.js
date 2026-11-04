@@ -7,12 +7,12 @@ import PoFile from "#lib/locale/po-file";
 suite( "locale", () => {
     suite( "po file", () => {
         test( "revision date", () => {
-            const date = new Date( "2024-01-02T03:04:05.000Z" ),
+            const date = Temporal.Instant.from( "2024-01-02T03:04:05.000Z" ),
                 poFile = new PoFile( `msgid ""\nmsgstr ""\n"PO-Revision-Date: ${ date.toISOString() }\\n"\n` );
 
             deepStrictEqual( poFile.revisionDate, date );
 
-            const updatedDate = new Date( "2025-06-07T08:09:10.000Z" );
+            const updatedDate = Temporal.Instant.from( "2025-06-07T08:09:10.000Z" );
 
             poFile.setRevisionDate( updatedDate );
 
