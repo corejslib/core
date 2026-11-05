@@ -1,5 +1,99 @@
 # Changelog
 
+### v8.58.0 (2026-11-05)
+
+**New features:**
+
+- \[MINOR] feat: add HTTP date conversion helpers and cache timezone validation (● [bf16e70](https://github.com/corejslib/core/commit/bf16e7094); 👬 zdm)
+
+- \[MINOR] feat: decode HTTP dates as Temporal instants (● [e16bc59](https://github.com/corejslib/core/commit/e16bc59ad); 👬 zdm)
+
+- \[MINOR] feat: encode dates as MessagePack timestamps (● [809affe](https://github.com/corejslib/core/commit/809affe28); 👬 zdm)
+
+    Support multiple constructors per extension and encode `Date` using the timestamp extension. Renumber Temporal extensions accordingly.
+
+- \[MINOR] feat: migrate date handling to Temporal (● [7f44d7f](https://github.com/corejslib/core/commit/7f44d7f14); 👬 zdm)
+
+- \[MINOR] feat: support Temporal values for HTTP dates (● [2784b5b](https://github.com/corejslib/core/commit/2784b5b3c); 👬 zdm)
+
+    Validate HTTP-date strings and use Temporal.Instant for cookie expiration and header date parsing.
+
+**Bug fixes:**
+
+- \[PATCH] fix: compare expiration epoch milliseconds (● [0b20231](https://github.com/corejslib/core/commit/0b202318f); 👬 zdm)
+
+- \[PATCH] fix: compare modified dates by epoch milliseconds (● [44b4947](https://github.com/corejslib/core/commit/44b4947fc); 👬 zdm)
+
+- \[PATCH] fix: compare monitoring mark dates by epoch milliseconds (● [7455b1e](https://github.com/corejslib/core/commit/7455b1ee6); 👬 zdm)
+
+- \[PATCH] fix: compare temporal timestamps by epoch milliseconds (● [26b357b](https://github.com/corejslib/core/commit/26b357bc2); 👬 zdm)
+
+- \[PATCH] fix: decode PostgreSQL boolean strings (● [7fbbc19](https://github.com/corejslib/core/commit/7fbbc19e9); 👬 zdm)
+
+    Support PostgreSQL boolean values returned as strings or buffers.
+
+- \[PATCH] fix: encode supported Temporal values correctly (● [ad52fd6](https://github.com/corejslib/core/commit/ad52fd691); 👬 zdm)
+
+- \[PATCH] fix: encode Temporal SQL parameters and reject unsupported types (● [be2aaf6](https://github.com/corejslib/core/commit/be2aaf6f7); 👬 zdm)
+
+- \[PATCH] fix: fix file size (● [91437fb](https://github.com/corejslib/core/commit/91437fb8b); 👬 zdm)
+
+- \[PATCH] fix: fix sqlite dbh (● [392d922](https://github.com/corejslib/core/commit/392d922b4), [934cfef](https://github.com/corejslib/core/commit/934cfef19), [f2e67e1](https://github.com/corejslib/core/commit/f2e67e129), [1b0fef3](https://github.com/corejslib/core/commit/1b0fef3ed), [d56d5d1](https://github.com/corejslib/core/commit/d56d5d1dd), [5ff3bd7](https://github.com/corejslib/core/commit/5ff3bd7b6), [5d08e60](https://github.com/corejslib/core/commit/5d08e6080), [a02cfd1](https://github.com/corejslib/core/commit/a02cfd16a); 👬 zdm)
+
+- \[PATCH] fix: handle interval defaults and certificate validity dates (● [50fd2a9](https://github.com/corejslib/core/commit/50fd2a9da); 👬 zdm)
+
+- \[PATCH] fix: handle Temporal objects consistently (● [298b5aa](https://github.com/corejslib/core/commit/298b5aad6); 👬 zdm)
+
+    Generalize Temporal instance checks while preserving specialized handling for date-time values and durations.
+
+- \[PATCH] fix: handle Temporal values in SQLite parameters (● [00d71c1](https://github.com/corejslib/core/commit/00d71c11e); 👬 zdm)
+
+- \[PATCH] fix: ignore invalid PO revision dates (● [4166cc5](https://github.com/corejslib/core/commit/4166cc536); 👬 zdm)
+
+- \[PATCH] fix: parse HTTP last-modified dates with helper (● [ff9741d](https://github.com/corejslib/core/commit/ff9741d8d); 👬 zdm)
+
+- \[PATCH] fix: quote temporal array values with double quotes (● [ccf26ec](https://github.com/corejslib/core/commit/ccf26ec72); 👬 zdm)
+
+- \[PATCH] fix: read parsed last-modified dates from resource responses (● [843c039](https://github.com/corejslib/core/commit/843c0398f); 👬 zdm)
+
+- \[PATCH] fix: rename crypto keyring (● [e70f233](https://github.com/corejslib/core/commit/e70f233cf); 👬 zdm)
+
+- \[PATCH] fix: restrict temporal handling to supported types (● [2fb87cb](https://github.com/corejslib/core/commit/2fb87cb8c); 👬 zdm)
+
+- \[PATCH] fix: serialize supported Temporal values correctly (● [0830988](https://github.com/corejslib/core/commit/08309885f); 👬 zdm)
+
+- \[PATCH] fix: use file mtimeNs (● [82430c0](https://github.com/corejslib/core/commit/82430c0d5); 👬 zdm)
+
+- \[PATCH] fix: use strict ISO dates for release tags (● [5c1d9be](https://github.com/corejslib/core/commit/5c1d9bef0); 👬 zdm)
+
+- \[PATCH] fix: validate temporal header values safely (● [ed5fe35](https://github.com/corejslib/core/commit/ed5fe35f6); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: consolidate Temporal instance checks (● [d359633](https://github.com/corejslib/core/commit/d35963377); 👬 zdm)
+
+- \[PATCH] refactor: remove redundant nesting in PostgreSQL value conversion (● [48b7a37](https://github.com/corejslib/core/commit/48b7a3761); 👬 zdm)
+
+- \[PATCH] refactor: use Date.now for epoch millisecond timestamps (● [248c8e4](https://github.com/corejslib/core/commit/248c8e454); 👬 zdm)
+
+- \[PATCH] refactor: use instants for interval date comparisons (● [6889862](https://github.com/corejslib/core/commit/688986239); 👬 zdm)
+
+- \[PATCH] refactor: use shared HTTP date formatter (● [97b0e04](https://github.com/corejslib/core/commit/97b0e0482); 👬 zdm)
+
+- \[PATCH] refactor: use Temporal for image creation timestamps (● [3d331db](https://github.com/corejslib/core/commit/3d331db78); 👬 zdm)
+
+- \[PATCH] refactor: use Temporal instants for current timestamps (● [6bcbc25](https://github.com/corejslib/core/commit/6bcbc253e); 👬 zdm)
+
+**Other changes:**
+
+- chore: update code style (● [9f3f304](https://github.com/corejslib/core/commit/9f3f304e4); 👬 zdm)
+
+- style: simplify SQLite value handling branches (● [bad4118](https://github.com/corejslib/core/commit/bad411814); 👬 zdm)
+
+- style: suppress Temporal preference lint for Date interop (● [4c752c3](https://github.com/corejslib/core/commit/4c752c3de); 👬 zdm)
+
+Compare with the previous release: [v8.57.0...v8.58.0](https://github.com/corejslib/core/compare/v8.57.0...v8.58.0)
+
 ### v8.57.0 (2026-11-03)
 
 **New features:**
