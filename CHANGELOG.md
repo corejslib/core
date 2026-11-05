@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.58.1 (2026-11-05)
+
+**Bug fixes:**
+
+- \[PATCH] fix: use valid-to date for certificate expiration (● [0d8cb9a](https://github.com/corejslib/core/commit/0d8cb9a88); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: centralize Temporal value detection (● [b144777](https://github.com/corejslib/core/commit/b144777ef); 👬 zdm)
+
+Compare with the previous release: [v8.58.0...v8.58.1](https://github.com/corejslib/core/compare/v8.58.0...v8.58.1)
+
 ### v8.58.0 (2026-11-05)
 
 **New features:**
