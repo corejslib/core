@@ -1,5 +1,33 @@
 # Changelog
 
+### v8.59.0 (2026-11-06)
+
+**New features:**
+
+- \[MINOR] feat: add ISO duration string serialization for intervals (● [9b0147f](https://github.com/corejslib/core/commit/9b0147f64); 👬 zdm)
+
+- \[MINOR] feat: parse ISO 8601 duration strings (● [a8a8631](https://github.com/corejslib/core/commit/a8a86316b); 👬 zdm)
+
+- \[MINOR] feat: support Interval values in SQL databases (● [40f72d5](https://github.com/corejslib/core/commit/40f72d57c); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: disambiguate positive interval components after negatives (● [c6c42a3](https://github.com/corejslib/core/commit/c6c42a31e); 👬 zdm)
+
+- \[PATCH] fix: fix interval duration parser (● [287c4e7](https://github.com/corejslib/core/commit/287c4e720); 👬 zdm)
+
+- \[PATCH] fix: parse Temporal.Duration via its ISO string (● [d0774f1](https://github.com/corejslib/core/commit/d0774f1e8); 👬 zdm)
+
+- \[PATCH] fix: preserve signed components in duration strings (● [f48bc10](https://github.com/corejslib/core/commit/f48bc103a); 👬 zdm)
+
+- \[PATCH] fix: update sql types (● [2937ca8](https://github.com/corejslib/core/commit/2937ca84a), [3601258](https://github.com/corejslib/core/commit/360125833), [87fcf28](https://github.com/corejslib/core/commit/87fcf280c); 👬 zdm)
+
+**Other changes:**
+
+- style: rename vars (● [37fd8cb](https://github.com/corejslib/core/commit/37fd8cb3b); 👬 zdm)
+
+Compare with the previous release: [v8.58.1...v8.59.0](https://github.com/corejslib/core/compare/v8.58.1...v8.59.0)
+
 ### v8.58.1 (2026-11-05)
 
 **Bug fixes:**
