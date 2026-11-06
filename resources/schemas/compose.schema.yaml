@@ -302,4 +302,8 @@
           type: array
           items: { type: string }
           minItems: 1
+        depends_on:
+          type: array
+          items: { type: string }
+          minItems: 1
       additionalProperties: false
