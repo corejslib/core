@@ -14,19 +14,6 @@
 
         properties:
           image: { type: string }
-          depends_on:
-            anyOf:
-              - { type: array, items: { type: string } }
-              - type: object
-                propertyNames: { type: string }
-                additionalProperties:
-                  type: object
-                  properties:
-                    restart: { type: boolean }
-                    condition: { enum: [service_started, service_healthy, service_completed_successfully] }
-                    required: { type: boolean }
-                  additionalProperties: false
-                  required: []
           init: { type: boolean }
           stop_grace_period: { type: string }
 
