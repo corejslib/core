@@ -1,5 +1,21 @@
 # Changelog
 
+### v8.60.0 (2026-11-08)
+
+**New features:**
+
+- \[MINOR] feat: support build-level image dependencies (● [d1b72f2](https://github.com/corejslib/core/commit/d1b72f283); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: apply microsecond and nanosecond interval units (● [cf039f6](https://github.com/corejslib/core/commit/cf039f6f5); 👬 zdm)
+
+- \[PATCH] fix: fix interval add / subtract (● [f51f0cd](https://github.com/corejslib/core/commit/f51f0cd62); 👬 zdm)
+
+- \[PATCH] fix: remove depends_on from compose file (● [ee95556](https://github.com/corejslib/core/commit/ee955561d); 👬 zdm)
+
+Compare with the previous release: [v8.59.0...v8.60.0](https://github.com/corejslib/core/compare/v8.59.0...v8.60.0)
+
 ### v8.59.0 (2026-11-06)
 
 **New features:**
