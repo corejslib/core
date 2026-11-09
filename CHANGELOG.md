@@ -1,5 +1,29 @@
 # Changelog
 
+### v8.61.0 (2026-11-09)
+
+**New features:**
+
+- \[MINOR] feat: add named hostname-aware service discovery (● [e326cbb](https://github.com/corejslib/core/commit/e326cbb45); 👬 zdm)
+
+    Add the absolute-path format and update service registration, removal, and events to use named services with hostname data.
+
+- \[MINOR] feat: pass discovered hostnames to service connections (● [e7c07e5](https://github.com/corejslib/core/commit/e7c07e5c5); 👬 zdm)
+
+- \[MINOR] feat: set host header for websocket connections (● [9f03906](https://github.com/corejslib/core/commit/9f0390643); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: forward configured hostname to transport requests (● [00e4855](https://github.com/corejslib/core/commit/00e48550b); 👬 zdm)
+
+- \[PATCH] fix: preserve configured hostnames for connections (● [fd3fce2](https://github.com/corejslib/core/commit/fd3fce23f); 👬 zdm)
+
+- \[PATCH] fix: store hostname in connections manager (● [acc680f](https://github.com/corejslib/core/commit/acc680fa8); 👬 zdm)
+
+- \[PATCH] fix: use the resolved hostname for PostgreSQL TLS servername (● [c60dd74](https://github.com/corejslib/core/commit/c60dd74a9); 👬 zdm)
+
+Compare with the previous release: [v8.60.0...v8.61.0](https://github.com/corejslib/core/compare/v8.60.0...v8.61.0)
+
 ### v8.60.0 (2026-11-08)
 
 **New features:**
