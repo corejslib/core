@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.62.0 (2026-11-09)
+
+**New features:**
+
+- \[MINOR] feat: support authenticated external resource downloads (● [32a38bf](https://github.com/corejslib/core/commit/32a38bfc4); 👬 zdm)
+
+Compare with the previous release: [v8.61.0...v8.62.0](https://github.com/corejslib/core/compare/v8.61.0...v8.62.0)
+
 ### v8.61.0 (2026-11-09)
 
 **New features:**
