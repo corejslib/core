@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.62.3 (2026-11-09)
+
+**Bug fixes:**
+
+- \[PATCH] fix: set websocket host header through dispatcher (● [a6b4b78](https://github.com/corejslib/core/commit/a6b4b78e5); 👬 zdm)
+
+Compare with the previous release: [v8.62.2...v8.62.3](https://github.com/corejslib/core/compare/v8.62.2...v8.62.3)
+
 ### v8.62.2 (2026-11-09)
 
 **Bug fixes:**
