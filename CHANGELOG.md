@@ -1,5 +1,21 @@
 # Changelog
 
+### v8.62.5 (2026-11-10)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix sql query builder (● [91d7ed5](https://github.com/corejslib/core/commit/91d7ed526), [606f73f](https://github.com/corejslib/core/commit/606f73f4c), [3922830](https://github.com/corejslib/core/commit/392283032), [a9857f8](https://github.com/corejslib/core/commit/a9857f858), [6d4eafd](https://github.com/corejslib/core/commit/6d4eafd90), [5afadad](https://github.com/corejslib/core/commit/5afadadf0), [d569ad1](https://github.com/corejslib/core/commit/d569ad17b); 👬 zdm)
+
+- \[PATCH] fix: preserve ILIKE in SQLite queries (● [6137146](https://github.com/corejslib/core/commit/613714682); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: centralize SQL value quoting (● [27cc121](https://github.com/corejslib/core/commit/27cc121e1); 👬 zdm)
+
+- \[PATCH] refactor: streamline SQL quoting and database selection (● [02b1806](https://github.com/corejslib/core/commit/02b1806d1); 👬 zdm)
+
+Compare with the previous release: [v8.62.4...v8.62.5](https://github.com/corejslib/core/compare/v8.62.4...v8.62.5)
+
 ### v8.62.4 (2026-11-09)
 
 **Bug fixes:**
