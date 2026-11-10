@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.62.6 (2026-11-10)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: separate string query handling from value quoting (● [34f78be](https://github.com/corejslib/core/commit/34f78be8e); 👬 zdm)
+
+Compare with the previous release: [v8.62.5...v8.62.6](https://github.com/corejslib/core/compare/v8.62.5...v8.62.6)
+
 ### v8.62.5 (2026-11-10)
 
 **Bug fixes:**
