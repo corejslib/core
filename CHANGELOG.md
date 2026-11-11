@@ -1,5 +1,25 @@
 # Changelog
 
+### v8.63.1 (2026-11-11)
+
+**Bug fixes:**
+
+- \[PATCH] fix: avoid logging PostgreSQL parameter encoding errors (● [491ae9b](https://github.com/corejslib/core/commit/491ae9b3a); 👬 zdm)
+
+- \[PATCH] fix: fix api request abort (● [4401ef8](https://github.com/corejslib/core/commit/4401ef806); 👬 zdm)
+
+- \[PATCH] fix: handle PostgreSQL ArrayBuffer values (● [1144848](https://github.com/corejslib/core/commit/11448484b); 👬 zdm)
+
+- \[PATCH] fix: return sqlite query errors without logging (● [fdd66b2](https://github.com/corejslib/core/commit/fdd66b207); 👬 zdm)
+
+- \[PATCH] fix: return sqlite query preparation errors as results (● [f1f154e](https://github.com/corejslib/core/commit/f1f154e87); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: reuse empty named-parameter object for SQLite queries (● [12928d6](https://github.com/corejslib/core/commit/12928d6fb); 👬 zdm)
+
+Compare with the previous release: [v8.63.0...v8.63.1](https://github.com/corejslib/core/compare/v8.63.0...v8.63.1)
+
 ### v8.63.0 (2026-11-11)
 
 **New features:**
