@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.63.0 (2026-11-11)
+
+**New features:**
+
+- \[MINOR] feat: add shared mutex wait method (● [a35a2d6](https://github.com/corejslib/core/commit/a35a2d6f2); 👬 zdm)
+
+**Other changes:**
+
+- style: clarify lock-state branches in mutex wait (● [ec06fe5](https://github.com/corejslib/core/commit/ec06fe5a0); 👬 zdm)
+
+Compare with the previous release: [v8.62.6...v8.63.0](https://github.com/corejslib/core/compare/v8.62.6...v8.63.0)
+
 ### v8.62.6 (2026-11-10)
 
 **Code refactoring:**
