@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.64.1 (2026-11-12)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: hoist uppercase regexp in text normalization (● [7643120](https://github.com/corejslib/core/commit/764312011); 👬 zdm)
+
+Compare with the previous release: [v8.64.0...v8.64.1](https://github.com/corejslib/core/compare/v8.64.0...v8.64.1)
+
 ### v8.64.0 (2026-11-12)
 
 **New features:**
