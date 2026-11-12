@@ -1,5 +1,23 @@
 # Changelog
 
+### v8.64.0 (2026-11-12)
+
+**New features:**
+
+- \[MINOR] feat: add NFC-normalized lowercase string helper (● [2589ed4](https://github.com/corejslib/core/commit/2589ed4ab); 👬 zdm)
+
+- \[MINOR] feat: add sql normalize text functions (● [8ccfa97](https://github.com/corejslib/core/commit/8ccfa9798), [eb7ab77](https://github.com/corejslib/core/commit/eb7ab7785); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: remove sqlite time_hires function (● [b8f78ad](https://github.com/corejslib/core/commit/b8f78adbd); 👬 zdm)
+
+**Other changes:**
+
+- chore: apply small code optimization (● [89f00d8](https://github.com/corejslib/core/commit/89f00d83e); 👬 zdm)
+
+Compare with the previous release: [v8.63.1...v8.64.0](https://github.com/corejslib/core/compare/v8.63.1...v8.64.0)
+
 ### v8.63.1 (2026-11-11)
 
 **Bug fixes:**
