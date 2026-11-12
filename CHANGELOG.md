@@ -1,5 +1,21 @@
 # Changelog
 
+### v8.64.2 (2026-11-12)
+
+**Bug fixes:**
+
+- \[PATCH] fix: quote SQLite schema identifiers consistently (● [7ed230a](https://github.com/corejslib/core/commit/7ed230a79); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: clarify PostgreSQL array codec names (● [cde4010](https://github.com/corejslib/core/commit/cde401049); 👬 zdm)
+
+- \[PATCH] refactor: simplify SQL identifier quoting and LIKE pattern escaping (● [332f4c5](https://github.com/corejslib/core/commit/332f4c58d); 👬 zdm)
+
+- \[PATCH] refactor: simplify SQL string quoting (● [a80e93b](https://github.com/corejslib/core/commit/a80e93b11); 👬 zdm)
+
+Compare with the previous release: [v8.64.1...v8.64.2](https://github.com/corejslib/core/compare/v8.64.1...v8.64.2)
+
 ### v8.64.1 (2026-11-12)
 
 **Code refactoring:**
