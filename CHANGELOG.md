@@ -1,5 +1,19 @@
 # Changelog
 
+### v8.65.0 (2026-11-13)
+
+**New features:**
+
+- \[MINOR] feat: add zapi service discovery (● [8294f54](https://github.com/corejslib/core/commit/8294f540a), [c6abf90](https://github.com/corejslib/core/commit/c6abf9041); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix cli command parser (● [50cb365](https://github.com/corejslib/core/commit/50cb3654d), [3c3d5e6](https://github.com/corejslib/core/commit/3c3d5e638); 👬 zdm)
+
+- \[PATCH] fix: point default URLs at server roots (● [2f19711](https://github.com/corejslib/core/commit/2f197113a); 👬 zdm)
+
+Compare with the previous release: [v8.64.3...v8.65.0](https://github.com/corejslib/core/compare/v8.64.3...v8.65.0)
+
 ### v8.64.3 (2026-11-13)
 
 **Code refactoring:**
