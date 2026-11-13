@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.64.3 (2026-11-13)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: clarify NFC normalization function names (● [34484de](https://github.com/corejslib/core/commit/34484dea2); 👬 zdm)
+
+Compare with the previous release: [v8.64.2...v8.64.3](https://github.com/corejslib/core/compare/v8.64.2...v8.64.3)
+
 ### v8.64.2 (2026-11-12)
 
 **Bug fixes:**
