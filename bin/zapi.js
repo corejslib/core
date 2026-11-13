@@ -270,7 +270,7 @@ class ApiCli {
 
             let serviceDiscovery;
 
-            if ( this.#clusterUrl && url.hostname === "service-discovery" ) {
+            if ( this.#clusterUrl && url.hostname === ServiceDiscovery.hostname ) {
                 serviceDiscovery = new ServiceDiscovery( new Api( this.#clusterUrl ) );
             }
 
