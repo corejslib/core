@@ -265,13 +265,23 @@ class ApiCli {
 
     // private
     #getApi ( { persistent } = {} ) {
-        this.#api ??= new Api( this.#url, {
-            persistent,
-            "version": this.#version,
-            "token": this.#token,
-            "locale": this.#locale,
-            "serviceDiscovery": new ServiceDiscovery( new Api( this.#clusterUrl ) ),
-        } );
+        if ( !this.#api ) {
+            const url = new URL( this.#url );
+
+            let serviceDiscovery;
+
+            if ( this.#clusterUrl && url.hostname === "service-discovery" ) {
+                serviceDiscovery = new ServiceDiscovery( new Api( this.#clusterUrl ) );
+            }
+
+            this.#api ??= new Api( this.#url, {
+                persistent,
+                "version": this.#version,
+                "token": this.#token,
+                "locale": this.#locale,
+                serviceDiscovery,
+            } );
+        }
 
         return this.#api;
     }
