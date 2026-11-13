@@ -90,7 +90,6 @@
     - type: string
       minLength: 1
       maxLength: 1
-      regexp: { pattern: "^[a-zA-Z0-9?]$", flags: v }
 
 - $id: alias
   anyOf:
