@@ -11,8 +11,8 @@ import Message from "#lib/message";
 import Table from "#lib/text/table";
 import * as yaml from "#lib/yaml";
 
-const DEFAULT_URL = "http://127.0.0.1:81/api",
-    DEFAULT_CLUSTER_URL = "ws://cluster:81/api";
+const DEFAULT_URL = "http://127.0.0.1:81/",
+    DEFAULT_CLUSTER_URL = "ws://cluster:81/";
 
 const CLI = {
     "title": "Core API client",
@@ -93,7 +93,7 @@ const CLI = {
             "title": "Make API call",
             "description": `
 \`\`\`sh
-MSYS2_ARG_CONV_EXCL="*" zapi --url "http://devel:81/api" call "/v1/test" "$(
+MSYS2_ARG_CONV_EXCL="*" zapi --url "http://devel:81/" call "/v1/test" "$(
     cat << 'EOF'
 [
     "argument-1",
