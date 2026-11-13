@@ -1,5 +1,15 @@
 # Changelog
 
+### v8.65.1 (2026-11-13)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: centralize service discovery hostname lookup (● [8f8a91c](https://github.com/corejslib/core/commit/8f8a91cc5); 👬 zdm)
+
+    Use `ServiceDiscovery.hostname` across API clients and PostgreSQL, and retain registered service paths verbatim.
+
+Compare with the previous release: [v8.65.0...v8.65.1](https://github.com/corejslib/core/compare/v8.65.0...v8.65.1)
+
 ### v8.65.0 (2026-11-13)
 
 **New features:**
