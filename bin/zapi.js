@@ -3,12 +3,16 @@
 import { fileURLToPath } from "node:url";
 import ansi from "#lib/ansi";
 import Api from "#lib/api";
+import ServiceDiscovery from "#lib/api/service-discovery";
 import Cli from "#lib/cli";
 import File from "#lib/file";
 import * as json5 from "#lib/json5";
 import Message from "#lib/message";
 import Table from "#lib/text/table";
 import * as yaml from "#lib/yaml";
+
+const DEFAULT_URL = "http://127.0.0.1:81/api",
+    DEFAULT_CLUSTER_URL = "ws://cluster:81/api";
 
 const CLI = {
     "title": "Core API client",
@@ -25,7 +29,16 @@ const CLI = {
         "url": {
             "short": "u",
             "description": "API url",
-            "default": "http://127.0.0.1:81/api",
+            "default": DEFAULT_URL,
+            "schema": {
+                "type": "string",
+                "format": "url",
+            },
+        },
+        "cluster-url": {
+            "short": "c",
+            "description": "cluster service discovery API url",
+            "default": DEFAULT_CLUSTER_URL,
             "schema": {
                 "type": "string",
                 "format": "url",
@@ -138,14 +151,16 @@ EOF
 
 class ApiCli {
     #url;
+    #clusterUrl;
     #version;
     #token;
     #locale;
     #json;
     #api;
 
-    constructor ( { url, version, token, locale, json } ) {
+    constructor ( { url, clusterUrl, version, token, locale, json } ) {
         this.#url = url;
+        this.#clusterUrl = clusterUrl;
         this.#version = version;
         this.#token = token;
         this.#locale = locale;
@@ -255,6 +270,7 @@ class ApiCli {
             "version": this.#version,
             "token": this.#token,
             "locale": this.#locale,
+            "serviceDiscovery": new ServiceDiscovery( new Api( this.#clusterUrl ) ),
         } );
 
         return this.#api;
@@ -322,6 +338,7 @@ await Cli.parse( CLI );
 
 const apiCli = new ApiCli( {
     "url": process.cli.globalOptions.url,
+    "clusterUrl": process.cli.globalOptions[ "cluster-url" ],
     "version": process.cli.globalOptions[ "default-version" ],
     "token": process.cli.globalOptions.token,
     "locale": process.cli.globalOptions.locale,
