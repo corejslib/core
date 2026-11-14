@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.65.2 (2026-11-14)
+
+**Other changes:**
+
+- docs: add Sasl type reference (● [fe869cb](https://github.com/corejslib/core/commit/fe869cba1); 👬 zdm)
+
+Compare with the previous release: [v8.65.1...v8.65.2](https://github.com/corejslib/core/compare/v8.65.1...v8.65.2)
+
 ### v8.65.1 (2026-11-13)
 
 **Code refactoring:**
