@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.65.4 (2026-11-14)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: rename path folder option to directory (● [af9a891](https://github.com/corejslib/core/commit/af9a8910b); 👬 zdm)
+
+Compare with the previous release: [v8.65.3...v8.65.4](https://github.com/corejslib/core/compare/v8.65.3...v8.65.4)
+
 ### v8.65.3 (2026-11-14)
 
 **Bug fixes:**
