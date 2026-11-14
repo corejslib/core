@@ -10,25 +10,26 @@ docs:
     - corejslib/result
 
   types:
-    Auth: ~
-    Table: "/text.md#Class: Table"
-    ProxyClient: ~
-    Blob: "/blob.md#Class: Blob"
-    File: "/file.md#Class: File"
-    Message: "/message.md#Class: Message"
-    Attachment: "/attachment.md#Class: Attachment"
     ApiClient: "/api-client.md#Class: ApiClient"
-    ApiClientUpload: "/api-client.md#Class: ApiClientUpload"
     ApiClientConnection: "/api-client.md#Class: ApIClientConnection"
-    TmpFile: "/tmp.md#Class: TmpFile"
-    TmpDir: "/tmp.md#Class: TmpDir"
+    ApiClientUpload: "/api-client.md#Class: ApiClientUpload"
+    Attachment: "/attachment.md#Class: Attachment"
+    Auth: ~
+    Blob: "/blob.md#Class: Blob"
+    CacheLRU: "/cache-lru.md"
+    CondVar: "/threads.md#Class: CondVar"
     DoublyLinkedList: "/doubly-linked-list.md"
     DoublyLinkedListNode: "/doubly-linked-list.md#Class: DoublyLinkedListNode"
-    CacheLRU: "/cache-lru.md"
-    Threads: "/threads.md#Class: Threads"
-    CondVar: "/threads.md#Class: CondVar"
+    File: "/file.md#Class: File"
+    Hostname: "/hostname.md"
+    Message: "/message.md#Class: Message"
+    Mutex: "/threads.md#Class: Mutex"
+    ProxyClient: ~
+    Sasl: "/threads.md#Class: Sasl"
     Semaphore: "/threads.md#Class: Semaphore"
     SemaphoreSet: "/threads.md#Class: SemaphoreSet"
-    Mutex: "/threads.md#Class: Mutex"
     Signal: "/threads.md#Class: Signal"
-    Hostname: "/hostname.md"
+    Table: "/text.md#Class: Table"
+    Threads: "/threads.md#Class: Threads"
+    TmpDir: "/tmp.md#Class: TmpDir"
+    TmpFile: "/tmp.md#Class: TmpFile"
