@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.65.3 (2026-11-14)
+
+**Bug fixes:**
+
+- \[PATCH] fix: distinguish root paths from absolute paths (● [96d0416](https://github.com/corejslib/core/commit/96d04161e); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: centralize path and port validation (● [190850c](https://github.com/corejslib/core/commit/190850c91); 👬 zdm)
+
+Compare with the previous release: [v8.65.2...v8.65.3](https://github.com/corejslib/core/compare/v8.65.2...v8.65.3)
+
 ### v8.65.2 (2026-11-14)
 
 **Other changes:**
