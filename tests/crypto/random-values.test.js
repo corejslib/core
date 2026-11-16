@@ -15,14 +15,14 @@ const TESTS = [
     { "min": 0, "max": Numeric.MAX_UINT16.bigint, "generate": () => randomValues.getRandomUint16() },
 
     // random int
-    { "max": 1, "generate": max => randomValues.getRandomInt( max ) },
-    { "max": 2, "generate": max => randomValues.getRandomInt( max ) },
-    { "max": 3, "generate": max => randomValues.getRandomInt( max ) },
-    { "max": 5, "generate": max => randomValues.getRandomInt( max ) },
-    { "max": 10, "generate": max => randomValues.getRandomInt( max ) },
-    { "max": 100, "generate": max => randomValues.getRandomInt( max ) },
-    { "max": 1000, "generate": max => randomValues.getRandomInt( max ) },
-    { "max": 10_000, "generate": max => randomValues.getRandomInt( max ) },
+    { "max": 1, "generate": max => randomValues.getRandomInt( { max } ) },
+    { "max": 2, "generate": max => randomValues.getRandomInt( { max } ) },
+    { "max": 3, "generate": max => randomValues.getRandomInt( { max } ) },
+    { "max": 5, "generate": max => randomValues.getRandomInt( { max } ) },
+    { "max": 10, "generate": max => randomValues.getRandomInt( { max } ) },
+    { "max": 100, "generate": max => randomValues.getRandomInt( { max } ) },
+    { "max": 1000, "generate": max => randomValues.getRandomInt( { max } ) },
+    { "max": 10_000, "generate": max => randomValues.getRandomInt( { max } ) },
 
     // internal
     { "max": 1000, "generate": max => crypto.randomInt( 0, Number( max ) + 1 ) },
