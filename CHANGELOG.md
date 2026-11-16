@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.65.5 (2026-11-16)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix functions optional param (● [0c2e780](https://github.com/corejslib/core/commit/0c2e78029); 👬 zdm)
+
+Compare with the previous release: [v8.65.4...v8.65.5](https://github.com/corejslib/core/compare/v8.65.4...v8.65.5)
+
 ### v8.65.4 (2026-11-14)
 
 **Code refactoring:**
