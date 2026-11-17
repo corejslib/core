@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.66.0 (2026-11-17)
+
+**New features:**
+
+- \[MINOR] feat: add custom inspection output for ApiClient (● [2e8227b](https://github.com/corejslib/core/commit/2e8227b10); 👬 zdm)
+
+**Code refactoring:**
+
+- \[PATCH] refactor: destructure uri in delete service argument (● [ef76d20](https://github.com/corejslib/core/commit/ef76d2034); 👬 zdm)
+
+Compare with the previous release: [v8.65.5...v8.66.0](https://github.com/corejslib/core/compare/v8.65.5...v8.66.0)
+
 ### v8.65.5 (2026-11-16)
 
 **Bug fixes:**
