@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.67.1 (2026-11-17)
+
+**Bug fixes:**
+
+- \[PATCH] fix: resynchronize local version after disconnect (● [309c483](https://github.com/corejslib/core/commit/309c483d6); 👬 zdm)
+
+**Other changes:**
+
+- docs: format docker connection commands as shell code blocks (● [e077fc4](https://github.com/corejslib/core/commit/e077fc45f); 👬 zdm)
+
+Compare with the previous release: [v8.67.0...v8.67.1](https://github.com/corejslib/core/compare/v8.67.0...v8.67.1)
+
 ### v8.67.0 (2026-11-17)
 
 **New features:**
