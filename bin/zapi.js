@@ -19,11 +19,15 @@ const CLI = {
     "description": `
 # Connect to the docker stack:
 
-    docker run --rm -it --entrypoint=/usr/bin/bash --network=<STACK-NETWORK-NAME> ghcr.io/zerocluster/cluster
+\`\`\`sh
+docker run --rm -it --entrypoint=/usr/bin/bash --network=<STACK-NETWORK-NAME> ghcr.io/zerocluster/cluster
+\`\`\`
 
 # Connect to the docker container:
 
-    docker exec -it <CONTAINER-ID> bash
+\`\`\`sh
+docker exec -it <CONTAINER-ID> bash
+\`\`\`
 `.trim(),
     "globalOptions": {
         "url": {
