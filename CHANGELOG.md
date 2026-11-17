@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.67.0 (2026-11-17)
+
+**New features:**
+
+- \[MINOR] feat: support optional service discovery filters (● [43399ed](https://github.com/corejslib/core/commit/43399edf1); 👬 zdm)
+
+Compare with the previous release: [v8.66.0...v8.67.0](https://github.com/corejslib/core/compare/v8.66.0...v8.67.0)
+
 ### v8.66.0 (2026-11-17)
 
 **New features:**
