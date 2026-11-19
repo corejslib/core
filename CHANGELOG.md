@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.70.0 (2026-11-19)
+
+**New features:**
+
+- \[MINOR] feat: support cap_add in compose schema (● [b439408](https://github.com/corejslib/core/commit/b439408a2); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: require at least one capability item in compose schema (● [d637fe5](https://github.com/corejslib/core/commit/d637fe5bc); 👬 zdm)
+
+Compare with the previous release: [v8.69.0...v8.70.0](https://github.com/corejslib/core/compare/v8.69.0...v8.70.0)
+
 ### v8.69.0 (2026-11-19)
 
 **New features:**
