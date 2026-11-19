@@ -1,5 +1,21 @@
 # Changelog
 
+### v8.69.0 (2026-11-19)
+
+**New features:**
+
+- \[MINOR] feat: add wait-for-disconnect support to APIs (● [7b92b77](https://github.com/corejslib/core/commit/7b92b7749); 👬 zdm)
+
+**Bug fixes:**
+
+- \[PATCH] fix: call the correctly named disconnect event waiter (● [756cb70](https://github.com/corejslib/core/commit/756cb70a3); 👬 zdm)
+
+- \[PATCH] fix: correct waitDisconnect method name (● [d8113b3](https://github.com/corejslib/core/commit/d8113b3d1); 👬 zdm)
+
+- \[PATCH] fix: return immediately when already disconnected (● [0c6283b](https://github.com/corejslib/core/commit/0c6283bd2); 👬 zdm)
+
+Compare with the previous release: [v8.68.0...v8.69.0](https://github.com/corejslib/core/compare/v8.68.0...v8.69.0)
+
 ### v8.68.0 (2026-11-19)
 
 **New features:**
