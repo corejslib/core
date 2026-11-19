@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.68.0 (2026-11-19)
+
+**New features:**
+
+- \[MINOR] feat: support timeouts when waiting for lifecycle and synchronization events (● [921824d](https://github.com/corejslib/core/commit/921824d6f); 👬 zdm)
+
+Compare with the previous release: [v8.67.1...v8.68.0](https://github.com/corejslib/core/compare/v8.67.1...v8.68.0)
+
 ### v8.67.1 (2026-11-17)
 
 **Bug fixes:**
