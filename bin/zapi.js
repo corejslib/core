@@ -6,6 +6,7 @@ import Api from "#lib/api";
 import ServiceDiscovery from "#lib/api/service-discovery";
 import Cli from "#lib/cli";
 import File from "#lib/file";
+import GlobPatterns from "#lib/glob/patterns";
 import * as json5 from "#lib/json5";
 import Message from "#lib/message";
 import Table from "#lib/text/table";
@@ -84,10 +85,11 @@ docker exec -it <CONTAINER-ID> bash
         "schema": {
             "title": "Get API schema",
             "arguments": {
-                "method": {
-                    "description": "API method pattern",
+                "method-pattern": {
+                    "description": "API method patterns",
                     "schema": {
-                        "type": "string",
+                        "type": "array",
+                        "items": { "type": "string", "format": "glob-pattern" },
                     },
                 },
             },
@@ -172,11 +174,17 @@ class ApiCli {
     }
 
     // public
-    async schema ( method ) {
+    async schema ( methodPatterns ) {
         const res = await this.#getApi().call( "/schema" );
         if ( !res.ok ) return this.#logError( res );
 
-        const methods = {};
+        let patterns;
+
+        if ( methodPatterns ) {
+            patterns = new GlobPatterns().add( methodPatterns );
+        }
+
+        const methods = new Map();
 
         // index methods
         for ( const version of Object.keys( res.data.versions ).sort() ) {
@@ -184,17 +192,15 @@ class ApiCli {
                 for ( const methodId of Object.keys( res.data.versions[ version ][ module ].methods ).sort() ) {
                     const method = res.data.versions[ version ][ module ].methods[ methodId ];
 
-                    methods[ method.id ] = method;
+                    if ( patterns && !patterns.test( method.id ) ) continue;
+
+                    methods.set( method.id, method );
                 }
             }
         }
 
-        if ( method && !method.startsWith( "/" ) ) {
-            method = `/v${ this.#getApi().version }/${ method }`;
-        }
-
-        if ( method && methods[ method ] ) {
-            this.#logMethod( methods[ method ] );
+        if ( methods.size === 1 ) {
+            this.#logMethod( methods.values().toArray()[ 0 ] );
         }
         else {
             if ( this.#json ) {
@@ -207,7 +213,7 @@ class ApiCli {
                     console.log();
                 }
 
-                this.#logMethods( Object.values( methods ) );
+                this.#logMethods( methods.values() );
             }
         }
 
@@ -367,7 +373,7 @@ const apiCli = new ApiCli( {
 var res;
 
 if ( process.cli.command === "schema" ) {
-    res = await apiCli.schema( process.cli.arguments.method );
+    res = await apiCli.schema( process.cli.arguments[ "method-pattern" ] );
 }
 else if ( process.cli.command === "call" ) {
     let args, hasAttachments;
