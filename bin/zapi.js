@@ -33,7 +33,7 @@ docker exec -it <CONTAINER-ID> bash
     "globalOptions": {
         "url": {
             "short": "u",
-            "description": "API url",
+            "description": "API url.",
             "default": DEFAULT_URL,
             "schema": {
                 "type": "string",
@@ -42,7 +42,7 @@ docker exec -it <CONTAINER-ID> bash
         },
         "cluster-url": {
             "short": "c",
-            "description": "cluster service discovery API url",
+            "description": "Cluster service discovery API url.",
             "default": DEFAULT_CLUSTER_URL,
             "schema": {
                 "type": "string",
@@ -51,7 +51,7 @@ docker exec -it <CONTAINER-ID> bash
         },
         "default-version": {
             "short": "v",
-            "description": "default API version",
+            "description": "Default API version.",
             "default": 1,
             "schema": {
                 "type": "integer",
@@ -86,7 +86,7 @@ docker exec -it <CONTAINER-ID> bash
             "title": "Get API schema",
             "arguments": {
                 "method-pattern": {
-                    "description": "API method glob patterns",
+                    "description": "API method glob patterns.",
                     "schema": {
                         "type": "array",
                         "items": { "type": "string", "format": "glob-pattern" },
