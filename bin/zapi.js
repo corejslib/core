@@ -152,6 +152,9 @@ EOF
                 },
             },
         },
+        "help": {
+            "title": "Get help",
+        },
     },
 };
 
@@ -370,7 +373,7 @@ const apiCli = new ApiCli( {
     "json": process.cli.globalOptions.json,
 } );
 
-var res;
+let res;
 
 if ( process.cli.command === "schema" ) {
     res = await apiCli.schema( process.cli.arguments[ "method-pattern" ] );
@@ -424,6 +427,9 @@ else if ( process.cli.command === "listen" ) {
     res = await apiCli.listen( process.cli.arguments.event, {
         "listenSystemEvents": process.cli.options[ "listen-system-events" ],
     } );
+}
+else if ( process.cli.command === "help" ) {
+    res = result( 200 );
 }
 
 if ( res.ok ) {
