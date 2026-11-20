@@ -18,13 +18,13 @@ const DEFAULT_URL = "http://127.0.0.1:81/",
 const CLI = {
     "title": "Core API client",
     "description": `
-# Connect to the docker stack:
+Connect to the docker stack:
 
 \`\`\`sh
 docker run --rm -it --entrypoint=/usr/bin/bash --network=<STACK-NETWORK-NAME> ghcr.io/zerocluster/cluster
 \`\`\`
 
-# Connect to the docker container:
+Connect to the docker container:
 
 \`\`\`sh
 docker exec -it <CONTAINER-ID> bash
