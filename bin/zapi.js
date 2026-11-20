@@ -86,7 +86,7 @@ docker exec -it <CONTAINER-ID> bash
             "title": "Get API schema",
             "arguments": {
                 "method-pattern": {
-                    "description": "API method patterns",
+                    "description": "API method glob patterns",
                     "schema": {
                         "type": "array",
                         "items": { "type": "string", "format": "glob-pattern" },
