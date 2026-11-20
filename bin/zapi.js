@@ -17,19 +17,6 @@ const DEFAULT_URL = "http://127.0.0.1:81/",
 
 const CLI = {
     "title": "Core API client",
-    "description": `
-Connect to the docker stack:
-
-\`\`\`sh
-docker run --rm -it --entrypoint=/usr/bin/bash --network=<STACK-NETWORK-NAME> ghcr.io/zerocluster/cluster
-\`\`\`
-
-Connect to the docker container:
-
-\`\`\`sh
-docker exec -it <CONTAINER-ID> bash
-\`\`\`
-`.trim(),
     "globalOptions": {
         "url": {
             "short": "u",
@@ -97,22 +84,6 @@ docker exec -it <CONTAINER-ID> bash
 
         "call": {
             "title": "Make API call",
-            "description": `
-\`\`\`sh
-MSYS2_ARG_CONV_EXCL="*" zapi --url "http://devel:81/" call "/v1/test" "$(
-    cat << 'EOF'
-[
-    "argument-1",
-    "argument-2",
-    {
-        "relative-attachment": "attach:1.mp3",
-        "absolute-attachment": "attach:///1.mp3",
-    }
-]
-EOF
-)"
-\`\`\`
-`.trim(),
             "arguments": {
                 "method": {
                     "description": "API method",
@@ -430,6 +401,46 @@ else if ( process.cli.command === "listen" ) {
 }
 else if ( process.cli.command === "help" ) {
     res = result( 200 );
+
+    const help = `
+# \`zapi\` help
+
+## Docker
+
+Connect to the docker stack:
+
+\`\`\`sh
+docker run --rm -it \\
+    --entrypoint=/usr/bin/bash \\
+    --network=<STACK-NETWORK-NAME> \\
+    ghcr.io/zerocluster/cluster
+\`\`\`
+
+Connect to the docker container:
+
+\`\`\`sh
+docker exec -it <CONTAINER-ID> bash
+\`\`\`
+
+## API call example
+
+\`\`\`sh
+MSYS2_ARG_CONV_EXCL="*" zapi --url "http://devel:81/" call "/v1/test" "$(
+    cat << 'EOF'
+[
+    "argument-1",
+    "argument-2",
+    {
+        "relative-attachment": "attach:1.mp3",
+        "absolute-attachment": "attach:///1.mp3",
+    }
+]
+EOF
+)"
+\`\`\`
+`;
+
+    console.log( Cli.markdownToString( help ) );
 }
 
 if ( res.ok ) {
