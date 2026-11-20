@@ -174,7 +174,6 @@ class ApiCli {
     // public
     async schema ( method ) {
         const res = await this.#getApi().call( "/schema" );
-
         if ( !res.ok ) return this.#logError( res );
 
         const methods = {};
@@ -190,17 +189,23 @@ class ApiCli {
             }
         }
 
+        if ( method && !method.startsWith( "/" ) ) {
+            method = `/v${ this.#getApi().version }/${ method }`;
+        }
+
         if ( method && methods[ method ] ) {
-            this.#logMethod( methods[ process.cli.arguments.method ] );
+            this.#logMethod( methods[ method ] );
         }
         else {
             if ( this.#json ) {
                 console.log( JSON.stringify( res.data, null, 4 ) );
             }
             else {
-                this.#logEmits( res.data.emits );
+                if ( res.data.emits?.length ) {
+                    this.#logEmits( res.data.emits );
 
-                console.log();
+                    console.log();
+                }
 
                 this.#logMethods( Object.values( methods ) );
             }
