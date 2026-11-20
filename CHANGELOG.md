@@ -1,5 +1,19 @@
 # Changelog
 
+### v8.70.1 (2026-11-20)
+
+**Bug fixes:**
+
+- \[PATCH] fix: fix zapi (● [6c10e63](https://github.com/corejslib/core/commit/6c10e63e2); 👬 zdm)
+
+- \[PATCH] fix: fix zapi patterns (● [4021e47](https://github.com/corejslib/core/commit/4021e47a0); 👬 zdm)
+
+- \[PATCH] fix: resolve schema methods by versioned path (● [09301c2](https://github.com/corejslib/core/commit/09301c272); 👬 zdm)
+
+    Avoid logging empty emits sections when listing methods.
+
+Compare with the previous release: [v8.70.0...v8.70.1](https://github.com/corejslib/core/compare/v8.70.0...v8.70.1)
+
 ### v8.70.0 (2026-11-19)
 
 **New features:**
