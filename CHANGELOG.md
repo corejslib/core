@@ -1,5 +1,41 @@
 # Changelog
 
+### v8.71.0 (2026-11-21)
+
+**New features**:
+
+- \[MINOR] feat: add ansi and unicode-aware text wrapping (● [0d16b24](https://github.com/corejslib/core/commit/0d16b2460); 👬 zdm)
+
+- \[MINOR] feat: add cli help markdown (● [7e5f672](https://github.com/corejslib/core/commit/7e5f67295), [31395b9](https://github.com/corejslib/core/commit/31395b97b), [871dd44](https://github.com/corejslib/core/commit/871dd442b), [4df0894](https://github.com/corejslib/core/commit/4df0894a5), [b70318c](https://github.com/corejslib/core/commit/b70318cce), [03277eb](https://github.com/corejslib/core/commit/03277ebcd); 👬 zdm)
+
+- \[MINOR] feat: expand ANSI text styles and underline colors (● [d85bfc8](https://github.com/corejslib/core/commit/d85bfc86d); 👬 zdm)
+
+- \[MINOR] feat: improve table width and ANSI hyperlink handling (● [d88fbc9](https://github.com/corejslib/core/commit/d88fbc9f0); 👬 zdm)
+
+- \[MINOR] feat: preserve active ANSI styles across wrapped lines (● [bcfe9db](https://github.com/corejslib/core/commit/bcfe9db10); 👬 zdm)
+
+- \[MINOR] feat: reopen styles after nested ANSI close codes (● [dad2928](https://github.com/corejslib/core/commit/dad2928fc); 👬 zdm)
+
+**Bug fixes**:
+
+- \[PATCH] fix: fix threads api (● [2666b62](https://github.com/corejslib/core/commit/2666b62b7); 👬 zdm)
+
+- \[PATCH] fix: harden ansi color and sequence handling (● [599f06d](https://github.com/corejslib/core/commit/599f06ddf); 👬 zdm)
+
+- \[PATCH] fix: preserve formatting in markdown headings (● [07634f8](https://github.com/corejslib/core/commit/07634f802), [7690d3d](https://github.com/corejslib/core/commit/7690d3da5); 👬 zdm)
+
+- \[PATCH] fix: prevent starting an existing thread twice (● [f5bd604](https://github.com/corejslib/core/commit/f5bd6042b); 👬 zdm)
+
+**Code refactoring**:
+
+- \[PATCH] refactor: reorganize threads destroy method (● [967c9b2](https://github.com/corejslib/core/commit/967c9b207); 👬 zdm)
+
+**Other changes**:
+
+- style: change markdown heading ANSI styling (● [3ac78d7](https://github.com/corejslib/core/commit/3ac78d714); 👬 zdm)
+
+Compare with the previous release: [v8.70.1...v8.71.0](https://github.com/corejslib/core/compare/v8.70.1...v8.71.0)
+
 ### v8.70.1 (2026-11-20)
 
 **Bug fixes:**
