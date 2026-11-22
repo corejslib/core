@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.71.1 (2026-11-22)
+
+**Bug fixes**:
+
+- \[PATCH] fix: keep event synchronization loop active (● [d8c1341](https://github.com/corejslib/core/commit/d8c134143); 👬 zdm)
+
+Compare with the previous release: [v8.71.0...v8.71.1](https://github.com/corejslib/core/compare/v8.71.0...v8.71.1)
+
 ### v8.71.0 (2026-11-21)
 
 **New features**:
