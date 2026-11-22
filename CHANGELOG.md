@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.72.0 (2026-11-22)
+
+**New features**:
+
+- \[MINOR] feat: add recursive support to rmDirEntries (● [3154858](https://github.com/corejslib/core/commit/3154858e0); 👬 zdm)
+
+Compare with the previous release: [v8.71.1...v8.72.0](https://github.com/corejslib/core/compare/v8.71.1...v8.72.0)
+
 ### v8.71.1 (2026-11-22)
 
 **Bug fixes**:
