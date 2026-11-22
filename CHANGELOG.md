@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.73.0 (2026-11-22)
+
+**New features**:
+
+- \[MINOR] feat: add session reload browser event (● [8944b68](https://github.com/corejslib/core/commit/8944b687a); 👬 zdm)
+
+Compare with the previous release: [v8.72.0...v8.73.0](https://github.com/corejslib/core/compare/v8.72.0...v8.73.0)
+
 ### v8.72.0 (2026-11-22)
 
 **New features**:
