@@ -1,5 +1,23 @@
 # Changelog
 
+### v8.73.2 (2026-11-23)
+
+**Code refactoring**:
+
+- \[PATCH] refactor: clarify negated option variable names (● [1abe63f](https://github.com/corejslib/core/commit/1abe63f3c); 👬 zdm)
+
+**Other changes**:
+
+- docs: capitalize CLI option descriptions (● [bd6ff55](https://github.com/corejslib/core/commit/bd6ff5507); 👬 zdm)
+
+- docs: clarify version and help option descriptions (● [9de30e7](https://github.com/corejslib/core/commit/9de30e78d); 👬 zdm)
+
+- docs: update CLI option descriptions (● [28a721f](https://github.com/corejslib/core/commit/28a721f23); 👬 zdm)
+
+- docs: update zapi command descriptions (● [fa73afb](https://github.com/corejslib/core/commit/fa73afb90); 👬 zdm)
+
+Compare with the previous release: [v8.73.1...v8.73.2](https://github.com/corejslib/core/compare/v8.73.1...v8.73.2)
+
 ### v8.73.1 (2026-11-23)
 
 **Bug fixes**:
