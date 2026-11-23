@@ -5,7 +5,7 @@ import ExternalResourceBuilder from "#lib/external-resource-builder";
 import FfmpegLinux from "#lib/external-resources/ffmpeg-linux";
 
 const CLI = {
-    "title": "Build resources",
+    "title": "Build resources.",
     "options": {
         "force": {
             "description": "Force build.",

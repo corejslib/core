@@ -4,7 +4,7 @@ import Cli from "#lib/cli";
 import externalResources from "#lib/external-resources";
 
 const CLI = {
-    "title": "Update resources",
+    "title": "Update resources.",
     "options": {
         "force": {
             "description": "Force update.",

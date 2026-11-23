@@ -23,10 +23,10 @@ import Tld from "#lib/external-resources/tld";
 import UserAgent from "#lib/external-resources/user-agent";
 
 const CLI = {
-    "title": "Build resources",
+    "title": "Build resources.",
     "options": {
         "force": {
-            "description": "force build",
+            "description": "Force build.",
             "default": false,
             "schema": {
                 "type": "boolean",

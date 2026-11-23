@@ -5,7 +5,7 @@ import ExternalResourceBuilder from "#lib/external-resource-builder";
 import FfmpegWin32 from "#lib/external-resources/ffmpeg-win32";
 
 const CLI = {
-    "title": "Build resources",
+    "title": "Build resources.",
     "options": {
         "force": {
             "description": "Force build.",
