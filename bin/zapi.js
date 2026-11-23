@@ -16,11 +16,11 @@ const DEFAULT_URL = "http://127.0.0.1:81/",
     DEFAULT_CLUSTER_URL = "ws://cluster:81/";
 
 const CLI = {
-    "title": "Core API client",
+    "title": "Core API client.",
     "globalOptions": {
         "url": {
             "short": "u",
-            "description": "API url.",
+            "description": "API URL.",
             "default": DEFAULT_URL,
             "schema": {
                 "type": "string",
@@ -29,7 +29,7 @@ const CLI = {
         },
         "cluster-url": {
             "short": "c",
-            "description": "Cluster service discovery API url.",
+            "description": "Cluster service discovery API URL.",
             "default": DEFAULT_CLUSTER_URL,
             "schema": {
                 "type": "string",
@@ -46,14 +46,14 @@ const CLI = {
         },
         "token": {
             "short": "t",
-            "description": "API token",
+            "description": "API token.",
             "schema": {
                 "type": "string",
             },
         },
         "locale": {
             "short": "l",
-            "description": "API locale",
+            "description": "API locale.",
             "schema": {
                 "type": "string",
                 "format": "locale",
@@ -70,7 +70,7 @@ const CLI = {
     },
     "commands": {
         "schema": {
-            "title": "Get API schema",
+            "title": "Get the API schema.",
             "arguments": {
                 "method-pattern": {
                     "description": "API method glob patterns.",
@@ -83,7 +83,7 @@ const CLI = {
         },
 
         "call": {
-            "title": "Make API call",
+            "title": "Make an API call.",
             "arguments": {
                 "method": {
                     "description": "API method.",
@@ -102,7 +102,7 @@ const CLI = {
         },
 
         "listen": {
-            "title": "Listen API events",
+            "title": "Listen for API events.",
             "options": {
                 "listen-system-events": {
                     "short": "s",
@@ -124,7 +124,7 @@ const CLI = {
             },
         },
         "help": {
-            "title": "Get help",
+            "title": "Get help.",
         },
     },
 };
