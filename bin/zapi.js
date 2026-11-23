@@ -86,7 +86,7 @@ const CLI = {
             "title": "Make API call",
             "arguments": {
                 "method": {
-                    "description": "API method",
+                    "description": "API method.",
                     "required": true,
                     "schema": {
                         "type": "string",
@@ -106,14 +106,14 @@ const CLI = {
             "options": {
                 "listen-system-events": {
                     "short": "s",
-                    "description": `Listen API system events, such as: "connect", "disconnect", "sessionDisable", "sessionDelete", "sessionReload", "accessDenied".`,
+                    "description": 'Listen API system events, such as: `"connect"`, `"disconnect"`, `"sessionDisable"`, `"sessionDelete"`, `"sessionReload"`, `"accessDenied"`.',
                     "default": false,
                     "schema": { "type": "boolean" },
                 },
             },
             "arguments": {
                 "event": {
-                    "description": "API event name",
+                    "description": "API event name.",
                     "schema": {
                         "type": "array",
                         "items": {
