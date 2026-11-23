@@ -1,5 +1,33 @@
 # Changelog
 
+### v8.73.1 (2026-11-23)
+
+**Bug fixes**:
+
+- \[PATCH] fix: correct cli option help formatting (● [6a6385d](https://github.com/corejslib/core/commit/6a6385d10); 👬 zdm)
+
+- \[PATCH] fix: correct reserved SQL event handling (● [3368a55](https://github.com/corejslib/core/commit/3368a55e8); 👬 zdm)
+
+- \[PATCH] fix: exclude system events from remote subscriptions (● [7ff1c9a](https://github.com/corejslib/core/commit/7ff1c9a2b); 👬 zdm)
+
+- \[PATCH] fix: fix api local events (● [2e02115](https://github.com/corejslib/core/commit/2e0211561); 👬 zdm)
+
+- \[PATCH] fix: fix sql local events (● [1d78700](https://github.com/corejslib/core/commit/1d787004c); 👬 zdm)
+
+**Code refactoring**:
+
+- \[PATCH] refactor: refactor cli (● [f4032a9](https://github.com/corejslib/core/commit/f4032a9bf), [73e7eaa](https://github.com/corejslib/core/commit/73e7eaadd), [e960f43](https://github.com/corejslib/core/commit/e960f434b), [e5c2df9](https://github.com/corejslib/core/commit/e5c2df9e9), [a9043f1](https://github.com/corejslib/core/commit/a9043f132); 👬 zdm)
+
+- \[PATCH] refactor: remove docker /var/run/docker.sock (● [667e29a](https://github.com/corejslib/core/commit/667e29a27); 👬 zdm)
+
+**Other changes**:
+
+- chore: add class name (● [fa77eaf](https://github.com/corejslib/core/commit/fa77eaffa); 👬 zdm)
+
+- style: simplify PostgreSQL protocol version comment (● [56611af](https://github.com/corejslib/core/commit/56611af64); 👬 zdm)
+
+Compare with the previous release: [v8.73.0...v8.73.1](https://github.com/corejslib/core/compare/v8.73.0...v8.73.1)
+
 ### v8.73.0 (2026-11-22)
 
 **New features**:
