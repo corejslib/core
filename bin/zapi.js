@@ -61,7 +61,7 @@ const CLI = {
         },
         "json": {
             "short": "j",
-            "description": "output in JSON format",
+            "description": "Output in JSON format.",
             "default": false,
             "schema": {
                 "type": "boolean",
