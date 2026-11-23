@@ -60,7 +60,6 @@
         description: { type: string }
         required: { type: boolean }
         default: { type: [string, integer, boolean] }
-        negatable: { type: boolean }
         schema: { type: object }
       additionalProperties: false
       required: [description, schema]
