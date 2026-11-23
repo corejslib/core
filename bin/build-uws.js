@@ -18,7 +18,7 @@ const CLI = {
     "title": "Build resources",
     "options": {
         "force": {
-            "description": "force build",
+            "description": "Force build.",
             "default": false,
             "schema": {
                 "type": "boolean",

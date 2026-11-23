@@ -7,7 +7,7 @@ const CLI = {
     "title": "Install Google Chrome browser",
     "options": {
         "log": {
-            "description": "hide install log",
+            "description": "Hide install log.",
             "default": true,
             "schema": {
                 "type": "boolean",
