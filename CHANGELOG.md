@@ -1,5 +1,49 @@
 # Changelog
 
+### v8.74.0 (2026-11-24)
+
+**New features**:
+
+- \[MINOR] feat: add optional tag for cli arguments (● [0e29506](https://github.com/corejslib/core/commit/0e2950695); 👬 zdm)
+
+- \[MINOR] feat: improve CLI help formatting and boolean values (● [8e42e21](https://github.com/corejslib/core/commit/8e42e2174); 👬 zdm)
+
+- \[MINOR] feat: validate command titles and option descriptions (● [3a8c61b](https://github.com/corejslib/core/commit/3a8c61be0); 👬 zdm)
+
+**Bug fixes**:
+
+- \[PATCH] fix: correct CLI help text formatting (● [9eaa828](https://github.com/corejslib/core/commit/9eaa8287e); 👬 zdm)
+
+- \[PATCH] fix: improve cli help usage and spec error handling (● [6ce1b60](https://github.com/corejslib/core/commit/6ce1b60ef); 👬 zdm)
+
+- \[PATCH] fix: improve cli title and option validation (● [6333e78](https://github.com/corejslib/core/commit/6333e7862); 👬 zdm)
+
+- \[PATCH] fix: rename API call arguments option to parameters (● [ef39ddd](https://github.com/corejslib/core/commit/ef39ddded); 👬 zdm)
+
+- \[PATCH] fix: render command titles as markdown in CLI help (● [af70fe1](https://github.com/corejslib/core/commit/af70fe105); 👬 zdm)
+
+**Code refactoring**:
+
+- \[PATCH] refactor: refactor cli (● [2f164ac](https://github.com/corejslib/core/commit/2f164aca2), [8d14900](https://github.com/corejslib/core/commit/8d149003f), [59958a1](https://github.com/corejslib/core/commit/59958a121), [c8df68c](https://github.com/corejslib/core/commit/c8df68c5c), [b432830](https://github.com/corejslib/core/commit/b43283063), [73d0c95](https://github.com/corejslib/core/commit/73d0c954c), [4b9023b](https://github.com/corejslib/core/commit/4b9023b85), [61afaec](https://github.com/corejslib/core/commit/61afaec93), [d66e882](https://github.com/corejslib/core/commit/d66e8829b), [8448f8d](https://github.com/corejslib/core/commit/8448f8dfc), [ff9f4d8](https://github.com/corejslib/core/commit/ff9f4d87e), [eae9648](https://github.com/corejslib/core/commit/eae964856), [1677e5d](https://github.com/corejslib/core/commit/1677e5d16), [4a3107a](https://github.com/corejslib/core/commit/4a3107adf), [cfc0da8](https://github.com/corejslib/core/commit/cfc0da8bd), [66a45f6](https://github.com/corejslib/core/commit/66a45f62b), [f7e02aa](https://github.com/corejslib/core/commit/f7e02aa41), [116eb2b](https://github.com/corejslib/core/commit/116eb2ba5), [a2b0212](https://github.com/corejslib/core/commit/a2b02122d), [63b4867](https://github.com/corejslib/core/commit/63b4867c4), [8bbd8b3](https://github.com/corejslib/core/commit/8bbd8b336), [651f463](https://github.com/corejslib/core/commit/651f46388); 👬 zdm)
+
+- \[PATCH] refactor: remove redundant cli option defaults (● [782f5f6](https://github.com/corejslib/core/commit/782f5f6ec); 👬 zdm)
+
+**Other changes**:
+
+- docs: add missing punctuation to API arguments description (● [f0ed1e3](https://github.com/corejslib/core/commit/f0ed1e3bb); 👬 zdm)
+
+- docs: clarify second short option help text (● [8fc7045](https://github.com/corejslib/core/commit/8fc704518); 👬 zdm)
+
+- style: add punctuation to CLI text (● [8c52e82](https://github.com/corejslib/core/commit/8c52e82f2); 👬 zdm)
+
+- style: capitalize help option tags (● [ad6af6c](https://github.com/corejslib/core/commit/ad6af6ccb); 👬 zdm)
+
+- style: improve aliases display formatting (● [dbe0b8f](https://github.com/corejslib/core/commit/dbe0b8fe0); 👬 zdm)
+
+- style: improve CLI help text (● [7ad8292](https://github.com/corejslib/core/commit/7ad829234); 👬 zdm)
+
+Compare with the previous release: [v8.73.2...v8.74.0](https://github.com/corejslib/core/compare/v8.73.2...v8.74.0)
+
 ### v8.73.2 (2026-11-23)
 
 **Code refactoring**:
