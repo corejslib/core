@@ -93,7 +93,7 @@ const CLI = {
                     },
                 },
                 "arguments": {
-                    "description": "API method arguments in JSON format",
+                    "description": "API method arguments in JSON format.",
                     "schema": {
                         "type": "string",
                     },
