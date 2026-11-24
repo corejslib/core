@@ -92,8 +92,8 @@ const CLI = {
                         "type": "string",
                     },
                 },
-                "arguments": {
-                    "description": "API method arguments in JSON format.",
+                "parameters": {
+                    "description": "API method parameters in JSON format.",
                     "schema": {
                         "type": "string",
                     },
@@ -352,8 +352,8 @@ if ( process.cli.command === "schema" ) {
 else if ( process.cli.command === "call" ) {
     let args, hasAttachments;
 
-    if ( process.cli.arguments.arguments ) {
-        args = json5.fromJson5( process.cli.arguments.arguments, ( key, value, context ) => {
+    if ( process.cli.arguments.parameters ) {
+        args = json5.fromJson5( process.cli.arguments.parameterparameters, ( key, value, context ) => {
             if ( typeof value === "string" ) {
 
                 // attachment
