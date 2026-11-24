@@ -15,10 +15,10 @@ const UWS_VERSION = "20.71.0",
     ARCHITECTURES = new Set( [ "x64" ] );
 
 const CLI = {
-    "title": "Build resources.",
+    "title": "Build resources",
     "options": {
         "force": {
-            "description": "Force build.",
+            "description": "Force build",
             "default": false,
             "schema": {
                 "type": "boolean",

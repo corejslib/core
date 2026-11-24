@@ -16,11 +16,11 @@ const DEFAULT_URL = "http://127.0.0.1:81/",
     DEFAULT_CLUSTER_URL = "ws://cluster:81/";
 
 const CLI = {
-    "title": "Core API client.",
+    "title": "Core API client",
     "globalOptions": {
         "url": {
             "short": "u",
-            "description": "API URL.",
+            "description": "API URL",
             "default": DEFAULT_URL,
             "schema": {
                 "type": "string",
@@ -29,7 +29,7 @@ const CLI = {
         },
         "cluster-url": {
             "short": "c",
-            "description": "Cluster service discovery API URL.",
+            "description": "Cluster service discovery API URL",
             "default": DEFAULT_CLUSTER_URL,
             "schema": {
                 "type": "string",
@@ -38,7 +38,7 @@ const CLI = {
         },
         "default-version": {
             "short": "v",
-            "description": "Default API version.",
+            "description": "Default API version",
             "default": 1,
             "schema": {
                 "type": "integer",
@@ -46,14 +46,14 @@ const CLI = {
         },
         "token": {
             "short": "t",
-            "description": "API token.",
+            "description": "API token",
             "schema": {
                 "type": "string",
             },
         },
         "locale": {
             "short": "l",
-            "description": "API locale.",
+            "description": "API locale",
             "schema": {
                 "type": "string",
                 "format": "locale",
@@ -61,7 +61,7 @@ const CLI = {
         },
         "json": {
             "short": "j",
-            "description": "Output in JSON format.",
+            "description": "Output in JSON format",
             "default": false,
             "schema": {
                 "type": "boolean",
@@ -70,10 +70,10 @@ const CLI = {
     },
     "commands": {
         "schema": {
-            "title": "Get the API schema.",
+            "title": "Get the API schema",
             "arguments": {
                 "method-pattern": {
-                    "description": "API method glob patterns.",
+                    "description": "API method glob patterns",
                     "schema": {
                         "type": "array",
                         "items": { "type": "string", "format": "glob-pattern" },
@@ -81,39 +81,37 @@ const CLI = {
                 },
             },
         },
-
         "call": {
-            "title": "Make an API call.",
+            "title": "Make an API call",
             "arguments": {
                 "method": {
-                    "description": "API method.",
+                    "description": "API method",
                     "required": true,
                     "schema": {
                         "type": "string",
                     },
                 },
                 "parameters": {
-                    "description": "API method parameters in JSON format.",
+                    "description": "API method parameters in JSON format",
                     "schema": {
                         "type": "string",
                     },
                 },
             },
         },
-
         "listen": {
-            "title": "Listen for API events.",
+            "title": "Listen for API events",
             "options": {
                 "listen-system-events": {
                     "short": "s",
-                    "description": 'Listen API system events, such as: `"connect"`, `"disconnect"`, `"sessionDisable"`, `"sessionDelete"`, `"sessionReload"`, `"accessDenied"`.',
+                    "description": 'Listen API system events, such as: `"connect"`, `"disconnect"`, `"sessionDisable"`, `"sessionDelete"`, `"sessionReload"`, `"accessDenied"`',
                     "default": false,
                     "schema": { "type": "boolean" },
                 },
             },
             "arguments": {
                 "event": {
-                    "description": "API event name.",
+                    "description": "API event name",
                     "schema": {
                         "type": "array",
                         "items": {
@@ -124,7 +122,7 @@ const CLI = {
             },
         },
         "help": {
-            "title": "Get help.",
+            "title": "Get help",
         },
     },
 };

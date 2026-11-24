@@ -23,10 +23,10 @@ import Tld from "#lib/external-resources/tld";
 import UserAgent from "#lib/external-resources/user-agent";
 
 const CLI = {
-    "title": "Build resources.",
+    "title": "Build resources",
     "options": {
         "force": {
-            "description": "Force build.",
+            "description": "Force build",
             "default": false,
             "schema": {
                 "type": "boolean",
@@ -35,7 +35,7 @@ const CLI = {
     },
     "arguments": {
         "pattern": {
-            "description": "Filter resources using glob patterns.",
+            "description": "Filter resources using glob patterns",
             "schema": { "type": "array", "items": { "type": "string" } },
         },
     },

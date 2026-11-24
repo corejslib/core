@@ -5,10 +5,10 @@ import ExternalResourceBuilder from "#lib/external-resource-builder";
 import FfmpegLinux from "#lib/external-resources/ffmpeg-linux";
 
 const CLI = {
-    "title": "Build resources.",
+    "title": "Build resources",
     "options": {
         "force": {
-            "description": "Force build.",
+            "description": "Force build",
             "default": false,
             "schema": {
                 "type": "boolean",
@@ -17,7 +17,7 @@ const CLI = {
     },
     "arguments": {
         "pattern": {
-            "description": "Filter resources using glob patterns.",
+            "description": "Filter resources using glob patterns",
             "schema": { "type": "array", "items": { "type": "string" } },
         },
     },
