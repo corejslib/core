@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.75.0 (2026-11-25)
+
+**New features**:
+
+- \[MINOR] feat: highlight negated boolean options in help (● [4576373](https://github.com/corejslib/core/commit/4576373d7); 👬 zdm)
+
+Compare with the previous release: [v8.74.1...v8.75.0](https://github.com/corejslib/core/compare/v8.74.1...v8.75.0)
+
 ### v8.74.1 (2026-11-25)
 
 **Bug fixes**:
