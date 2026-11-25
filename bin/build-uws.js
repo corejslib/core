@@ -11,7 +11,7 @@ import { globSync } from "#lib/fs";
 import tar from "#lib/tar";
 import { TmpDir } from "#lib/tmp";
 
-const UWS_VERSION = "20.71.0",
+const UWS_VERSION = "20.72.0",
     ARCHITECTURES = new Set( [ "x64" ] );
 
 const CLI = {
