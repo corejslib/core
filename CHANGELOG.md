@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.75.2 (2026-11-25)
+
+**Code refactoring**:
+
+- \[PATCH] refactor: simplify createRelease parameter handling (● [fcb5ec5](https://github.com/corejslib/core/commit/fcb5ec5ea); 👬 zdm)
+
+Compare with the previous release: [v8.75.1...v8.75.2](https://github.com/corejslib/core/compare/v8.75.1...v8.75.2)
+
 ### v8.75.1 (2026-11-25)
 
 No changes since the previous release.
