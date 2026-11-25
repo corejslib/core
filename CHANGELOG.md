@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.75.5 (2026-11-25)
+
+**Bug fixes**:
+
+- \[PATCH] fix: normalize cli help section spacing (● [9ce111e](https://github.com/corejslib/core/commit/9ce111e37); 👬 zdm)
+
+Compare with the previous release: [v8.75.4...v8.75.5](https://github.com/corejslib/core/compare/v8.75.4...v8.75.5)
+
 ### v8.75.4 (2026-11-25)
 
 **Bug fixes**:
