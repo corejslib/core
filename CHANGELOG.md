@@ -1,5 +1,19 @@
 # Changelog
 
+### v8.74.1 (2026-11-25)
+
+**Bug fixes**:
+
+- \[PATCH] fix: clarify boolean option help text and default handling (● [97ba3e2](https://github.com/corejslib/core/commit/97ba3e29b); 👬 zdm)
+
+- \[PATCH] fix: exclude false boolean defaults from CLI help (● [80984ca](https://github.com/corejslib/core/commit/80984ca73); 👬 zdm)
+
+**Other changes**:
+
+- build(deps): upgrade uws to 20.72.0 (● [de6cd89](https://github.com/corejslib/core/commit/de6cd8986); 👬 zdm)
+
+Compare with the previous release: [v8.74.0...v8.74.1](https://github.com/corejslib/core/compare/v8.74.0...v8.74.1)
+
 ### v8.74.0 (2026-11-24)
 
 **New features**:
