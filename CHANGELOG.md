@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.75.4 (2026-11-25)
+
+**Bug fixes**:
+
+- \[PATCH] fix: correct markdown heading stripping (● [382d04c](https://github.com/corejslib/core/commit/382d04c33); 👬 zdm)
+
+Compare with the previous release: [v8.75.3...v8.75.4](https://github.com/corejslib/core/compare/v8.75.3...v8.75.4)
+
 ### v8.75.3 (2026-11-25)
 
 **Bug fixes**:
