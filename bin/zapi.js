@@ -70,6 +70,7 @@ const CLI = {
     },
     "commands": {
         "schema": {
+            "short": "s",
             "title": "Get the API schema",
             "arguments": {
                 "method-pattern": {
@@ -82,6 +83,7 @@ const CLI = {
             },
         },
         "call": {
+            "short": "c",
             "title": "Make an API call",
             "arguments": {
                 "method": {
@@ -100,6 +102,7 @@ const CLI = {
             },
         },
         "listen": {
+            "short": "l",
             "title": "Listen for API events",
             "options": {
                 "listen-system-events": {
@@ -122,6 +125,7 @@ const CLI = {
             },
         },
         "help": {
+            "short": "h",
             "title": "Get help",
         },
     },
