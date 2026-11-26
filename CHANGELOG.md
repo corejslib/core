@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.75.6 (2026-11-26)
+
+**Code refactoring**:
+
+- \[PATCH] refactor: rename validatePort to validateIpPort (● [8159770](https://github.com/corejslib/core/commit/81597704f); 👬 zdm)
+
+Compare with the previous release: [v8.75.5...v8.75.6](https://github.com/corejslib/core/compare/v8.75.5...v8.75.6)
+
 ### v8.75.5 (2026-11-25)
 
 **Bug fixes**:
