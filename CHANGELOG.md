@@ -1,5 +1,23 @@
 # Changelog
 
+### v8.76.0 (2026-11-26)
+
+**New features**:
+
+- \[MINOR] feat: add zapi short commands (● [cfe13eb](https://github.com/corejslib/core/commit/cfe13eb68); 👬 zdm)
+
+**Bug fixes**:
+
+- \[PATCH] fix: fix cli help layout (● [5252cd7](https://github.com/corejslib/core/commit/5252cd7d4); 👬 zdm)
+
+- \[PATCH] fix: fix install-google-chorme cli (● [444d9e7](https://github.com/corejslib/core/commit/444d9e735); 👬 zdm)
+
+- \[PATCH] fix: fix markdown heading style (● [18bb79d](https://github.com/corejslib/core/commit/18bb79d74), [1729eb3](https://github.com/corejslib/core/commit/1729eb366); 👬 zdm)
+
+- \[PATCH] fix: remove .js extension from sctip name in cli help (● [5c2c9bc](https://github.com/corejslib/core/commit/5c2c9bc1d); 👬 zdm)
+
+Compare with the previous release: [v8.75.6...v8.76.0](https://github.com/corejslib/core/compare/v8.75.6...v8.76.0)
+
 ### v8.75.6 (2026-11-26)
 
 **Code refactoring**:
