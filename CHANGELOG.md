@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.77.1 (2026-11-27)
+
+**Bug fixes**:
+
+- \[PATCH] fix: account for node indentation in markdown rendering widths (● [574d93b](https://github.com/corejslib/core/commit/574d93b1b); 👬 zdm)
+
+Compare with the previous release: [v8.77.0...v8.77.1](https://github.com/corejslib/core/compare/v8.77.0...v8.77.1)
+
 ### v8.77.0 (2026-11-27)
 
 **New features**:
