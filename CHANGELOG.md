@@ -1,5 +1,13 @@
 # Changelog
 
+### v8.78.0 (2026-11-27)
+
+**New features**:
+
+- \[MINOR] feat: add ALPN protocol name format validation (● [61ef85c](https://github.com/corejslib/core/commit/61ef85c1c); 👬 zdm)
+
+Compare with the previous release: [v8.77.1...v8.78.0](https://github.com/corejslib/core/compare/v8.77.1...v8.78.0)
+
 ### v8.77.1 (2026-11-27)
 
 **Bug fixes**:
