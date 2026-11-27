@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.77.0 (2026-11-27)
+
+**New features**:
+
+- \[MINOR] feat: increase default markdown and table width to 100 (● [1462844](https://github.com/corejslib/core/commit/14628449f); 👬 zdm)
+
+**Bug fixes**:
+
+- \[PATCH] fix: fix markdown codeblock (● [43077e0](https://github.com/corejslib/core/commit/43077e074), [0f4b6ea](https://github.com/corejslib/core/commit/0f4b6ea26), [b699185](https://github.com/corejslib/core/commit/b69918599), [278ccaa](https://github.com/corejslib/core/commit/278ccaa37), [bdea1d4](https://github.com/corejslib/core/commit/bdea1d4c3), [21ba1bb](https://github.com/corejslib/core/commit/21ba1bb29), [a346087](https://github.com/corejslib/core/commit/a34608740); 👬 zdm)
+
+Compare with the previous release: [v8.76.0...v8.77.0](https://github.com/corejslib/core/compare/v8.76.0...v8.77.0)
+
 ### v8.76.0 (2026-11-26)
 
 **New features**:
