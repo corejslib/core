@@ -1,5 +1,17 @@
 # Changelog
 
+### v8.79.0 (2026-11-28)
+
+**New features**:
+
+- \[MINOR] feat: add proxy server proxy protocol v2 support (● [33472f9](https://github.com/corejslib/core/commit/33472f93a); 👬 zdm)
+
+**Code refactoring**:
+
+- \[PATCH] refactor: rename cproxy client to zproxy (● [fc9910a](https://github.com/corejslib/core/commit/fc9910ab5); 👬 zdm)
+
+Compare with the previous release: [v8.78.0...v8.79.0](https://github.com/corejslib/core/compare/v8.78.0...v8.79.0)
+
 ### v8.78.0 (2026-11-27)
 
 **New features**:
